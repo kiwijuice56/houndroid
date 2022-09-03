@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://main/save_data/save_file/save_file.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+version = "v1.0a"
+data = {
+}

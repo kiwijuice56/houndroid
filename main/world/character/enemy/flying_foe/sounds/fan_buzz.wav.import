@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fan_buzz.wav-368833d40922dd978c29bc869b514e39.sample"
+
+[deps]
+
+source_file="res://main/world/character/enemy/flying_foe/sounds/fan_buzz.wav"
+dest_files=[ "res://.import/fan_buzz.wav-368833d40922dd978c29bc869b514e39.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/saw.wav-b6c158a0aec5994c64dafbaa3f82f15f.sample"
+
+[deps]
+
+source_file="res://main/world/projectile/bullet/gravity_bullet/hammer/sounds/saw.wav"
+dest_files=[ "res://.import/saw.wav-b6c158a0aec5994c64dafbaa3f82f15f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

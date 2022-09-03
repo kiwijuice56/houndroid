@@ -1,0 +1,131 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/gd-spritesheet-anim-import-main/import_dock.gd" type="Script" id=1]
+
+[node name="ImportDock" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StartFrame" type="HBoxContainer" parent="Options"]
+margin_right = 820.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Options/StartFrame"]
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Start Frame"
+
+[node name="SpinBox" type="SpinBox" parent="Options/StartFrame"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="EndFrame" type="HBoxContainer" parent="Options"]
+margin_top = 28.0
+margin_right = 820.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Options/EndFrame"]
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "End Frame"
+
+[node name="SpinBox" type="SpinBox" parent="Options/EndFrame"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="FPS" type="HBoxContainer" parent="Options"]
+margin_top = 56.0
+margin_right = 820.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="Options/FPS"]
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "FPS"
+
+[node name="SpinBox" type="SpinBox" parent="Options/FPS"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="FrameDuration" type="HBoxContainer" parent="Options"]
+margin_top = 84.0
+margin_right = 820.0
+margin_bottom = 108.0
+
+[node name="Label" type="Label" parent="Options/FrameDuration"]
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Frame Duration"
+
+[node name="SpinBox" type="SpinBox" parent="Options/FrameDuration"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="AnimName" type="HBoxContainer" parent="Options"]
+margin_top = 112.0
+margin_right = 820.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="Options/AnimName"]
+margin_top = 5.0
+margin_right = 408.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Animation Name"
+
+[node name="LineEdit" type="LineEdit" parent="Options/AnimName"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Loop" type="HBoxContainer" parent="Options"]
+margin_top = 140.0
+margin_right = 820.0
+margin_bottom = 160.0
+
+[node name="Label" type="Label" parent="Options/Loop"]
+margin_top = 3.0
+margin_right = 408.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Loop"
+
+[node name="OptionButton" type="OptionButton" parent="Options/Loop"]
+margin_left = 412.0
+margin_right = 820.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "None"
+items = [ "None", null, false, 0, null, "Linear", null, false, 1, null, "Ping-Pong", null, false, 2, null ]
+selected = 0
+
+[node name="ConfirmButton" type="Button" parent="Options"]
+margin_top = 164.0
+margin_right = 820.0
+margin_bottom = 184.0
+text = "Generate Animation"

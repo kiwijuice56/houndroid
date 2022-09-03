@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main/world/character/player/sprites/player_shadow.png" type="Texture" id=1]
+[ext_resource path="res://main/world/character/shadow.gd" type="Script" id=2]
+
+[node name="Shadow" type="Light2D"]
+texture = ExtResource( 1 )
+offset = Vector2( 0, 2 )
+color = Color( 1, 1, 1, 0.803922 )
+mode = 2
+script = ExtResource( 2 )
+shadow_owner_path = NodePath("../..")
+max_distance = 100.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 256 )

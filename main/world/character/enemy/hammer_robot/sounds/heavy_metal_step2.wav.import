@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heavy_metal_step2.wav-c7af852bf6717455bd5e666278fbe318.sample"
+
+[deps]
+
+source_file="res://main/world/character/enemy/hammer_robot/sounds/heavy_metal_step2.wav"
+dest_files=[ "res://.import/heavy_metal_step2.wav-c7af852bf6717455bd5e666278fbe318.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

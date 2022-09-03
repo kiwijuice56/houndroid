@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://main/world/obstacle/gravity_weakener/gravity_weakener.gd" type="Script" id=1]
+[ext_resource path="res://main/world/obstacle/gravity_weakener/sprites/gravity_particle.png" type="Texture" id=2]
+[ext_resource path="res://main/world/obstacle/gravity_weakener/sprites/gravity_cover.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 879, 144 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.1875, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 0.015625, 0.46936, 1, 0 )
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.105769, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.819611, 0.886216, 0.980469, 1, 0.207886, 0.015625, 1, 0 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hue:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.435294, 0.564706, 0.956863, 0.152941 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hue_shift"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hue:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.435294, 0.564706, 0.956863, 0.152941 ), Color( 0.427451, 0.384314, 0.921569, 0.215686 ) ]
+}
+
+[node name="GravityWeakener" type="Area2D"]
+position = Vector2( 1824, -464 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+gravity_rate = 0.55
+particle_per_scale = 0.35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 64 )
+amount = 32
+lifetime = 5.0
+randomness = 0.58
+texture = ExtResource( 2 )
+emission_shape = 2
+emission_rect_extents = Vector2( 256, 1 )
+gravity = Vector2( 0, -98 )
+scale_amount = 0.5
+scale_amount_random = 1.0
+color_ramp = SubResource( 5 )
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 256 )
+amount = 32
+lifetime = 5.0
+randomness = 0.58
+texture = ExtResource( 2 )
+emission_shape = 2
+emission_rect_extents = Vector2( 256, 1 )
+gravity = Vector2( 0, -98 )
+scale_amount = 0.5
+scale_amount_random = 1.0
+color_ramp = SubResource( 6 )
+
+[node name="Hue" type="Sprite" parent="."]
+modulate = Color( 0.435294, 0.564706, 0.956863, 0.152941 )
+scale = Vector2( 1280, 640 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "hue_shift"
+playback_speed = 0.15
+anims/RESET = SubResource( 7 )
+anims/hue_shift = SubResource( 8 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -879, -10, 879, 20 )
+process_parent = true

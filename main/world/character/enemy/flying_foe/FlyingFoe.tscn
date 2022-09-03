@@ -1,0 +1,171 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://main/world/character/enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/character/enemy/flying_foe/flying_foe.gd" type="Script" id=2]
+[ext_resource path="res://main/world/character/enemy/flying_foe/sprites/floating_foe_top_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://main/world/character/enemy/flying_foe/sprites/floating_foe_handle_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://main/world/character/enemy/flying_foe/sprites/floating_foe_eye_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://main/world/character/enemy/flying_foe/sprites/floating_foe_body_spritesheet.png" type="Texture" id=6]
+[ext_resource path="res://main/world/character/enemy/flying_foe/sounds/fan_buzz.wav" type="AudioStream" id=7]
+[ext_resource path="res://main/world/character/Shadow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/world/projectile/bullet/orb_bullet/OrbBullet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=10]
+[ext_resource path="res://main/world/character/enemy/sounds/laser_shot.wav" type="AudioStream" id=11]
+[ext_resource path="res://main/world/character/enemy/sounds/charge_up.wav" type="AudioStream" id=12]
+[ext_resource path="res://main/world/character/enemy/states/enemy_hover.gd" type="Script" id=13]
+
+[sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Spinner:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Eye:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "unwind"
+length = 0.35
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Eye:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.073, 0.15, 0.218 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 3, 2, 1, 0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 10.0
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 1, 1, 1, 0.878431, 0.223529, 0.576471, 0 )
+
+[node name="FlyingFoe" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+move_speed = 80.0
+gravity = 9.0
+max_health = 2.0
+orb = ExtResource( 9 )
+shoot_delay = 1.1
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 3 )
+
+[node name="Body" type="Sprite" parent="Sprites" index="0"]
+light_mask = 0
+texture = ExtResource( 6 )
+
+[node name="Eye" type="Sprite" parent="Sprites" index="1"]
+light_mask = 0
+texture = ExtResource( 5 )
+hframes = 4
+
+[node name="Rod" type="Sprite" parent="Sprites" index="2"]
+light_mask = 0
+texture = ExtResource( 4 )
+
+[node name="Spinner" type="Sprite" parent="Sprites" index="3"]
+light_mask = 0
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="Shadow" parent="Sprites" index="4" instance=ExtResource( 8 )]
+max_distance = 256.0
+
+[node name="Explosion" parent="Sprites" index="5"]
+position = Vector2( 1, 5 )
+
+[node name="Fan" type="Node2D" parent="Sounds" index="2"]
+script = ExtResource( 10 )
+sounds = [ ExtResource( 7 ) ]
+volume = -7.0
+max_distance = 250
+auto_start = true
+
+[node name="LaserShot" type="Node2D" parent="Sounds" index="3"]
+script = ExtResource( 10 )
+sounds = [ ExtResource( 11 ) ]
+volume = -7.0
+rand_pitch_range = 0.4
+
+[node name="ChargeUp" type="Node2D" parent="Sounds" index="4"]
+script = ExtResource( 10 )
+sounds = [ ExtResource( 12 ) ]
+volume = -10.0
+rand_pitch_range = 0.4
+
+[node name="Spinner" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
+autoplay = "spin"
+anims/spin = SubResource( 1 )
+
+[node name="Eye" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
+anims/shoot = SubResource( 4 )
+anims/unwind = SubResource( 5 )
+
+[node name="StateMachine" parent="." index="4"]
+initial_state = NodePath("EnemyHover")
+
+[node name="EnemyHover" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 13 )
+state_owner_path = NodePath("../..")
+ray_length = 25
+
+[node name="VisibilityEnabler2D" parent="." index="6"]
+rect = Rect2( -64, -64, 128, 128 )
+physics_process_parent = true
+
+[node name="Vision" parent="." index="7"]
+visible = true
+
+[node name="Hitbox" parent="." index="8"]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, 4 )
+shape = SubResource( 2 )
+
+[node name="ShootDelayTimer" type="Timer" parent="." index="9"]
+one_shot = true
+
+[node name="ShootSparks" type="CPUParticles2D" parent="." index="10"]
+position = Vector2( 0, 8 )
+emitting = false
+amount = 24
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.74
+explosiveness = 0.86
+local_coords = false
+spread = 180.0
+initial_velocity = 47.62
+color_ramp = SubResource( 6 )

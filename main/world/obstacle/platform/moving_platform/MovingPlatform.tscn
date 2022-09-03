@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main/world/obstacle/platform/Platform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/obstacle/platform/moving_platform/moving_platform.gd" type="Script" id=2]
+[ext_resource path="res://main/world/obstacle/platform/moving_platform/moving_platform.png" type="Texture" id=3]
+[ext_resource path="res://main/world/obstacle/platform/moving_platform/platform_wheel.png" type="Texture" id=4]
+[ext_resource path="res://main/world/obstacle/platform/moving_platform/platform_back.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wheel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -22, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wheel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -22, 1 ), Vector2( 22, 1 ) ]
+}
+
+[node name="MovingPlatform" instance=ExtResource( 1 )]
+collision_mask = 2
+motion/sync_to_physics = false
+script = ExtResource( 2 )
+speed = 16.0
+
+[node name="Back" type="Sprite" parent="." index="0"]
+texture = ExtResource( 5 )
+
+[node name="Wheel" type="Sprite" parent="." index="1"]
+position = Vector2( -22, 1 )
+texture = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )
+
+[node name="Points" type="Node" parent="." index="4"]
+
+[node name="A" type="Position2D" parent="Points" index="0"]
+
+[node name="B" type="Position2D" parent="Points" index="1"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+autoplay = "move"
+playback_speed = 0.5
+anims/RESET = SubResource( 1 )
+anims/move = SubResource( 2 )

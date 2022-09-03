@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star.gd" type="Script" id=1]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star2.png" type="Texture" id=2]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star4.png" type="Texture" id=3]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star1.png" type="Texture" id=4]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star5.png" type="Texture" id=5]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/star3.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0 ]
+}
+
+[node name="Star" type="Sprite"]
+position = Vector2( 13, -105 )
+texture = ExtResource( 6 )
+hframes = 3
+script = ExtResource( 1 )
+colors = [ Color( 1, 1, 1, 1 ), Color( 0.945098, 0.443137, 0.631373, 1 ), Color( 0.839216, 0.623529, 0.984314, 1 ), Color( 0.996078, 0.74902, 0.552941, 1 ) ]
+textures = [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ) ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/twinkle = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

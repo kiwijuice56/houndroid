@@ -1,0 +1,225 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://main/ui/main.theme" type="Theme" id=1]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay.gd" type="Script" id=2]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.gd" type="Script" id=3]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_bar.gd" type="Script" id=4]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/portrait.png" type="Texture" id=5]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/shoot_pressed.png" type="Texture" id=6]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/inner_joystick.png" type="Texture" id=7]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.png" type="Texture" id=8]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/jump_unpressed.png" type="Texture" id=9]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/shoot_unpressed.png" type="Texture" id=10]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_under.png" type="Texture" id=11]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_progress.png" type="Texture" id=12]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/jump_pressed.png" type="Texture" id=13]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/menu_button2.png" type="Texture" id=14]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/menu_button2_pressed.png" type="Texture" id=15]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/fps_label.gd" type="Script" id=16]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_icon.png" type="Texture" id=17]
+[ext_resource path="res://main/ui/font/C&C Red Alert [INET].ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd" type="Script" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StreamTexture" id=6]
+
+[sub_resource type="StreamTexture" id=7]
+
+[sub_resource type="DynamicFont" id=10]
+size = 13
+outline_size = 1
+font_data = ExtResource( 18 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 24.0
+
+[node name="GameOverlay" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+world_path = NodePath("../../../World")
+menu_button_path = NodePath("VBoxContainer/TopRow/Menu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 896.0
+margin_bottom = 476.0
+
+[node name="TopRow" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 892.0
+margin_bottom = 48.0
+
+[node name="StatusContainer" type="PanelContainer" parent="VBoxContainer/TopRow"]
+margin_right = 111.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 28 )
+size_flags_horizontal = 2
+custom_styles/panel = SubResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopRow/StatusContainer"]
+margin_right = 111.0
+margin_bottom = 48.0
+custom_constants/separation = 0
+
+[node name="Control" type="Control" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
+normal = ExtResource( 5 )
+action = "jump"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer"]
+margin_left = 48.0
+margin_top = 16.0
+margin_right = 111.0
+margin_bottom = 31.0
+size_flags_vertical = 4
+
+[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
+margin_right = 63.0
+margin_bottom = 15.0
+max_value = 9.0
+value = 9.0
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 12 )
+texture_progress_offset = Vector2( 0, 1 )
+script = ExtResource( 4 )
+
+[node name="TextureProgress2" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 19.0
+margin_right = 60.0
+margin_bottom = 34.0
+value = 25.0
+texture_under = SubResource( 6 )
+texture_progress = SubResource( 7 )
+
+[node name="BoneContainer" type="HBoxContainer" parent="VBoxContainer/TopRow"]
+margin_left = 827.0
+margin_right = 858.0
+margin_bottom = 22.0
+size_flags_vertical = 0
+custom_constants/separation = -13
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow/BoneContainer"]
+margin_right = 22.0
+margin_bottom = 22.0
+texture = ExtResource( 17 )
+
+[node name="Label" type="Label" parent="VBoxContainer/TopRow/BoneContainer"]
+margin_left = 9.0
+margin_right = 31.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+size_flags_vertical = 5
+custom_colors/font_outline_modulate = Color( 0.439216, 0.105882, 0.0901961, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "x99"
+valign = 2
+script = ExtResource( 19 )
+
+[node name="Menu" type="Button" parent="VBoxContainer/TopRow"]
+margin_left = 862.0
+margin_right = 892.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 31 )
+focus_mode = 0
+size_flags_vertical = 0
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
+
+[node name="BotRow" type="HBoxContainer" parent="VBoxContainer"]
+pause_mode = 1
+margin_top = 403.0
+margin_right = 892.0
+margin_bottom = 472.0
+size_flags_vertical = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoystickControl" type="Control" parent="VBoxContainer/BotRow"]
+margin_top = 5.0
+margin_right = 824.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Joystick" type="TouchScreenButton" parent="VBoxContainer/BotRow/JoystickControl"]
+modulate = Color( 1, 1, 1, 0.827451 )
+normal = ExtResource( 8 )
+shape = SubResource( 3 )
+visibility_mode = 1
+script = ExtResource( 3 )
+offset = Vector2( 33, 33 )
+inner_offset = Vector2( 17, 17 )
+inner_resistance = 1.0
+
+[node name="InnerJoystick" type="TouchScreenButton" parent="VBoxContainer/BotRow/JoystickControl/Joystick"]
+self_modulate = Color( 1, 1, 1, 0.839216 )
+position = Vector2( 16, 16 )
+normal = ExtResource( 7 )
+visibility_mode = 1
+
+[node name="ButtonControl" type="Control" parent="VBoxContainer/BotRow"]
+margin_left = 828.0
+margin_right = 892.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 64, 69 )
+size_flags_horizontal = 9
+size_flags_vertical = 8
+
+[node name="JumpButton" type="TouchScreenButton" parent="VBoxContainer/BotRow/ButtonControl"]
+modulate = Color( 1, 1, 1, 0.827451 )
+normal = ExtResource( 9 )
+pressed = ExtResource( 13 )
+shape = SubResource( 2 )
+action = "jump"
+visibility_mode = 1
+
+[node name="ShootButton" type="TouchScreenButton" parent="VBoxContainer/BotRow/ButtonControl"]
+modulate = Color( 1, 1, 1, 0.827451 )
+position = Vector2( -38, -10 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 6 )
+shape = SubResource( 1 )
+action = "primary_weapon"
+visibility_mode = 1
+
+[node name="FpsLabel" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 896.0
+margin_bottom = 18.0
+size_flags_vertical = 0
+text = "0 fps"
+script = ExtResource( 16 )

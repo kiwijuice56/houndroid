@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://main/world/collectible/Collectible.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/collectible/bone/sprites/bone_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://main/world/collectible/bone/bone.gd" type="Script" id=3]
+[ext_resource path="res://main/world/collectible/bone/sounds/jingle1.wav" type="AudioStream" id=4]
+[ext_resource path="res://main/world/collectible/bone/sounds/collect.wav" type="AudioStream" id=5]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=6]
+[ext_resource path="res://main/world/collectible/bone/sounds/jingle2.wav" type="AudioStream" id=7]
+[ext_resource path="res://main/world/collectible/bone/sounds/jingle3.wav" type="AudioStream" id=8]
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "bob"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.035, 0.07, 0.105, 0.14, 0.175, 0.21, 0.245, 0.28 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 6, 7, 8, 9, 10, 11, 12, 13, 13 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.45
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.065, 0.13, 0.195, 0.26, 0.325, 0.39 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0 ]
+}
+
+[node name="Bone" instance=ExtResource( 1 )]
+z_index = 1
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -5.50896 )
+texture = ExtResource( 2 )
+hframes = 14
+frame = 6
+
+[node name="BobAnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+autoplay = "bob"
+anims/RESET = SubResource( 5 )
+anims/bob = SubResource( 1 )
+
+[node name="SpriteAnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+anims/RESET = SubResource( 7 )
+anims/collect = SubResource( 6 )
+anims/shine = SubResource( 2 )
+
+[node name="ShineTimer" type="Timer" parent="." index="4"]
+
+[node name="CoinSounds" type="Node2D" parent="." index="6"]
+script = ExtResource( 6 )
+sounds = [ ExtResource( 5 ) ]
+volume = -15.0
+rand_pitch_range = 0.3
+
+[node name="JingleSounds" type="Node2D" parent="." index="7"]
+script = ExtResource( 6 )
+sounds = [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ) ]
+volume = 5.0
+rand_pitch_range = 0.1

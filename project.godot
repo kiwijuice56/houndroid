@@ -1,0 +1,419 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Collectible",
+"class": "Bone",
+"language": "GDScript",
+"path": "res://main/world/collectible/bone/bone.gd"
+}, {
+"base": "Label",
+"class": "BoneCounter",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd"
+}, {
+"base": "Projectile",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://main/world/projectile/bullet/bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://main/world/character/character.gd"
+}, {
+"base": "State",
+"class": "CharacterState",
+"language": "GDScript",
+"path": "res://main/world/character/states/character_state.gd"
+}, {
+"base": "Area2D",
+"class": "Collectible",
+"language": "GDScript",
+"path": "res://main/world/collectible/collectible.gd"
+}, {
+"base": "TileMap",
+"class": "DeathFallTileMap",
+"language": "GDScript",
+"path": "res://main/world/level/level_tools/death_fall_tile_map.gd"
+}, {
+"base": "Camera2D",
+"class": "DragCamera",
+"language": "GDScript",
+"path": "res://main/world/character/player/drag_camera.gd"
+}, {
+"base": "Character",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/enemy.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyFloat",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_float.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyHover",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_hover.gd"
+}, {
+"base": "CharacterState",
+"class": "EnemyState",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_state.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyStrafe",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_strafe.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyWalk",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_walk.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "FallingPlatform",
+"language": "GDScript",
+"path": "res://main/world/obstacle/platform/falling_platform/falling_platform.gd"
+}, {
+"base": "Node",
+"class": "FileLoader",
+"language": "GDScript",
+"path": "res://main/save_data/file_loader.gd"
+}, {
+"base": "Enemy",
+"class": "FloatingFoe",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/flying_foe/flying_foe.gd"
+}, {
+"base": "Label",
+"class": "FpsLabel",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/fps_label.gd"
+}, {
+"base": "UIScreen",
+"class": "GameMenu",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/pause_menu/pause_menu.gd"
+}, {
+"base": "UIScreen",
+"class": "GameOverlay",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/game_overlay.gd"
+}, {
+"base": "Node2D",
+"class": "GameWorld",
+"language": "GDScript",
+"path": "res://main/world/world.gd"
+}, {
+"base": "Bullet",
+"class": "GravityBullet",
+"language": "GDScript",
+"path": "res://main/world/projectile/bullet/gravity_bullet/gravity_bullet.gd"
+}, {
+"base": "Enemy",
+"class": "HammerRobot",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/hammer_robot/hammer_robot.gd"
+}, {
+"base": "TextureProgress",
+"class": "HealthBar",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/health_bar/health_bar.gd"
+}, {
+"base": "TouchScreenButton",
+"class": "Joystick",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://main/world/level/level.gd"
+}, {
+"base": "Node",
+"class": "Main",
+"language": "GDScript",
+"path": "res://main/main.gd"
+}, {
+"base": "Enemy",
+"class": "MoleMine",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/mole_mine/mole_mine.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "MovingPlatform",
+"language": "GDScript",
+"path": "res://main/world/obstacle/platform/moving_platform/moving_platform.gd"
+}, {
+"base": "Bullet",
+"class": "OrbBullet",
+"language": "GDScript",
+"path": "res://main/world/projectile/bullet/orb_bullet/orb_bullet.gd"
+}, {
+"base": "Character",
+"class": "Player",
+"language": "GDScript",
+"path": "res://main/world/character/player/player.gd"
+}, {
+"base": "PlayerState",
+"class": "PlayerAir",
+"language": "GDScript",
+"path": "res://main/world/character/player/states/player_air.gd"
+}, {
+"base": "Bullet",
+"class": "PlayerBullet",
+"language": "GDScript",
+"path": "res://main/world/projectile/bullet/player_bullet/player_bullet.gd"
+}, {
+"base": "Sprite",
+"class": "PlayerDeathEffect",
+"language": "GDScript",
+"path": "res://main/world/character/player/sprites/death_effect/player_death_effect.gd"
+}, {
+"base": "PlayerState",
+"class": "PlayerIdle",
+"language": "GDScript",
+"path": "res://main/world/character/player/states/player_idle.gd"
+}, {
+"base": "PlayerState",
+"class": "PlayerRun",
+"language": "GDScript",
+"path": "res://main/world/character/player/states/player_run.gd"
+}, {
+"base": "CharacterState",
+"class": "PlayerState",
+"language": "GDScript",
+"path": "res://main/world/character/player/states/player_state.gd"
+}, {
+"base": "Area2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://main/world/projectile/projectile.gd"
+}, {
+"base": "Node2D",
+"class": "RandomSoundSpawner",
+"language": "GDScript",
+"path": "res://main/world/random_sound_spawner/random_sound_spawner.gd"
+}, {
+"base": "Resource",
+"class": "SaveFile",
+"language": "GDScript",
+"path": "res://main/save_data/save_file/save_file.gd"
+}, {
+"base": "Area2D",
+"class": "ScreenEnemySpawner",
+"language": "GDScript",
+"path": "res://main/world/obstacle/enemy_spawner/screen_enemy_spawner.gd"
+}, {
+"base": "Control",
+"class": "SpritesheetAnimImportDock",
+"language": "GDScript",
+"path": "res://addons/gd-spritesheet-anim-import-main/import_dock.gd"
+}, {
+"base": "Sprite",
+"class": "Star",
+"language": "GDScript",
+"path": "res://main/world/level/1_city/star_spawn/star/star.gd"
+}, {
+"base": "ParallaxLayer",
+"class": "StarSpawner",
+"language": "GDScript",
+"path": "res://main/world/level/1_city/star_spawn/star_spawner.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://main/world/character/state_machine/state/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://main/world/character/state_machine/state_machine.gd"
+}, {
+"base": "UIScreen",
+"class": "TitleScreen",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/title_screen/title_screen.gd"
+}, {
+"base": "Control",
+"class": "UIScreen",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/ui_screen.gd"
+}, {
+"base": "Control",
+"class": "UIScreenManager",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen_manager/ui_screen_manager.gd"
+}, {
+"base": "Label",
+"class": "VersionLabel",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/title_screen/version_label.gd"
+}, {
+"base": "Area2D",
+"class": "gravity_weakener",
+"language": "GDScript",
+"path": "res://main/world/obstacle/gravity_weakener/gravity_weakener.gd"
+} ]
+_global_script_class_icons={
+"Bone": "",
+"BoneCounter": "",
+"Bullet": "",
+"Character": "",
+"CharacterState": "",
+"Collectible": "",
+"DeathFallTileMap": "",
+"DragCamera": "",
+"Enemy": "",
+"EnemyFloat": "",
+"EnemyHover": "",
+"EnemyState": "",
+"EnemyStrafe": "",
+"EnemyWalk": "",
+"FallingPlatform": "",
+"FileLoader": "",
+"FloatingFoe": "",
+"FpsLabel": "",
+"GameMenu": "",
+"GameOverlay": "",
+"GameWorld": "",
+"GravityBullet": "",
+"HammerRobot": "",
+"HealthBar": "",
+"Joystick": "",
+"Level": "",
+"Main": "",
+"MoleMine": "",
+"MovingPlatform": "",
+"OrbBullet": "",
+"Player": "",
+"PlayerAir": "",
+"PlayerBullet": "",
+"PlayerDeathEffect": "",
+"PlayerIdle": "",
+"PlayerRun": "",
+"PlayerState": "",
+"Projectile": "",
+"RandomSoundSpawner": "",
+"SaveFile": "",
+"ScreenEnemySpawner": "",
+"SpritesheetAnimImportDock": "",
+"Star": "",
+"StarSpawner": "",
+"State": "",
+"StateMachine": "",
+"TitleScreen": "",
+"UIScreen": "",
+"UIScreenManager": "",
+"VersionLabel": "",
+"gravity_weakener": ""
+}
+
+[application]
+
+config/name="robodog3"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+version=""
+config/version="v1.0a"
+
+[autoload]
+
+GlobalData="*res://main/global_data/global_data.gd"
+GlobalInstanceManager="*res://main/global_instance_manager/global_instance_manager.gd"
+
+[debug]
+
+settings/fps/force_fps=60
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/size/width=900
+window/size/height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+window/stretch/shrink=2.0
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/gd-spritesheet-anim-import-main/plugin.cfg" )
+
+[global]
+
+version=""
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[input]
+
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+primary_weapon={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":90,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_render/layer_1="map"
+2d_render/layer_2="player"
+2d_physics/layer_1="map"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="player_projectile"
+2d_physics/layer_5="enemy_projectile"
+2d_physics/layer_6="death_fall"
+2d_physics/layer_7="collectible"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+2d/snapping/use_gpu_pixel_snap=true
+environment/default_clear_color=Color( 0, 0, 0, 1 )

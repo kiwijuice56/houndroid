@@ -1,0 +1,144 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://main/ui/main.theme" type="Theme" id=1]
+[ext_resource path="res://main/ui/ui_screen/pause_menu/pause_menu.gd" type="Script" id=2]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/menu_button.png" type="Texture" id=3]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/menu_button_pressed.png" type="Texture" id=4]
+[ext_resource path="res://main/ui/ui_screen/pause_menu/grabber.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.65098 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 6.0
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_top = 7.0
+expand_margin_bottom = 6.0
+anti_aliasing = false
+
+[node name="PauseMenu" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+menu_button_path = NodePath("MarginContainer/VBoxContainer/Menu")
+music_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/MusicSilder")
+sound_effect_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/SoundEffectSlider")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 900.0
+margin_bottom = 480.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 896.0
+margin_bottom = 476.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_left = 862.0
+margin_right = 892.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 31 )
+focus_mode = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+enabled_focus_mode = 0
+
+[node name="PausedLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 892.0
+margin_bottom = 55.0
+text = "~ Paused ~"
+align = 1
+
+[node name="GridContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_left = 264.0
+margin_top = 65.0
+margin_right = 627.0
+margin_bottom = 472.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="LabelContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_right = 103.0
+margin_bottom = 407.0
+
+[node name="Music" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/LabelContainer"]
+margin_right = 103.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Music Volume"
+align = 2
+
+[node name="SoundEffect" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/LabelContainer"]
+margin_top = 18.0
+margin_right = 103.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Sound Effect Volume"
+align = 2
+
+[node name="InputContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 107.0
+margin_right = 363.0
+margin_bottom = 407.0
+rect_min_size = Vector2( 256, 0 )
+
+[node name="MusicSilder" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer/InputContainer"]
+margin_right = 256.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+custom_icons/grabber_disabled = ExtResource( 5 )
+custom_icons/grabber_highlight = ExtResource( 5 )
+custom_icons/grabber = ExtResource( 5 )
+custom_styles/slider = SubResource( 8 )
+min_value = -80.0
+max_value = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundEffectSlider" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer/InputContainer"]
+margin_top = 19.0
+margin_right = 256.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+custom_icons/grabber_disabled = ExtResource( 5 )
+custom_icons/grabber_highlight = ExtResource( 5 )
+custom_icons/grabber = ExtResource( 5 )
+custom_styles/slider = SubResource( 8 )
+min_value = -80.0
+max_value = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
