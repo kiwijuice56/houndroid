@@ -117,6 +117,10 @@ anims/shine = SubResource( 2 )
 
 [node name="ShineTimer" type="Timer" parent="." index="4"]
 
+[node name="VisibilityEnabler2D" parent="." index="5"]
+process_parent = true
+physics_process_parent = true
+
 [node name="CoinSounds" type="Node2D" parent="." index="6"]
 script = ExtResource( 6 )
 sounds = [ ExtResource( 5 ) ]

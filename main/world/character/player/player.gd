@@ -101,6 +101,9 @@ func run_step() -> void:
 		$WalkingSparks.direction.x = -$Sprites.scale.x
 	$Sounds/Step.play_sound()
 
+func _physics_process(delta):
+	print(global_position.y)
+
 # Called when player lands after a fall
 func fall_step(distance: float) -> void:
 	$JumpToleranceTimer.stop()
@@ -154,7 +157,6 @@ func death() -> void:
 		new_effect.dir = Vector2(1, 0).rotated(angle_change * i)
 	$Sounds/Death.play_sound()
 	set_animations("death")
-	print($AnimationPlayers/Body.current_animation)
 	yield($AnimationPlayers/Body, "animation_finished")
 	game_world.call_deferred("load_level")
 	

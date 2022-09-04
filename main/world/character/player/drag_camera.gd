@@ -27,4 +27,4 @@ func _physics_process(_delta) -> void:
 	if dir.x == new_dir.x and is_equal_approx(1.0, abs(dir.x)):
 		update_position = target.global_position
 	
-	offset.x = round(dir.x * max_drag)
+	offset.x = dir.x * max_drag

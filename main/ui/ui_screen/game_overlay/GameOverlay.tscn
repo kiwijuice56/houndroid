@@ -40,7 +40,7 @@ texture = ExtResource( 15 )
 region_rect = Rect2( 0, 0, 30, 31 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 36.0
+radius = 48.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 36.0
@@ -176,6 +176,7 @@ size_flags_vertical = 8
 
 [node name="Joystick" type="TouchScreenButton" parent="VBoxContainer/BotRow/JoystickControl"]
 modulate = Color( 1, 1, 1, 0.827451 )
+position = Vector2( 15, -16 )
 normal = ExtResource( 8 )
 shape = SubResource( 3 )
 visibility_mode = 1
@@ -186,7 +187,7 @@ inner_resistance = 1.0
 
 [node name="InnerJoystick" type="TouchScreenButton" parent="VBoxContainer/BotRow/JoystickControl/Joystick"]
 self_modulate = Color( 1, 1, 1, 0.839216 )
-position = Vector2( 16, 16 )
+position = Vector2( 17, 17 )
 normal = ExtResource( 7 )
 visibility_mode = 1
 

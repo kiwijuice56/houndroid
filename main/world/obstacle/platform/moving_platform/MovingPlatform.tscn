@@ -64,3 +64,7 @@ autoplay = "move"
 playback_speed = 0.5
 anims/RESET = SubResource( 1 )
 anims/move = SubResource( 2 )
+
+[node name="VisibilityEnabler2D" parent="." index="6"]
+process_parent = false
+physics_process_parent = false

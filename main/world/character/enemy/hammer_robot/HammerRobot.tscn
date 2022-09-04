@@ -363,6 +363,9 @@ initial_state = NodePath("Strafe")
 script = ExtResource( 5 )
 state_owner_path = NodePath("../..")
 
+[node name="VisibilityEnabler2D" parent="." index="6"]
+physics_process_parent = true
+
 [node name="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource( 17 )
 

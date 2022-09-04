@@ -44,3 +44,7 @@ playback_speed = 4.0
 anims/rumble = SubResource( 2 )
 
 [node name="FallTimer" type="Timer" parent="." index="4"]
+
+[node name="VisibilityEnabler2D" parent="." index="5"]
+process_parent = false
+physics_process_parent = false

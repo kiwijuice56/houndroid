@@ -28,7 +28,7 @@
 [ext_resource path="res://main/world/character/player/sounds/player_death.wav" type="AudioStream" id=26]
 
 [sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 8, 11 )
+extents = Vector2( 8, 10 )
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.839779 )
@@ -576,7 +576,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.051, 0.103, 0.15, 0.202, 0.255 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.5, 0.5 ), Vector2( -6.5, 0.5 ), Vector2( 5.5, 0.5 ), Vector2( -3.5, 0.5 ), Vector2( 1.5, 0.5 ), Vector2( 0.5, 0.5 ) ]
+"values": [ Vector2( 0.5, 0.5 ), Vector2( -6.5, 0.5 ), Vector2( 5.5, 0.5 ), Vector2( -3.5, 0.5 ), Vector2( 1.5, 0.5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Sprites:modulate")
@@ -665,13 +665,13 @@ fall_effect_distance = 4.0
 primary_bullet_scene = ExtResource( 22 )
 death_effect_scene = ExtResource( 25 )
 death_effect_count = 8
-death_fall_delay = 0.35
+death_fall_delay = 0.15
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 40 )
 
 [node name="Sprites" parent="." index="1"]
-position = Vector2( 0.5, 0.5 )
+position = Vector2( -2.2451, 0.5 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 max_distance = 256.0
@@ -686,7 +686,7 @@ frame = 7
 light_mask = 2
 texture = ExtResource( 5 )
 hframes = 23
-frame = 16
+frame = 7
 
 [node name="ArmML" type="Sprite" parent="Sprites" index="3"]
 light_mask = 2

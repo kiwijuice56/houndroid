@@ -5,7 +5,7 @@
 [ext_resource path="res://main/world/obstacle/gravity_weakener/sprites/gravity_cover.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 879, 144 )
+extents = Vector2( 48, 83 )
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.1875, 1 )
@@ -53,7 +53,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
 gravity_rate = 0.55
-particle_per_scale = 0.35
+particle_per_scale = 0.15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
@@ -61,7 +61,7 @@ shape = SubResource( 3 )
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 64 )
 amount = 32
-lifetime = 5.0
+lifetime = 2.0
 randomness = 0.58
 texture = ExtResource( 2 )
 emission_shape = 2
@@ -74,7 +74,7 @@ color_ramp = SubResource( 5 )
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 256 )
 amount = 32
-lifetime = 5.0
+lifetime = 2.0
 randomness = 0.58
 texture = ExtResource( 2 )
 emission_shape = 2

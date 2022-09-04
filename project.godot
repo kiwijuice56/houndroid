@@ -333,7 +333,6 @@ GlobalInstanceManager="*res://main/global_instance_manager/global_instance_manag
 
 [debug]
 
-settings/fps/force_fps=60
 gdscript/warnings/return_value_discarded=false
 
 [display]

@@ -18,4 +18,3 @@ func collect() -> void:
 	$SpriteAnimationPlayer.current_animation = "collect"
 	yield($SpriteAnimationPlayer, "animation_finished")
 	call_deferred("emit_signal", "collect_finished")
-
