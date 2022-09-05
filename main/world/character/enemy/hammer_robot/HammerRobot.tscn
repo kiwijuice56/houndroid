@@ -266,6 +266,7 @@ script = ExtResource( 3 )
 move_speed = 32.0
 gravity = 9.0
 max_health = 32.0
+score_orb_count = 24
 contact_damage = 4.0
 hammer = ExtResource( 4 )
 shoot_delay = 0.65

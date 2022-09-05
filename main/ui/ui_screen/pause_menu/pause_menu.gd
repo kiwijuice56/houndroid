@@ -15,14 +15,14 @@ func _ready() -> void:
 	sound_effect_slider = get_node(sound_effect_slider_path)
 	
 	menu_button.connect("pressed", self, "_on_menu_button_pressed")
-	music_slider.connect("changed", self, "_on_music_slider_changed")
-	sound_effect_slider.connect("changed", self, "_on_sound_effect_slider_changed")
+	music_slider.connect("value_changed", self, "_on_music_slider_changed")
+	sound_effect_slider.connect("value_changed", self, "_on_sound_effect_slider_changed")
 
-func _on_music_slider_changed() -> void:
-	GlobalData.music_volume = music_slider.value
+func _on_music_slider_changed(new_value: float) -> void:
+	GlobalData.music_volume = new_value
 
-func _on_sound_effect_slider_changed() -> void:
-	GlobalData.sound_effect_volume = sound_effect_slider.value
+func _on_sound_effect_slider_changed(new_value: float) -> void:
+	GlobalData.sound_effect_volume = new_value
 
 func _on_menu_button_pressed() -> void:
 	ui_manager.transition("PauseMenu", "GameOverlay")

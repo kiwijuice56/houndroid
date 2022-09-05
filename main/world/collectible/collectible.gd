@@ -1,8 +1,6 @@
 extends Area2D
 class_name Collectible
 
-export var shine_time := 4.0
-export var shine_random := 1.25
 signal collect_finished
 
 func _ready() -> void:

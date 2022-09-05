@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/menu_button2_pressed.png-d44499435a2cbbbdd1ab91a46445f3c7.stex"
+path="res://.import/tires3.png-6ed477147206796bc36ef5117f5f023e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/ui/ui_screen/game_overlay/menu_button/menu_button2_pressed.png"
-dest_files=[ "res://.import/menu_button2_pressed.png-d44499435a2cbbbdd1ab91a46445f3c7.stex" ]
+source_file="res://main/world/decoration/tires3.png"
+dest_files=[ "res://.import/tires3.png-6ed477147206796bc36ef5117f5f023e.stex" ]
 
 [params]
 

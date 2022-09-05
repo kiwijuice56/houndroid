@@ -16,8 +16,8 @@ func _ready():
 	$VisibilityEnabler2D.rect.size.x = size.x * 2
 	$VisibilityEnabler2D.rect.size.y = size.y * 2
 	
-	$CPUParticles2D.amount = int(particle_per_scale) * size.x
-	$CPUParticles2D2.amount = int(particle_per_scale) * size.x
+	$CPUParticles2D.amount = int(particle_per_scale * size.x)
+	$CPUParticles2D2.amount = int(particle_per_scale * size.x)
 	
 	$CPUParticles2D.position.y = size.y 
 	$CPUParticles2D2.position.y = size.y

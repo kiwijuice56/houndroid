@@ -7,7 +7,7 @@ export var start := Vector2()
 export var end := Vector2()
 
 func _ready() -> void:
-	for i in range(star_count):
+	for _i in range(star_count):
 		var new_star := star.instance()
 		add_child(new_star)
 		new_star.position.x = int(randf() * (end.x - start.x) + start.x)

@@ -130,5 +130,5 @@ rand_pitch_range = 0.3
 [node name="JingleSounds" type="Node2D" parent="." index="7"]
 script = ExtResource( 6 )
 sounds = [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ) ]
-volume = 5.0
+volume = 9.0
 rand_pitch_range = 0.1

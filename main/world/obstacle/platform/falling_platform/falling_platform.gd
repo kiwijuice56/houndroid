@@ -3,6 +3,7 @@ class_name FallingPlatform
 
 export var fall_time := 2.0
 export var accel := 128
+export var terminal_velocity := 512.0
 var speed := 0.0
 
 
@@ -11,6 +12,7 @@ func _ready() -> void:
 	$FallArea.connect("body_entered", self, "_on_body_entered")
 
 func _on_body_entered(body: Node2D) -> void:
+	
 	if body.velocity.y < 0:
 		return
 	$AnimationPlayer.current_animation = "rumble"
@@ -18,7 +20,10 @@ func _on_body_entered(body: Node2D) -> void:
 	yield($FallTimer, "timeout")
 	set_physics_process(true)
 	$AnimationPlayer.current_animation = "[stop]"
+	$FallSounds.play_sound()
 
 func _physics_process(delta) -> void:
 	speed += accel * delta
 	position.y += speed * delta
+	if speed > terminal_velocity:
+		queue_free()

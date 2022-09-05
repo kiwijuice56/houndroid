@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/menu_button_pressed.png-59a40d64a9fac9b18a0cec86008de76c.stex"
+path="res://.import/pause_button_unpressed.png-a5559fd497a968f0e6be2ed655de4e00.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/ui/ui_screen/game_overlay/menu_button/menu_button_pressed.png"
-dest_files=[ "res://.import/menu_button_pressed.png-59a40d64a9fac9b18a0cec86008de76c.stex" ]
+source_file="res://main/ui/ui_screen/game_overlay/menu_button/pause_button_unpressed.png"
+dest_files=[ "res://.import/pause_button_unpressed.png-a5559fd497a968f0e6be2ed655de4e00.stex" ]
 
 [params]
 

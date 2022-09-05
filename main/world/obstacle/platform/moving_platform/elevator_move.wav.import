@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/elevator_move.wav-1ef53a6044b4e66eb0f01d59f60e2d90.sample"
+
+[deps]
+
+source_file="res://main/world/obstacle/platform/moving_platform/elevator_move.wav"
+dest_files=[ "res://.import/elevator_move.wav-1ef53a6044b4e66eb0f01d59f60e2d90.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

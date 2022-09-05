@@ -288,7 +288,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 5 ]
 }
 tracks/1/type = "method"
@@ -670,9 +670,6 @@ death_fall_delay = 0.15
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 40 )
 
-[node name="Sprites" parent="." index="1"]
-position = Vector2( -2.2451, 0.5 )
-
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 max_distance = 256.0
 
@@ -680,19 +677,19 @@ max_distance = 256.0
 light_mask = 2
 texture = ExtResource( 4 )
 hframes = 23
-frame = 7
+frame = 6
 
 [node name="Body" type="Sprite" parent="Sprites" index="2"]
 light_mask = 2
 texture = ExtResource( 5 )
 hframes = 23
-frame = 7
+frame = 6
 
 [node name="ArmML" type="Sprite" parent="Sprites" index="3"]
 light_mask = 2
 texture = ExtResource( 6 )
 hframes = 23
-frame = 16
+frame = 6
 
 [node name="PrimaryGunEffectML" type="Sprite" parent="Sprites" index="4"]
 visible = false

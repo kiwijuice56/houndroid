@@ -209,6 +209,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/save_data/save_file/save_file.gd"
 }, {
+"base": "Label",
+"class": "ScoreLabel",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/score_label.gd"
+}, {
+"base": "Collectible",
+"class": "ScoreOrb",
+"language": "GDScript",
+"path": "res://main/world/collectible/score_orb/score_orb.gd"
+}, {
 "base": "Area2D",
 "class": "ScreenEnemySpawner",
 "language": "GDScript",
@@ -305,6 +315,8 @@ _global_script_class_icons={
 "Projectile": "",
 "RandomSoundSpawner": "",
 "SaveFile": "",
+"ScoreLabel": "",
+"ScoreOrb": "",
 "ScreenEnemySpawner": "",
 "SpritesheetAnimImportDock": "",
 "Star": "",
@@ -330,9 +342,12 @@ config/version="v1.0a"
 
 GlobalData="*res://main/global_data/global_data.gd"
 GlobalInstanceManager="*res://main/global_instance_manager/global_instance_manager.gd"
+Transition="*res://main/ui/transition/transition.gd"
 
 [debug]
 
+settings/fps/force_fps=60
+gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 
 [display]
@@ -414,5 +429,8 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
+vram_compression/import_etc=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )
+quality/dynamic_fonts/use_oversampling=false

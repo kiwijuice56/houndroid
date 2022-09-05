@@ -43,6 +43,7 @@ radius = 16.0
 [node name="MoleMine" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 gravity = 9.0
+score_orb_count = 0
 contact_damage = 9.0
 
 [node name="Body" type="Sprite" parent="Sprites" index="0"]

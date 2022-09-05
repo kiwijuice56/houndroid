@@ -21,14 +21,14 @@ func transition_to(to: String) -> void:
 	match to:
 		"PauseMenu":
 			get_tree().paused = true
-			menu_button.visible = false
+			menu_button.modulate.a = 0.0
 	call_deferred("emit_signal", "transition_complete")
 
 func transition_from(from: String) -> void:
 	match from:
 		"PauseMenu":
 			get_tree().paused = false
-			menu_button.visible = true
+			menu_button.modulate.a = 1.0
 		"TitleScreen":
 			visible = true
 	call_deferred("emit_signal", "transition_complete")

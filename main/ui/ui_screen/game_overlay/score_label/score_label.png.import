@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/menu_button.png-52056580104391c46af15b8785c528a2.stex"
+path="res://.import/score_label.png-9e96071c6a2e7c76b2af13b84cead9f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/ui/ui_screen/game_overlay/menu_button/menu_button.png"
-dest_files=[ "res://.import/menu_button.png-52056580104391c46af15b8785c528a2.stex" ]
+source_file="res://main/ui/ui_screen/game_overlay/score_label/score_label.png"
+dest_files=[ "res://.import/score_label.png-9e96071c6a2e7c76b2af13b84cead9f8.stex" ]
 
 [params]
 

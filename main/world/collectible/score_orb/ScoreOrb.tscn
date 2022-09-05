@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://main/world/collectible/Collectible.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/collectible/score_orb/score_orb.png" type="Texture" id=2]
+[ext_resource path="res://main/world/collectible/score_orb/score_orb.gd" type="Script" id=3]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=4]
+[ext_resource path="res://main/world/collectible/score_orb/collect_orb.wav" type="AudioStream" id=5]
+[ext_resource path="res://main/world/collectible/score_orb/score_orb3.png" type="Texture" id=6]
+[ext_resource path="res://main/world/collectible/score_orb/score_orb2.png" type="Texture" id=7]
+[ext_resource path="res://main/world/collectible/score_orb/score_orb4.png" type="Texture" id=8]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 24.0
+
+[sub_resource type="Animation" id=4]
+length = 0.09
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.015, 0.03, 0.045, 0.06, 0.075, 0.09 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 3, 4, 5, 6, 7, 8, 8 ]
+}
+
+[sub_resource type="Animation" id=1]
+length = 0.38
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.065, 0.13, 0.195, 0.26, 0.32 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 2, 1 ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 64.0
+
+[node name="ScoreOrb" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+colors = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 8 ) ]
+gravity_speed = 512
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+hframes = 9
+frame = 3
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="VisibilityEnabler2D" parent="." index="2"]
+process_parent = true
+physics_process_parent = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+autoplay = "flash"
+playback_speed = 0.5
+anims/collect = SubResource( 4 )
+anims/flash = SubResource( 1 )
+
+[node name="AttractionArea" type="Area2D" parent="." index="4"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttractionArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="CollectSounds" type="Node2D" parent="." index="5"]
+script = ExtResource( 4 )
+sounds = [ ExtResource( 5 ) ]
+volume = -12.0
+rand_pitch_range = 0.3
+persist = true

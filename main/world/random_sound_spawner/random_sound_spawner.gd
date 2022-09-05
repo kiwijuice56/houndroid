@@ -7,6 +7,7 @@ export var volume := 0.0
 export var rand_pitch_range := 0.0
 export var max_distance := 2000
 export var auto_start := false
+export var persist := false
 
 func _ready() -> void:
 	if auto_start:
@@ -20,5 +21,10 @@ func play_sound() -> void:
 	
 	sound_player.pitch_scale = 1.0 + (2 * randf() * rand_pitch_range) - rand_pitch_range
 	
-	add_child(sound_player)
+	if persist:
+		GlobalInstanceManager.add_node(sound_player)
+		sound_player.global_position = global_position
+	else:
+		add_child(sound_player)
+	sound_player.connect("finished", sound_player, "queue_free")
 	sound_player.play()

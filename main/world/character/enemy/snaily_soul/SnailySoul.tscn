@@ -33,6 +33,7 @@ radius = 18.0
 scale = Vector2( -1, 1 )
 move_speed = 55.0
 max_health = 7.0
+score_orb_count = 6
 contact_damage = 2.0
 
 [node name="CollisionShape2D" parent="." index="0"]

@@ -1,6 +1,8 @@
 extends Character
 class_name Enemy
 
+export var score_orb: PackedScene
+export var score_orb_count := 4
 export var contact_damage := 1.0
 var player: Player
 
@@ -26,15 +28,26 @@ func hurt(damage: int) -> void:
 	.hurt(damage)
 	
 	if health <= 0:
-		$Sounds/Death.play_sound()
-		set_animations("death")
-		
-		# Disable collision 
-		$Hitbox.get_node("CollisionShape2D").call_deferred("set_disabled", true)
-		get_node("CollisionShape2D").call_deferred("set_disabled", true)
-		
-		yield($AnimationPlayers/Hurt, "animation_finished")
-		queue_free()
+		death()
+		return
 	else:
 		$Sounds/Hurt.play_sound()
 		set_animations("hurt")
+
+func death() -> void:
+	for _i in range(score_orb_count):
+		var new_orb := score_orb.instance()
+		new_orb.dir = Vector2((randf() * 2 - 1 ) * 128, -128 * randf() - 128)
+		GlobalInstanceManager.call_deferred("add_node", new_orb)
+		new_orb.global_position = global_position
+	
+	$Sounds/Death.play_sound()
+	set_animations("death")
+	
+	# Disable collision 
+	$Hitbox.get_node("CollisionShape2D").call_deferred("set_disabled", true)
+	get_node("CollisionShape2D").call_deferred("set_disabled", true)
+	
+	yield($AnimationPlayers/Hurt, "animation_finished")
+	
+	queue_free()
