@@ -27,7 +27,15 @@ func _ready():
 	
 
 func _on_area_entered(area: Area2D) -> void:
+	$AreaSounds.play_sound()
+	$EnterSounds.play_sound()
+	$TransferParticles.emitting = true
+	$TransferParticles.global_position = area.global_position
 	area.get_parent().gravity *= gravity_rate
 
 func _on_area_exited(area: Area2D) -> void:
+	$AreaSounds.wipe_sounds()
+	$LeaveSounds.play_sound()
+	$TransferParticles.emitting = true
+	$TransferParticles.global_position = area.global_position
 	area.get_parent().gravity /= gravity_rate

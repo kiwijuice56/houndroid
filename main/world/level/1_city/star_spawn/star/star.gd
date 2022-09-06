@@ -7,6 +7,7 @@ export(Array, Resource) var textures: Array
 func _ready() -> void:
 	texture = textures[randi() % len(textures)]
 	modulate = colors[randi() % len(colors)]
+	screen_entered()
 	$VisibilityNotifier2D.connect("screen_entered", self, "screen_entered")
 
 func screen_entered() -> void:

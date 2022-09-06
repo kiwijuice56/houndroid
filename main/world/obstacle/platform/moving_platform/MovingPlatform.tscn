@@ -68,8 +68,7 @@ anims/RESET = SubResource( 1 )
 anims/move = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" parent="." index="6"]
-process_parent = false
-physics_process_parent = false
+rect = Rect2( -512, -256, 1024, 512 )
 
 [node name="ElevatorSounds" type="Node2D" parent="." index="7"]
 script = ExtResource( 7 )

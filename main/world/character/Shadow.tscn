@@ -15,3 +15,8 @@ max_distance = 100.0
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 256 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -32, -32, 64, 64 )
+process_parent = true
+physics_process_parent = true

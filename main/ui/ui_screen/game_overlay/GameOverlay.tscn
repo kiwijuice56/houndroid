@@ -64,6 +64,7 @@ __meta__ = {
 }
 world_path = NodePath("../../../World")
 menu_button_path = NodePath("VBoxContainer/TopRow/Menu")
+button_control_path = NodePath("VBoxContainer/BotRow/ButtonControl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 4.0
@@ -230,6 +231,7 @@ size_flags_horizontal = 9
 size_flags_vertical = 8
 
 [node name="JumpButton" type="TouchScreenButton" parent="VBoxContainer/BotRow/ButtonControl"]
+position = Vector2( -44, 0 )
 normal = ExtResource( 9 )
 pressed = ExtResource( 13 )
 shape = SubResource( 2 )
@@ -237,12 +239,23 @@ action = "jump"
 visibility_mode = 1
 
 [node name="ShootButton" type="TouchScreenButton" parent="VBoxContainer/BotRow/ButtonControl"]
-position = Vector2( -38, -10 )
+position = Vector2( 26, -10 )
 normal = ExtResource( 10 )
 pressed = ExtResource( 6 )
 shape = SubResource( 1 )
 action = "primary_weapon"
 visibility_mode = 1
+
+[node name="JumpNormal" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
+
+[node name="ShootNormal" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
+position = Vector2( -38, -10 )
+
+[node name="JumpSwap" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
+position = Vector2( -44, 0 )
+
+[node name="ShootSwap" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
+position = Vector2( 26, -10 )
 
 [node name="FpsLabel" type="Label" parent="."]
 margin_left = 4.0

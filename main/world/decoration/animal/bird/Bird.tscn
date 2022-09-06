@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://main/world/decoration/animal/Animal.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/decoration/animal/bird/bird.gd" type="Script" id=2]
+[ext_resource path="res://main/world/decoration/animal/bird/bird2.png" type="Texture" id=3]
+[ext_resource path="res://main/world/decoration/animal/bird/bird.png" type="Texture" id=4]
+[ext_resource path="res://main/world/decoration/animal/bird/bird3.png" type="Texture" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 48.0
+
+[sub_resource type="Animation" id=3]
+length = 0.12
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.08, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 8 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.315
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 6 ]
+}
+
+[node name="Bird" instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 2 )
+sprites = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
+hop_length = 8.0
+hop_height = -12.0
+hop_time = 0.15
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -9 )
+
+[node name="SpriteAnimationPlayer" parent="." index="2"]
+playback_speed = 1.25
+anims/fly = SubResource( 3 )
+anims/scare = SubResource( 2 )
+
+[node name="IdleTimer" parent="." index="3"]
+one_shot = true
+
+[node name="VisibilityEnabler2D" parent="." index="4"]
+physics_process_parent = false
+
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[node name="WallCast" type="RayCast2D" parent="." index="6"]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( -16, 0 )
+
+[node name="FloorCast" type="RayCast2D" parent="." index="7"]
+position = Vector2( -12, -5 )
+enabled = true
+cast_to = Vector2( 0, 12 )

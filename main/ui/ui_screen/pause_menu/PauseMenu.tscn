@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main/ui/main.theme" type="Theme" id=1]
 [ext_resource path="res://main/ui/ui_screen/pause_menu/pause_menu.gd" type="Script" id=2]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/play_button_unpressed.png" type="Texture" id=3]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/play_button_pressed.png" type="Texture" id=4]
 [ext_resource path="res://main/ui/ui_screen/pause_menu/grabber.png" type="Texture" id=5]
+[ext_resource path="res://main/ui/font/font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://main/ui/ui_screen/pause_menu/switch2.png" type="Texture" id=7]
+[ext_resource path="res://main/ui/ui_screen/pause_menu/switch1.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0, 0, 0.65098 )
@@ -40,6 +43,7 @@ __meta__ = {
 menu_button_path = NodePath("MarginContainer/VBoxContainer/Menu")
 music_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/MusicSilder")
 sound_effect_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/SoundEffectSlider")
+button_switch_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/CheckButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 900.0
@@ -92,6 +96,7 @@ size_flags_vertical = 3
 [node name="LabelContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
 margin_right = 103.0
 margin_bottom = 407.0
+custom_constants/separation = 7
 
 [node name="Music" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/LabelContainer"]
 margin_right = 103.0
@@ -101,11 +106,18 @@ text = "Music Volume"
 align = 2
 
 [node name="SoundEffect" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/LabelContainer"]
-margin_top = 18.0
+margin_top = 21.0
 margin_right = 103.0
-margin_bottom = 32.0
+margin_bottom = 35.0
 size_flags_horizontal = 3
 text = "Sound Effect Volume"
+align = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/LabelContainer"]
+margin_top = 42.0
+margin_right = 103.0
+margin_bottom = 56.0
+text = "Swap Jump/Shoot"
 align = 2
 
 [node name="InputContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
@@ -142,3 +154,14 @@ max_value = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/GridContainer/InputContainer"]
+margin_top = 38.0
+margin_right = 44.0
+margin_bottom = 61.0
+focus_mode = 0
+size_flags_horizontal = 0
+custom_fonts/font = ExtResource( 6 )
+custom_icons/off = ExtResource( 7 )
+custom_icons/on = ExtResource( 8 )
+enabled_focus_mode = 0

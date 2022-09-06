@@ -6,7 +6,7 @@
 [ext_resource path="res://main/world/projectile/bullet/orb_bullet/orb_bullet.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4.0
+radius = 5.0
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0.631373, 0 )

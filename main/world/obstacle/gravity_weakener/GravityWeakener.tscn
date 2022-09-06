@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://main/world/obstacle/gravity_weakener/gravity_weakener.gd" type="Script" id=1]
 [ext_resource path="res://main/world/obstacle/gravity_weakener/sprites/gravity_particle.png" type="Texture" id=2]
 [ext_resource path="res://main/world/obstacle/gravity_weakener/sprites/gravity_cover.png" type="Texture" id=3]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=4]
+[ext_resource path="res://main/world/obstacle/gravity_weakener/sounds/gravity_area.wav" type="AudioStream" id=5]
+[ext_resource path="res://main/world/obstacle/gravity_weakener/sounds/in.wav" type="AudioStream" id=6]
+[ext_resource path="res://main/world/obstacle/gravity_weakener/sounds/out.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 48, 83 )
@@ -27,7 +31,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.435294, 0.564706, 0.956863, 0.152941 ) ]
+"values": [ Color( 0.435294, 0.564706, 0.956863, 0.215686 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -44,8 +48,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.435294, 0.564706, 0.956863, 0.152941 ), Color( 0.427451, 0.384314, 0.921569, 0.215686 ) ]
+"values": [ Color( 0.435294, 0.564706, 0.956863, 0.215686 ), Color( 0.427451, 0.384314, 0.921569, 0.294118 ) ]
 }
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.252252, 1 )
+colors = PoolColorArray( 0.433136, 0.557891, 0.667969, 0, 1, 1, 1, 1, 0.378161, 0.155502, 0.925781, 0 )
 
 [node name="GravityWeakener" type="Area2D"]
 position = Vector2( 1824, -464 )
@@ -53,7 +61,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
 gravity_rate = 0.55
-particle_per_scale = 0.05
+particle_per_scale = 0.02
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
@@ -85,7 +93,7 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 6 )
 
 [node name="Hue" type="Sprite" parent="."]
-modulate = Color( 0.435294, 0.564706, 0.956863, 0.152941 )
+modulate = Color( 0.435294, 0.564706, 0.956863, 0.215686 )
 scale = Vector2( 1280, 640 )
 z_index = 2
 texture = ExtResource( 3 )
@@ -98,5 +106,40 @@ anims/hue_shift = SubResource( 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -879, -10, 879, 20 )
+pause_particles = false
 process_parent = true
 physics_process_parent = true
+
+[node name="AreaSounds" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sounds = [ ExtResource( 5 ) ]
+volume = -12.0
+positional = false
+save_sounds = true
+
+[node name="EnterSounds" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sounds = [ ExtResource( 6 ) ]
+volume = -10.0
+rand_pitch_range = 0.2
+positional = false
+
+[node name="LeaveSounds" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sounds = [ ExtResource( 7 ) ]
+volume = -10.0
+rand_pitch_range = 0.2
+positional = false
+
+[node name="TransferParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 4, -112 )
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.79
+emission_shape = 1
+emission_sphere_radius = 32.0
+orbit_velocity = 1.25
+orbit_velocity_random = 0.16
+color_ramp = SubResource( 9 )

@@ -32,7 +32,7 @@ colors = PoolColorArray( 1, 1, 1, 0.694118, 1, 1, 1, 0 )
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 2 )
-lifespan = 0.4
+lifespan = 0.2
 speed = 500.0
 
 [node name="CollisionShape2D" parent="." index="0"]

@@ -84,6 +84,7 @@ func primary_weapon_shot() -> void:
 	
 	var bullet = primary_bullet_scene.instance()
 	bullet.direction = Vector2($Sprites.scale.x, 0)
+	bullet.speed += abs(velocity.x)
 	GlobalInstanceManager.add_node(bullet)
 	if last_shot_arm == "mr":
 		bullet.global_position = $Sprites/PrimaryGunEffectML/PrimaryShotSparksML.global_position

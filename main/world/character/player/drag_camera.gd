@@ -22,9 +22,9 @@ func _physics_process(_delta) -> void:
 	
 	if abs(target.global_position.x - update_position.x) > update_radius:
 		dir.x += new_dir.x * turn_speed
-	dir.x = clamp(dir.x, -1, 1)
+	dir.x = max(-1.0, min(dir.x, 1.0))
 	
-	if dir.x == new_dir.x and is_equal_approx(1.0, abs(dir.x)):
+	if dir.x == new_dir.x:
 		update_position = target.global_position
 	
 	offset.x = dir.x * max_drag

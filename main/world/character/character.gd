@@ -29,6 +29,16 @@ func set_frozen(new_frozen: bool):
 
 func _ready() -> void:
 	self.health = max_health
+	$VisibilityEnabler2D.connect("screen_entered", self, "_on_screen_entered")
+	$VisibilityEnabler2D.connect("screen_exited", self, "_on_screen_exited")
+
+func _on_screen_entered() -> void:
+	print(name + " entered")
+	$StateMachine.set_physics_process(true)
+
+func _on_screen_exited() -> void:
+	print(name + " exited")
+	$StateMachine.set_physics_process(false)
 
 func _physics_process(delta) -> void:
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -46,4 +56,3 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 
 func hurt(damage: int) -> void:
 	self.health -= damage
-	

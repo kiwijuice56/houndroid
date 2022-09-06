@@ -16,6 +16,7 @@ func _ready() -> void:
 		state_child.state_machine = self
 	if state != null:
 		state.enter()
+	set_physics_process(false)
 
 func _physics_process(delta) -> void:
 	if state != null:

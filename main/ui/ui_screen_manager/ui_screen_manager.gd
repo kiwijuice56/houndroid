@@ -10,6 +10,9 @@ func _ready() -> void:
 		# Get past first child - the CanvasLayer
 		child.get_child(0).ui_manager = self
 
+func get_screen(screen: String) -> Node:
+	return get_node(screen + "Layer").get_child(0)
+
 func transition(from: String, to: String) -> void:
 	var from_node = get_node(from + "Layer").get_child(0)
 	var to_node = get_node(to + "Layer").get_child(0)

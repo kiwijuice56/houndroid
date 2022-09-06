@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gravity_area.wav-2ddc64f851624ed2b98387d2ce8bca58.sample"
+
+[deps]
+
+source_file="res://main/world/obstacle/gravity_weakener/sounds/gravity_area.wav"
+dest_files=[ "res://.import/gravity_area.wav-2ddc64f851624ed2b98387d2ce8bca58.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

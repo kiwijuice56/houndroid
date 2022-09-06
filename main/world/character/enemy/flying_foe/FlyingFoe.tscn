@@ -14,8 +14,6 @@
 [ext_resource path="res://main/world/character/enemy/sounds/charge_up.wav" type="AudioStream" id=12]
 [ext_resource path="res://main/world/character/enemy/states/enemy_hover.gd" type="Script" id=13]
 
-[sub_resource type="CircleShape2D" id=3]
-
 [sub_resource type="Animation" id=1]
 length = 0.05
 loop = true
@@ -64,6 +62,9 @@ tracks/0/keys = {
 "values": [ 3, 2, 1, 0 ]
 }
 
+[sub_resource type="CircleShape2D" id=7]
+radius = 32.0
+
 [sub_resource type="CapsuleShape2D" id=2]
 height = 10.0
 
@@ -71,15 +72,13 @@ height = 10.0
 colors = PoolColorArray( 1, 1, 1, 1, 0.878431, 0.223529, 0.576471, 0 )
 
 [node name="FlyingFoe" instance=ExtResource( 1 )]
+collision_mask = 0
 script = ExtResource( 2 )
-move_speed = 80.0
+move_speed = 128.0
 gravity = 9.0
-max_health = 2.0
+max_health = 3.0
 orb = ExtResource( 9 )
-shoot_delay = 1.1
-
-[node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 3 )
+shoot_delay = 1.35
 
 [node name="Body" type="Sprite" parent="Sprites" index="0"]
 light_mask = 0
@@ -138,7 +137,17 @@ initial_state = NodePath("EnemyHover")
 [node name="EnemyHover" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 13 )
 state_owner_path = NodePath("../..")
-ray_length = 25
+ray_length = 28
+relocate_angle_threshold = 1.1
+wait_time = 1.0
+
+[node name="WaitTimer" type="Timer" parent="StateMachine/EnemyHover" index="0"]
+
+[node name="RelocateArea" type="Area2D" parent="StateMachine/EnemyHover" index="1"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/EnemyHover/RelocateArea" index="0"]
+shape = SubResource( 7 )
 
 [node name="VisibilityEnabler2D" parent="." index="6"]
 rect = Rect2( -64, -64, 128, 128 )

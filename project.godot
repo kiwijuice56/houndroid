@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Animal",
+"language": "GDScript",
+"path": "res://main/world/decoration/animal/animal.gd"
+}, {
+"base": "Animal",
+"class": "Bird",
+"language": "GDScript",
+"path": "res://main/world/decoration/animal/bird/bird.gd"
+}, {
 "base": "Collectible",
 "class": "Bone",
 "language": "GDScript",
@@ -33,6 +43,11 @@ _global_script_classes=[ {
 "class": "CharacterState",
 "language": "GDScript",
 "path": "res://main/world/character/states/character_state.gd"
+}, {
+"base": "TileMap",
+"class": "CityWindowLighter",
+"language": "GDScript",
+"path": "res://main/world/level/1_city/city_window_lighter.gd"
 }, {
 "base": "Area2D",
 "class": "Collectible",
@@ -275,11 +290,14 @@ _global_script_classes=[ {
 "path": "res://main/world/obstacle/gravity_weakener/gravity_weakener.gd"
 } ]
 _global_script_class_icons={
+"Animal": "",
+"Bird": "",
 "Bone": "",
 "BoneCounter": "",
 "Bullet": "",
 "Character": "",
 "CharacterState": "",
+"CityWindowLighter": "",
 "Collectible": "",
 "DeathFallTileMap": "",
 "DragCamera": "",
@@ -334,6 +352,7 @@ _global_script_class_icons={
 
 config/name="robodog3"
 run/main_scene="res://Main.tscn"
+run/disable_stdout=true
 config/icon="res://icon.png"
 version=""
 config/version="v1.0a"
@@ -346,7 +365,6 @@ Transition="*res://main/ui/transition/transition.gd"
 
 [debug]
 
-settings/fps/force_fps=60
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 

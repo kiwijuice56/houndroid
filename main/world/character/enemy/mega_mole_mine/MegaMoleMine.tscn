@@ -41,6 +41,7 @@ tracks/0/keys = {
 radius = 16.0
 
 [node name="MoleMine" instance=ExtResource( 2 )]
+collision_mask = 0
 script = ExtResource( 3 )
 gravity = 9.0
 score_orb_count = 0
