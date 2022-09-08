@@ -657,8 +657,9 @@ script = ExtResource( 7 )
 move_speed = 180.0
 gravity = 875.0
 max_health = 9.0
-primary_weapon_delay = 0.165
+primary_weapon_delay = 0.19
 jump_force = -400.0
+jump_cut = 120
 jump_tolerance = 0.15
 jump_fall = 0.095
 fall_effect_distance = 4.0
@@ -672,6 +673,9 @@ shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 max_distance = 256.0
+
+[node name="VisibilityEnabler2D" parent="Sprites/Shadow" index="1"]
+physics_process_parent = false
 
 [node name="ArmMR" type="Sprite" parent="Sprites" index="1"]
 light_mask = 2
@@ -918,3 +922,5 @@ light_mask = 2
 position = Vector2( -1, -3 )
 texture = ExtResource( 23 )
 hframes = 8
+
+[editable path="Sprites/Shadow"]

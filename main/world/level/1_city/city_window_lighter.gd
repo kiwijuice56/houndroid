@@ -20,12 +20,8 @@ var instanced_shadows := []
 var instanced_covers := []
 
 func _ready():
-	GlobalData.world.connect("level_loaded", self, "_on_level_loaded")
 	$Timer.connect("timeout", self, "_on_light_timeout")
 	$Timer.start(window_light_time + 2 * window_light_rand * randf() - window_light_rand)
-
-func _on_level_loaded() -> void:
-	GlobalData.world.player
 
 func _on_light_timeout() -> void:
 	var pos: Vector2 = GlobalData.world.player.global_position 
@@ -54,6 +50,7 @@ func _on_light_timeout() -> void:
 	
 	if attempts < max_attempts:
 		set_cellv(light_pos / 32, on_tiles[off_tiles.find(get_cellv(light_pos / 32))])
+		
 		turned_on.append(light_pos / 32)
 		
 		var cover_sprite := Sprite.new()

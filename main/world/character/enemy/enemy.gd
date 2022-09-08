@@ -6,6 +6,9 @@ export var score_orb_count := 4
 export var contact_damage := 1.0
 var player: Player
 
+signal body_entered_vision(body)
+signal body_exited_vision(body)
+
 func _ready() -> void:
 	$Vision.connect("body_entered", self, "_on_body_entered_vision")
 	$Vision.connect("body_exited", self, "_on_body_exited_vision")
@@ -13,8 +16,10 @@ func _ready() -> void:
 
 func _on_body_entered_vision(body: Node2D) -> void:
 	player = body as Player
+	emit_signal("body_entered_vision", body)
 
 func _on_body_exited_vision(body: Node2D) -> void:
+	emit_signal("body_exited_vision", body)
 	if player == body:
 		player = null
 

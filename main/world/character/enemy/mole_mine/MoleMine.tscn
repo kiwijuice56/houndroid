@@ -12,6 +12,7 @@ radius = 16.0
 script = ExtResource( 3 )
 move_speed = -64.0
 gravity = 9.0
+score_orb_count = 1
 
 [node name="Sprite" type="Sprite" parent="Sprites" index="0"]
 texture = ExtResource( 1 )
@@ -24,7 +25,8 @@ script = ExtResource( 4 )
 state_owner_path = NodePath("../..")
 
 [node name="VisibilityEnabler2D" parent="." index="6"]
-rect = Rect2( -50, -50, 100, 100 )
+visible = true
+rect = Rect2( -100, -100, 200, 200 )
 physics_process_parent = true
 
 [node name="CollisionShape2D" parent="Vision" index="0"]

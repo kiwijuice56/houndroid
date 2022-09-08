@@ -5,6 +5,7 @@ export var move_speed := 0.0
 export var gravity := 9.0
 
 export var max_health := 1.0
+
 var health := 1.0 setget set_health
 
 onready var anim_players: Node = $AnimationPlayers
@@ -32,16 +33,20 @@ func _ready() -> void:
 	$VisibilityEnabler2D.connect("screen_entered", self, "_on_screen_entered")
 	$VisibilityEnabler2D.connect("screen_exited", self, "_on_screen_exited")
 
+# Used to disable/enable extra processing on child nodes
+
 func _on_screen_entered() -> void:
-	print(name + " entered")
 	$StateMachine.set_physics_process(true)
 
 func _on_screen_exited() -> void:
-	print(name + " exited")
+	# Prevent characters from zipping off-screen when they are disabled
+	# velocity = Vector2()
 	$StateMachine.set_physics_process(false)
 
+# Godot built-in functions use multi-level calls, so we need to create a helper function to override the
+# function for inheriting classes
 func _physics_process(delta) -> void:
-	velocity = move_and_slide(velocity, Vector2.UP)
+	physics_update(delta)
 
 func set_animations(anim_name: String, anim_player_names := []) -> void:
 	if len(anim_player_names) == 0:
@@ -56,3 +61,6 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 
 func hurt(damage: int) -> void:
 	self.health -= damage
+
+func physics_update(_delta) -> void:
+	velocity = move_and_slide(velocity, Vector2.UP)

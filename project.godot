@@ -14,6 +14,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/world/decoration/animal/animal.gd"
 }, {
+"base": "Enemy",
+"class": "Armadillot",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/armadillot/armadillot.gd"
+}, {
+"base": "ArmadillotState",
+"class": "ArmadillotCharge",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/armadillot/states/charge.gd"
+}, {
+"base": "EnemyState",
+"class": "ArmadillotState",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/armadillot/states/armadillot_state.gd"
+}, {
 "base": "Animal",
 "class": "Bird",
 "language": "GDScript",
@@ -70,6 +85,11 @@ _global_script_classes=[ {
 "path": "res://main/world/character/enemy/enemy.gd"
 }, {
 "base": "EnemyState",
+"class": "EnemyBounce",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_bounce.gd"
+}, {
+"base": "EnemyState",
 "class": "EnemyFloat",
 "language": "GDScript",
 "path": "res://main/world/character/enemy/states/enemy_float.gd"
@@ -78,6 +98,11 @@ _global_script_classes=[ {
 "class": "EnemyHover",
 "language": "GDScript",
 "path": "res://main/world/character/enemy/states/enemy_hover.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyIdle",
+"language": "GDScript",
+"path": "res://main/world/character/enemy/states/enemy_idle.gd"
 }, {
 "base": "CharacterState",
 "class": "EnemyState",
@@ -291,6 +316,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Animal": "",
+"Armadillot": "",
+"ArmadillotCharge": "",
+"ArmadillotState": "",
 "Bird": "",
 "Bone": "",
 "BoneCounter": "",
@@ -302,8 +330,10 @@ _global_script_class_icons={
 "DeathFallTileMap": "",
 "DragCamera": "",
 "Enemy": "",
+"EnemyBounce": "",
 "EnemyFloat": "",
 "EnemyHover": "",
+"EnemyIdle": "",
 "EnemyState": "",
 "EnemyStrafe": "",
 "EnemyWalk": "",
@@ -352,7 +382,6 @@ _global_script_class_icons={
 
 config/name="robodog3"
 run/main_scene="res://Main.tscn"
-run/disable_stdout=true
 config/icon="res://icon.png"
 version=""
 config/version="v1.0a"

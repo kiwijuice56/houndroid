@@ -66,27 +66,33 @@ particle_per_scale = 0.02
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 0, 64 )
-amount = 32
-lifetime = 2.0
+[node name="ParticleLayer" type="CanvasLayer" parent="."]
+
+[node name="FrontParticles" type="CPUParticles2D" parent="ParticleLayer"]
+scale = Vector2( 1, -1 )
+emitting = false
+amount = 48
+lifetime = 1.25
+speed_scale = 1.25
 randomness = 0.58
 texture = ExtResource( 2 )
 emission_shape = 2
-emission_rect_extents = Vector2( 256, 1 )
+emission_rect_extents = Vector2( 450, 1 )
 gravity = Vector2( 0, -98 )
 scale_amount = 0.5
 scale_amount_random = 1.0
 color_ramp = SubResource( 5 )
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
-position = Vector2( 0, 256 )
-amount = 32
-lifetime = 2.0
+[node name="BackParticles" type="CPUParticles2D" parent="ParticleLayer"]
+position = Vector2( 0, 240 )
+emitting = false
+amount = 48
+lifetime = 1.25
+speed_scale = 1.25
 randomness = 0.58
 texture = ExtResource( 2 )
 emission_shape = 2
-emission_rect_extents = Vector2( 256, 1 )
+emission_rect_extents = Vector2( 450, 1 )
 gravity = Vector2( 0, -98 )
 scale_amount = 0.5
 scale_amount_random = 1.0
@@ -105,8 +111,8 @@ anims/RESET = SubResource( 7 )
 anims/hue_shift = SubResource( 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -879, -10, 879, 20 )
-pause_particles = false
 process_parent = true
 physics_process_parent = true
 

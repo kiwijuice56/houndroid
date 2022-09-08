@@ -15,6 +15,7 @@ func _ready() -> void:
 func physics_update(delta) -> void:
 	enemy.set_animations("walk")
 	enemy.velocity.y += enemy.gravity * delta
+	
 	if enemy.is_on_floor():
 		enemy.velocity.x = direction * enemy.move_speed
 		if not floor_ray.is_colliding() or wall_ray.is_colliding():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://main/ui/main.theme" type="Theme" id=1]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd" type="Script" id=19]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label.gd" type="Script" id=20]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/coin_label.png" type="Texture" id=21]
+[ext_resource path="res://main/ui/font/font.tres" type="DynamicFont" id=22]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -257,11 +258,18 @@ position = Vector2( -44, 0 )
 [node name="ShootSwap" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
 position = Vector2( 26, -10 )
 
-[node name="FpsLabel" type="Label" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="FpsLabel" type="Label" parent="CanvasLayer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 896.0
 margin_bottom = 18.0
 size_flags_vertical = 0
+custom_fonts/font = ExtResource( 22 )
 text = "0 fps"
 script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
