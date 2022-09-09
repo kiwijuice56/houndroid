@@ -14,6 +14,9 @@
 [ext_resource path="res://main/world/character/enemy/sounds/charge_up.wav" type="AudioStream" id=12]
 [ext_resource path="res://main/world/character/enemy/states/enemy_hover.gd" type="Script" id=13]
 
+[sub_resource type="CapsuleShape2D" id=2]
+height = 10.0
+
 [sub_resource type="Animation" id=1]
 length = 0.05
 loop = true
@@ -31,7 +34,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.4
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprites/Eye:frame")
 tracks/0/interp = 1
@@ -39,7 +42,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 2, 3, 3 ]
@@ -62,9 +65,6 @@ tracks/0/keys = {
 "values": [ 3, 2, 1, 0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
-height = 10.0
-
 [sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 1, 1, 1, 1, 0.878431, 0.223529, 0.576471, 0 )
 
@@ -74,32 +74,39 @@ radius = 32.0
 [node name="FlyingFoe" instance=ExtResource( 1 )]
 collision_mask = 0
 script = ExtResource( 2 )
-move_speed = 128.0
+move_speed = 100.0
 gravity = 9.0
 max_health = 2.0
 orb = ExtResource( 9 )
-shoot_delay = 1.35
+shoot_delay = 1.55
 
-[node name="Body" type="Sprite" parent="Sprites" index="0"]
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, 4 )
+shape = SubResource( 2 )
+
+[node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 8 )]
+max_distance = 256.0
+
+[node name="Body" type="Sprite" parent="Sprites" index="1"]
 light_mask = 0
 texture = ExtResource( 6 )
 
-[node name="Eye" type="Sprite" parent="Sprites" index="1"]
+[node name="Eye" type="Sprite" parent="Sprites" index="2"]
 light_mask = 0
 texture = ExtResource( 5 )
 hframes = 4
 
-[node name="Rod" type="Sprite" parent="Sprites" index="2"]
+[node name="Rod" type="Sprite" parent="Sprites" index="3"]
 light_mask = 0
 texture = ExtResource( 4 )
 
-[node name="Spinner" type="Sprite" parent="Sprites" index="3"]
+[node name="Spinner" type="Sprite" parent="Sprites" index="4"]
 light_mask = 0
 texture = ExtResource( 3 )
 hframes = 2
-
-[node name="Shadow" parent="Sprites" index="4" instance=ExtResource( 8 )]
-max_distance = 256.0
 
 [node name="Explosion" parent="Sprites" index="5"]
 position = Vector2( 1, 5 )
@@ -123,6 +130,11 @@ sounds = [ ExtResource( 12 ) ]
 volume = -10.0
 rand_pitch_range = 0.4
 
+[node name="VisibilityEnabler2D" parent="." index="4"]
+rect = Rect2( -16, -16, 32, 32 )
+process_parent = true
+physics_process_parent = true
+
 [node name="Spinner" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
 autoplay = "spin"
 anims/spin = SubResource( 1 )
@@ -131,7 +143,7 @@ anims/spin = SubResource( 1 )
 anims/shoot = SubResource( 4 )
 anims/unwind = SubResource( 5 )
 
-[node name="StateMachine" parent="." index="4"]
+[node name="StateMachine" parent="." index="7"]
 initial_state = NodePath("EnemyHover")
 
 [node name="EnemyHover" type="Node" parent="StateMachine" index="0"]
@@ -140,21 +152,10 @@ state_owner_path = NodePath("../..")
 timer_path = NodePath("../../WaitTimer")
 area_path = NodePath("../../RelocateArea")
 relocate_angle_threshold = 1.1
-wait_time = 1.0
+wait_time = 1.35
 
-[node name="VisibilityEnabler2D" parent="." index="6"]
-rect = Rect2( -64, -64, 128, 128 )
-physics_process_parent = true
-
-[node name="Vision" parent="." index="7"]
+[node name="Vision" parent="." index="8"]
 visible = true
-
-[node name="Hitbox" parent="." index="8"]
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, 4 )
-shape = SubResource( 2 )
 
 [node name="ShootSparks" type="CPUParticles2D" parent="." index="9"]
 position = Vector2( 0, 8 )
@@ -176,6 +177,7 @@ one_shot = true
 
 [node name="RelocateArea" type="Area2D" parent="." index="12"]
 collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RelocateArea" index="0"]
 shape = SubResource( 7 )

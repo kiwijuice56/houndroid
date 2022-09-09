@@ -11,12 +11,16 @@ export var flash_cutoff := 0.8
 
 export var anim_speed_min := 0.5
 
-func physics_update(delta) -> void:
-	pass
-
 func _ready() -> void:
 	$NormalFlashEndTimer.connect("timeout", self, "_on_flash_end")
 	$NormalFlashTimer.connect("timeout", self, "_on_flash_start")
+	set_physics_process(false)
+
+func _on_screen_entered() -> void:
+	pass
+
+func _on_screen_exited() -> void:
+	pass
 
 func _on_flash_start() -> void:
 	$NormalFlashEndTimer.start(flash_length)
@@ -35,7 +39,6 @@ func _on_flash_end() -> void:
 	
 	$AnimationPlayers/BlurTop.playback_speed = progress * (1.0 - anim_speed_min) + anim_speed_min
 	$AnimationPlayers/Top.playback_speed = progress * (1.0 - anim_speed_min) + anim_speed_min
-	print($AnimationPlayers/BlurTop.playback_speed)
 	$NormalFlashTimer.start(progress * (flash_time - flash_time_min) + flash_time_min)
 
 func set_animations(anim_name: String, anim_player_names := []) -> void:
@@ -45,6 +48,7 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 		$Sprites.get_node("Top").visible = false
 		$Sprites.get_node("BlurTop").visible = true
 		$Trail.emitting = true
+		
 	else:
 		$AnimationPlayers/BlurTop.playback_speed = 1.0
 		$AnimationPlayers/Top.playback_speed = 1.0

@@ -6,6 +6,7 @@ export var shoot_delay := 1.25
 
 func _ready() -> void:
 	$ShootDelayTimer.connect("timeout", self, "_on_shoot_delay_finished")
+	set_physics_process(false)
 
 func _on_body_entered_vision(body: Node2D) -> void:
 	._on_body_entered_vision(body)
@@ -19,7 +20,7 @@ func _on_shoot_delay_finished() -> void:
 	
 	$Sounds/ChargeUp.play_sound()
 	set_animations("shoot")
-	yield($AnimationPlayers/Eye, "animation_finished")
+	yield(anim_players.get_node("Eye"), "animation_finished")
 	
 	# Must check again after waiting for animation
 	if health <= 0:

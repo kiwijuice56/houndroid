@@ -273,3 +273,7 @@ script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="CanvasLayer/FpsLabel"]
+wait_time = 0.5
+autostart = true

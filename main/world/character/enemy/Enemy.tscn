@@ -8,6 +8,9 @@
 [ext_resource path="res://main/world/character/enemy/sounds/hurt.wav" type="AudioStream" id=6]
 [ext_resource path="res://main/world/collectible/score_orb/ScoreOrb.tscn" type="PackedScene" id=7]
 
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.227451, 0.388235, 0.160784 )
+
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
@@ -196,9 +199,6 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0.227451, 0.388235, 0.160784 )
-
 [sub_resource type="CircleShape2D" id=5]
 radius = 160.0
 
@@ -206,6 +206,10 @@ radius = 160.0
 collision_layer = 4
 script = ExtResource( 2 )
 score_orb = ExtResource( 7 )
+
+[node name="Hitbox" parent="." index="1"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Explosion" type="Sprite" parent="Sprites" index="0"]
 visible = false
@@ -225,14 +229,7 @@ sounds = [ ExtResource( 5 ) ]
 volume = -14.0
 rand_pitch_range = 0.3
 
-[node name="Hurt" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
-pause_mode = 2
-playback_speed = 1.75
-anims/RESET = SubResource( 1 )
-anims/death = SubResource( 4 )
-anims/hurt = SubResource( 2 )
-
-[node name="HurtParticles" type="CPUParticles2D" parent="." index="5"]
+[node name="HurtParticles" type="CPUParticles2D" parent="." index="6"]
 emitting = false
 amount = 32
 one_shot = true
@@ -243,19 +240,19 @@ emission_sphere_radius = 4.0
 direction = Vector2( 0, -1 )
 spread = 180.0
 initial_velocity = 37.8
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 6 )
 
-[node name="VisibilityEnabler2D" parent="." index="6"]
-visible = false
+[node name="Hurt" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
+pause_mode = 2
+playback_speed = 1.75
+anims/RESET = SubResource( 1 )
+anims/death = SubResource( 4 )
+anims/hurt = SubResource( 2 )
 
-[node name="Vision" type="Area2D" parent="." index="7"]
+[node name="Vision" type="Area2D" parent="." index="8"]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource( 5 )
-
-[node name="Hitbox" parent="." index="8"]
-collision_layer = 4
-collision_mask = 0

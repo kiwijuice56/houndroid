@@ -1,2 +1,2 @@
-extends TileMap
+extends DamageTileMap
 class_name DeathFallTileMap

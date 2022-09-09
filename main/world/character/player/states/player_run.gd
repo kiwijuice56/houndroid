@@ -1,6 +1,8 @@
 extends PlayerState
 class_name PlayerRun
 
+var displace_origin: Vector2
+
 func physics_update(delta) -> void:
 	if not player.is_on_floor():
 		player.slip_step()
@@ -21,11 +23,9 @@ func physics_update(delta) -> void:
 	
 	player.velocity.y += player.gravity * delta 
 	
-	if player.is_shooting_primary:
-		player.set_animations("run", ["Body"])
-	else:
-		player.set_animations("run")
-	
 	if Input.is_action_just_pressed("jump") or player.is_jump_queued:
 		player.jump_step()
 		player.velocity.y += player.jump_force
+
+func enter(msg := {}) -> void:
+	player.set_animations("run")

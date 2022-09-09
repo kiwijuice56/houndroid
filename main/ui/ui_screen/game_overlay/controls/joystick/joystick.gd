@@ -39,7 +39,6 @@ func _input(event) -> void:
 		if distance.length() > radius:
 			distance = direction * radius
 		
-		print(distance)
 		$InnerJoystick.position = inner_offset + distance * inner_resistance
 
 func _on_release() -> void:

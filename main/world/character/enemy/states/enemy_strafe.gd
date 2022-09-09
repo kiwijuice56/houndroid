@@ -1,5 +1,6 @@
 extends EnemyState
 class_name EnemyStrafe
+# Slightly moves the enemy from side to side
 
 export var relocate_threshold := 32
 export var relocate_range := 64
@@ -16,7 +17,6 @@ func _ready() -> void:
 func physics_update(delta) -> void:
 	enemy.velocity.y += enemy.gravity * delta
 	if abs(enemy.global_position.x - relocate_spot) < relocate_threshold:
-		var new_spot_dir := randf() * 2 - 1
-		relocate_spot = origin + new_spot_dir * relocate_range
+		relocate_spot = origin + (randf() * 2 - 1) * relocate_range
 		move_direction = sign(relocate_spot - enemy.global_position.x)
 	enemy.global_position.x += move_direction * enemy.move_speed * delta

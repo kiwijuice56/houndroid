@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://main/world/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/player/states/player_run.gd" type="Script" id=2]
@@ -62,22 +62,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 7, 7 ]
-}
-
-[sub_resource type="Animation" id=28]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprites/ArmMR:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 7, 8, 8 ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -227,22 +211,6 @@ tracks/0/keys = {
 "values": [ 7, 8, 8 ]
 }
 
-[sub_resource type="Animation" id=29]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprites/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 7, 8, 8 ]
-}
-
 [sub_resource type="Animation" id=3]
 length = 0.075
 loop = true
@@ -337,22 +305,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 7, 7 ]
-}
-
-[sub_resource type="Animation" id=30]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprites/ArmML:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 7, 8, 8 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -681,19 +633,19 @@ physics_process_parent = false
 light_mask = 2
 texture = ExtResource( 4 )
 hframes = 23
-frame = 6
+frame = 16
 
 [node name="Body" type="Sprite" parent="Sprites" index="2"]
 light_mask = 2
 texture = ExtResource( 5 )
 hframes = 23
-frame = 6
+frame = 7
 
 [node name="ArmML" type="Sprite" parent="Sprites" index="3"]
 light_mask = 2
 texture = ExtResource( 6 )
 hframes = 23
-frame = 6
+frame = 16
 
 [node name="PrimaryGunEffectML" type="Sprite" parent="Sprites" index="4"]
 visible = false
@@ -770,7 +722,6 @@ volume = -12.0
 playback_speed = 0.9
 anims/death = SubResource( 41 )
 anims/fall = SubResource( 20 )
-anims/hurt = SubResource( 28 )
 anims/idle = SubResource( 1 )
 anims/jump = SubResource( 9 )
 anims/run = SubResource( 2 )
@@ -782,7 +733,6 @@ playback_speed = 0.9
 anims/RESET = SubResource( 44 )
 anims/death = SubResource( 42 )
 anims/fall = SubResource( 26 )
-anims/hurt = SubResource( 29 )
 anims/idle = SubResource( 3 )
 anims/jump = SubResource( 27 )
 anims/run = SubResource( 4 )
@@ -791,7 +741,6 @@ anims/run = SubResource( 4 )
 playback_speed = 0.9
 anims/death = SubResource( 43 )
 anims/fall = SubResource( 21 )
-anims/hurt = SubResource( 30 )
 anims/idle = SubResource( 5 )
 anims/jump = SubResource( 11 )
 anims/run = SubResource( 6 )
@@ -860,6 +809,7 @@ current = true
 script = ExtResource( 9 )
 target_path = NodePath("..")
 max_drag = 32.0
+turn_speed = 4.5
 update_radius = 80
 
 [node name="Tween" type="Tween" parent="DragCamera" index="0"]
@@ -911,7 +861,7 @@ color_ramp = SubResource( 39 )
 
 [node name="Hitbox" parent="." index="16"]
 collision_layer = 2
-collision_mask = 48
+collision_mask = 176
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 32 )

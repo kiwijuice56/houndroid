@@ -11,12 +11,15 @@
 [ext_resource path="res://main/world/character/enemy/armadillot/states/charge.gd" type="Script" id=9]
 [ext_resource path="res://main/world/character/enemy/armadillot/sprites/toy_ring.png" type="Texture" id=10]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 16.0
 
 [sub_resource type="Gradient" id=11]
 offsets = PoolRealArray( 0.00900901, 0.324324, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 0.807843, 0.945098, 1, 0.776471, 1, 1, 1, 0 )
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -125,9 +128,6 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=3]
 radius = 180.0
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 16.0
-
 [sub_resource type="Gradient" id=10]
 colors = PoolColorArray( 1, 1, 1, 1, 0.402344, 0.0644379, 0.0644379, 0 )
 
@@ -136,26 +136,21 @@ script = ExtResource( 5 )
 move_speed = 290.0
 gravity = 9.0
 max_health = 5.0
+uses_physics_process = false
 score_orb_count = 8
-contact_damage = 0.0
 flash_time = 0.3
 flash_time_min = 0.01
 flash_length = 0.05
 flash_cutoff = 0.4
 anim_speed_min = 0.2
 
-[node name="String" type="Line2D" parent="." index="0"]
-points = PoolVector2Array( 0, 0, 16.1, 0 )
-width = 4.0
-default_color = Color( 1, 1, 1, 1 )
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
 
-[node name="Ring" type="Sprite" parent="." index="1"]
-texture = ExtResource( 10 )
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
-
-[node name="Trail" type="CPUParticles2D" parent="." index="3"]
+[node name="Trail" type="CPUParticles2D" parent="." index="1"]
 amount = 4
 lifetime = 0.5
 speed_scale = 2.0
@@ -164,19 +159,33 @@ texture = ExtResource( 8 )
 gravity = Vector2( 0, 42 )
 color_ramp = SubResource( 11 )
 
-[node name="Body" type="Sprite" parent="Sprites" index="0"]
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 1 )
+
+[node name="String" type="Line2D" parent="Sprites" index="0"]
+points = PoolVector2Array( 0, 0, 16.1, 0 )
+width = 4.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Ring" type="Sprite" parent="Sprites" index="1"]
+texture = ExtResource( 10 )
+
+[node name="Body" type="Sprite" parent="Sprites" index="2"]
 texture = ExtResource( 1 )
 hframes = 4
 
-[node name="Top" type="Sprite" parent="Sprites" index="1"]
+[node name="Top" type="Sprite" parent="Sprites" index="3"]
 texture = ExtResource( 6 )
 hframes = 4
 
-[node name="BlurTop" type="Sprite" parent="Sprites" index="2"]
+[node name="BlurTop" type="Sprite" parent="Sprites" index="4"]
 visible = false
 texture = ExtResource( 7 )
 hframes = 4
 frame = 1
+
+[node name="VisibilityEnabler2D" parent="." index="5"]
+rect = Rect2( -32, -32, 64, 64 )
 
 [node name="Top" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
 anims/RESET = SubResource( 9 )
@@ -188,13 +197,13 @@ anims/RESET = SubResource( 7 )
 anims/idle = SubResource( 8 )
 anims/spin = SubResource( 5 )
 
-[node name="StateMachine" parent="." index="7"]
+[node name="StateMachine" parent="." index="8"]
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
 state_owner_path = NodePath("../..")
-idle_time = 0.6
+idle_time = 0.4
 transition = "Charge"
 timer_path = NodePath("../../IdleTimer")
 
@@ -209,37 +218,28 @@ decay = 0.125
 [node name="Charge" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 9 )
 state_owner_path = NodePath("../..")
-string_path = NodePath("../../String")
-ring_path = NodePath("../../Ring")
+string_path = NodePath("../../Sprites/String")
+ring_path = NodePath("../../Sprites/Ring")
 tween_path = NodePath("../../Tween")
-charge_time = 1.25
+charge_time = 0.9
 release_time = 0.15
 
-[node name="VisibilityEnabler2D" parent="." index="9"]
-visible = true
-
-[node name="Vision" parent="." index="10"]
+[node name="Vision" parent="." index="9"]
 visible = true
 
 [node name="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource( 3 )
 
-[node name="Hitbox" parent="." index="11"]
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 2 )
-
-[node name="IdleTimer" type="Timer" parent="." index="12"]
+[node name="IdleTimer" type="Timer" parent="." index="10"]
 one_shot = true
 
-[node name="NormalFlashTimer" type="Timer" parent="." index="13"]
+[node name="NormalFlashTimer" type="Timer" parent="." index="11"]
 one_shot = true
 
-[node name="NormalFlashEndTimer" type="Timer" parent="." index="14"]
+[node name="NormalFlashEndTimer" type="Timer" parent="." index="12"]
 one_shot = true
 
-[node name="WallParticles" type="CPUParticles2D" parent="." index="15"]
+[node name="WallParticles" type="CPUParticles2D" parent="." index="13"]
 emitting = false
 amount = 16
 lifetime = 0.2
@@ -253,4 +253,4 @@ spread = 66.89
 initial_velocity = 48.0
 color_ramp = SubResource( 10 )
 
-[node name="Tween" type="Tween" parent="." index="16"]
+[node name="Tween" type="Tween" parent="." index="14"]

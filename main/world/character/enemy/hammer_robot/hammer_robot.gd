@@ -1,5 +1,6 @@
 extends Enemy
 class_name HammerRobot
+# Extends the enemy class to shoot saws 
 
 export var hammer: PackedScene
 
@@ -35,7 +36,6 @@ func _on_shoot_delay_finished() -> void:
 	
 	$Sprites.scale.x = -x_dir
 	
-	# $Sounds/ChargeUp.play_sound()
 	set_animations("charge_up")
 	yield($AnimationPlayers/Body, "animation_finished")
 	
@@ -45,8 +45,8 @@ func _on_shoot_delay_finished() -> void:
 		set_animations("charge_left")
 	set_animations("charge_saw")
 	$Sprites/Saw/SawSparks.emitting = true
-	#$SawSounds.play_sound()
 	yield($AnimationPlayers/Antenna, "animation_finished")
+	
 	if health <= 0:
 		return
 	
@@ -68,8 +68,6 @@ func _on_shoot_delay_finished() -> void:
 	set_animations("rise")
 	yield($AnimationPlayers/Antenna, "animation_finished")
 	
-	# $Sounds/LaserShot.play_sound()
-	# $ShootSparks.emitting = true
 	set_animations("unwind")
 	$ShootDelayTimer.start(shoot_delay + randf() * 2 * shoot_random - shoot_random)
 

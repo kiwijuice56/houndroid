@@ -1,5 +1,6 @@
 extends EnemyState
 class_name EnemyWalk
+# Moves the enemy back and forth on a flat surface, flipping at edges and walls
 
 export var floor_ray_path: NodePath
 export var wall_ray_path: NodePath
@@ -13,7 +14,6 @@ func _ready() -> void:
 	wall_ray = get_node(wall_ray_path)
 
 func physics_update(delta) -> void:
-	enemy.set_animations("walk")
 	enemy.velocity.y += enemy.gravity * delta
 	
 	if enemy.is_on_floor():
@@ -21,3 +21,6 @@ func physics_update(delta) -> void:
 		if not floor_ray.is_colliding() or wall_ray.is_colliding():
 			enemy.scale.x *= -1
 			direction *= -1
+
+func enter(msg := {}) -> void:
+	enemy.set_animations("walk")

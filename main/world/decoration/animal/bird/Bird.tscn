@@ -7,7 +7,7 @@
 [ext_resource path="res://main/world/decoration/animal/bird/bird3.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 48.0
+radius = 16.0
 
 [sub_resource type="Animation" id=3]
 length = 0.12
@@ -43,8 +43,10 @@ tracks/0/keys = {
 [node name="Bird" instance=ExtResource( 1 )]
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 script = ExtResource( 2 )
 sprites = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ]
+idle_time = 4.0
 hop_length = 8.0
 hop_height = -12.0
 hop_time = 0.15

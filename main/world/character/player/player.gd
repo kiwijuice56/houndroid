@@ -60,14 +60,15 @@ func _on_jump_fall_timeout() -> void:
 	can_jump = false
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is DeathFallTileMap:
-		$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
-		var cam := $DragCamera
-		remove_child(cam)
-		GlobalInstanceManager.add_node(cam)
-		cam.global_position = global_position
-		$DeathFallTimer.start(death_fall_delay)
-		yield($DeathFallTimer, "timeout")
+	if body is DamageTileMap:
+		if body is DeathFallTileMap:
+			$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
+			var cam := $DragCamera
+			remove_child(cam)
+			GlobalInstanceManager.add_node(cam)
+			cam.global_position = global_position
+			$DeathFallTimer.start(death_fall_delay)
+			yield($DeathFallTimer, "timeout")
 		hurt(max_health, true)
 
 func primary_weapon_shot() -> void:

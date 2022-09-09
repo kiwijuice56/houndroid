@@ -16,16 +16,21 @@ func _physics_process(delta) -> void:
 	speed += delta * accel
 	global_position += speed * delta
 
+func _on_screen_exited() -> void:
+	._on_screen_exited()
+	if is_scared:
+		queue_free()
+
 func scare() -> void:
 	.scare()
 	speed.x *= -scale.x
 	$SpriteAnimationPlayer.current_animation = "scare"
 	yield($SpriteAnimationPlayer, "animation_finished")
 	$SpriteAnimationPlayer.current_animation = "fly"
+	$VisibilityEnabler2D.physics_process_parent = true
 	set_physics_process(true)
 
 func idle() -> void:
-
 	for _i in range(randi() % (max_hops - 1) + 1):
 		if randf() < 0.5:
 			scale.x *= -1
@@ -35,6 +40,7 @@ func idle() -> void:
 		
 		if $WallCast.is_colliding() or not $FloorCast.is_colliding():
 			scale.x *= -1
+		
 		$Tween.interpolate_property(self, "position:x", null, position.x - hop_length * scale.x, hop_time)
 		$Tween.interpolate_property(self, "position:y", null, position.y + hop_height, hop_time / 2)
 		$Tween.start()

@@ -19,12 +19,12 @@ func physics_update(delta) -> void:
 		
 		if collisions >= max_collisions:
 			state_machine.transition_to(transition)
-			collisions = 0
 			return
 		wall_particles.direction = collision.normal
 		wall_particles.emitting = true
 		wall_particles.global_position = enemy.global_position - 20 * collision.normal
 
 func enter(msg := {}) -> void:
+	collisions = 0
 	enemy.set_animations("spin")
 	enemy.velocity = msg.dir * enemy.move_speed 

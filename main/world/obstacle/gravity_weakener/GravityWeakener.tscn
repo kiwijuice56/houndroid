@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.435294, 0.564706, 0.956863, 0.215686 ), Color( 0.427451, 0.384314, 0.921569, 0.294118 ) ]
+"values": [ Color( 0.435294, 0.564706, 0.956863, 0.141176 ), Color( 0.427451, 0.384314, 0.921569, 0.262745 ) ]
 }
 
 [sub_resource type="Gradient" id=9]

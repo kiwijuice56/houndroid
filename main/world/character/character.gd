@@ -1,17 +1,23 @@
 extends KinematicBody2D
 class_name Character
+# Base class for all players and enemies
 
+# Generally, the speed that characters directly control within states, such
+# as the player walking speed or enemy flying speed
 export var move_speed := 0.0
-export var gravity := 9.0
 
+export var gravity := 9.0
 export var max_health := 1.0
 
-var health := 1.0 setget set_health
+# Ultimately decides whether physics_process of this character is ever enabled
+export var uses_physics_process := true
 
+# Stored references for other classes to access
 onready var anim_players: Node = $AnimationPlayers
 onready var sprites: Node2D = $Sprites
-
 var game_world: GameWorld
+
+var health := 1.0 setget set_health
 var velocity := Vector2()
 
 # Used to stop processing
@@ -32,16 +38,18 @@ func _ready() -> void:
 	self.health = max_health
 	$VisibilityEnabler2D.connect("screen_entered", self, "_on_screen_entered")
 	$VisibilityEnabler2D.connect("screen_exited", self, "_on_screen_exited")
+	
+	if not $VisibilityEnabler2D.is_on_screen():
+		_on_screen_exited()
 
-# Used to disable/enable extra processing on child nodes
-
+# Link VisibilityEnabler to StateMachine processing as well
 func _on_screen_entered() -> void:
 	$StateMachine.set_physics_process(true)
+	set_physics_process(true)
 
 func _on_screen_exited() -> void:
-	# Prevent characters from zipping off-screen when they are disabled
-	# velocity = Vector2()
 	$StateMachine.set_physics_process(false)
+	set_physics_process(false)
 
 # Godot built-in functions use multi-level calls, so we need to create a helper function to override the
 # function for inheriting classes
@@ -58,6 +66,9 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 			var anim_player: AnimationPlayer = anim_players.get_node(anim_player_name)
 			if not anim_player.current_animation == anim_name and anim_player.has_animation(anim_name):
 				anim_player.current_animation = anim_name
+
+func set_physics_process(enabled: bool) -> void:
+	.set_physics_process(uses_physics_process and enabled)
 
 func hurt(damage: int) -> void:
 	self.health -= damage

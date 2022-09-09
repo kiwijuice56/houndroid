@@ -6,6 +6,9 @@
 [ext_resource path="res://main/world/character/Shadow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/world/character/enemy/states/enemy_walk.gd" type="Script" id=5]
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 18.0
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 11 )
 
@@ -26,9 +29,6 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1, 0 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 18.0
-
 [node name="SnailySoul" instance=ExtResource( 1 )]
 scale = Vector2( -1, 1 )
 move_speed = 55.0
@@ -36,7 +36,13 @@ max_health = 6.0
 score_orb_count = 6
 contact_damage = 2.0
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 4 )]
@@ -52,10 +58,18 @@ hframes = 3
 [node name="Explosion" parent="Sprites" index="2"]
 light_mask = 0
 
+[node name="VisibilityEnabler2D" parent="." index="4"]
+rect = Rect2( -40, -40, 80, 80 )
+process_parent = true
+physics_process_parent = true
+
 [node name="Body" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
 anims/walk = SubResource( 3 )
 
-[node name="StateMachine" parent="." index="4"]
+[node name="CollisionShape2D" parent="Vision" index="0"]
+disabled = true
+
+[node name="StateMachine" parent="." index="8"]
 initial_state = NodePath("Walk")
 
 [node name="Walk" type="Node" parent="StateMachine" index="0"]
@@ -63,19 +77,6 @@ script = ExtResource( 5 )
 state_owner_path = NodePath("../..")
 floor_ray_path = NodePath("../../FloorCheck")
 wall_ray_path = NodePath("../../WallCheck")
-
-[node name="VisibilityEnabler2D" parent="." index="6"]
-rect = Rect2( -40, -40, 80, 80 )
-physics_process_parent = true
-
-[node name="CollisionShape2D" parent="Vision" index="0"]
-disabled = true
-
-[node name="Hitbox" parent="." index="8"]
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 2 )
 
 [node name="FloorCheck" type="RayCast2D" parent="." index="9"]
 position = Vector2( 12, 0 )

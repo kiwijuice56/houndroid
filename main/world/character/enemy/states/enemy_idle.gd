@@ -1,5 +1,6 @@
 extends EnemyState
 class_name EnemyIdle
+# Keeps the enemy stable while attempting to transition idle once the player is spotted
 
 export var idle_time := 0.9
 export var idle_rand := 0.15
@@ -19,7 +20,8 @@ func _on_body_exited_vision(body: Node2D) -> void:
 	timer.stop()
 
 func _on_body_entered_vision(body: Node2D) -> void:
-	timer.start(idle_time + idle_rand * randf() * 2 - idle_rand)
+	if state_machine.state == self:
+		timer.start(idle_time + idle_rand * randf() * 2 - idle_rand)
 
 func _on_idle_timeout() -> void:
 	state_machine.transition_to(transition)

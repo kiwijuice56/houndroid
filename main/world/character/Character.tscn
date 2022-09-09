@@ -7,19 +7,19 @@
 script = ExtResource( 2 )
 gravity = 800.0
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Sounds" type="Node2D" parent="."]
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+
 [node name="AnimationPlayers" type="Node" parent="."]
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

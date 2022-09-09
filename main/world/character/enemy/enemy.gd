@@ -1,9 +1,12 @@
 extends Character
 class_name Enemy
+# Extends character functionality to allow player detection and contact damage
 
 export var score_orb: PackedScene
 export var score_orb_count := 4
+
 export var contact_damage := 1.0
+
 var player: Player
 
 signal body_entered_vision(body)
@@ -53,6 +56,6 @@ func death() -> void:
 	$Hitbox.get_node("CollisionShape2D").call_deferred("set_disabled", true)
 	get_node("CollisionShape2D").call_deferred("set_disabled", true)
 	
-	yield($AnimationPlayers/Hurt, "animation_finished")
+	yield(anim_players.get_node("Hurt"), "animation_finished")
 	
 	queue_free()

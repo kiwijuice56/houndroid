@@ -15,10 +15,11 @@ func set_tip(new_tip: Vector2):
 
 func enter(msg := {}) -> void:
 	var dir := -(enemy.player.global_position - enemy.global_position).normalized()
-	tween.interpolate_property(self, "tip", null, dir * string_length, charge_time,  Tween.TRANS_QUAD , Tween.EASE_IN)
+	tween.interpolate_property(self, "tip", Vector2(), dir * string_length, charge_time,  Tween.TRANS_QUAD , Tween.EASE_IN)
 	tween.start()
 	yield(tween, "tween_completed")
 	tween.interpolate_property(self, "tip", null, Vector2(), release_time,  Tween.TRANS_QUAD, Tween.EASE_IN)
 	tween.start()
 	yield(tween, "tween_completed")
 	state_machine.transition_to("Bounce", {"dir": -dir})
+

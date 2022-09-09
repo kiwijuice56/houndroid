@@ -17,6 +17,9 @@
 [ext_resource path="res://main/world/character/enemy/hammer_robot/sounds/heavy_metal_step1.wav" type="AudioStream" id=15]
 [ext_resource path="res://main/world/character/enemy/hammer_robot/sounds/heavy_metal_step2.wav" type="AudioStream" id=16]
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 10, 31 )
 
@@ -258,9 +261,6 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=17]
 radius = 250.0
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 32.0
-
 [node name="HammerRobot" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 move_speed = 32.0
@@ -274,7 +274,13 @@ shoot_random = 0.45
 shoot_up_tolerance = 32
 up_throw_angle_cycle = [ 75.0, 55.0, 65.0 ]
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( 0, 0.5 )
 shape = SubResource( 16 )
 
@@ -330,6 +336,10 @@ hframes = 7
 [node name="Explosion" parent="Sprites" index="7"]
 light_mask = 0
 
+[node name="VisibilityEnabler2D" parent="." index="4"]
+process_parent = true
+physics_process_parent = true
+
 [node name="LegMR" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
 playback_speed = 0.75
 anims/walk1 = SubResource( 3 )
@@ -357,24 +367,15 @@ anims/charge_saw = SubResource( 13 )
 anims/fall = SubResource( 14 )
 anims/rise = SubResource( 15 )
 
-[node name="StateMachine" parent="." index="4"]
+[node name="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource( 17 )
+
+[node name="StateMachine" parent="." index="8"]
 initial_state = NodePath("Strafe")
 
 [node name="Strafe" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 5 )
 state_owner_path = NodePath("../..")
-
-[node name="VisibilityEnabler2D" parent="." index="6"]
-physics_process_parent = true
-
-[node name="CollisionShape2D" parent="Vision" index="0"]
-shape = SubResource( 17 )
-
-[node name="Hitbox" parent="." index="8"]
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 1 )
 
 [node name="ShootDelayTimer" type="Timer" parent="." index="9"]
 one_shot = true

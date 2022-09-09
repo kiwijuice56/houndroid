@@ -30,13 +30,7 @@ func physics_update(delta) -> void:
 		player.sprites.scale.x = 1 if input.x > 0 else -1
 	player.velocity.x = input.x * player.move_speed
 	player.velocity.y += player.gravity * delta
-	
-	var animation := "jump"
-	if player.anim_players.get_node("Body").current_animation != "land":
-		if player.is_shooting_primary:
-			player.set_animations(animation, ["Body"])
-		else:
-			player.set_animations(animation)
 
 func enter(msg := {}) -> void:
 	origin = player.global_position
+	player.set_animations("jump")

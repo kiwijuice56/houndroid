@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spike_ball.png-1c1fd8867c13fb102f6eb9081390aac3.stex"
+path="res://.import/spike_ball.png-0223df9f03f98eeafbb637f26ae2c95d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/world/character/enemy/mega_mole_mine/sprites/spike_ball.png"
-dest_files=[ "res://.import/spike_ball.png-1c1fd8867c13fb102f6eb9081390aac3.stex" ]
+source_file="res://main/world/level/level_tools/spike_ball.png"
+dest_files=[ "res://.import/spike_ball.png-0223df9f03f98eeafbb637f26ae2c95d.stex" ]
 
 [params]
 
