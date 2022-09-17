@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://main/ui/main.theme" type="Theme" id=1]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay.gd" type="Script" id=2]
+[ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=1]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay_screen.gd" type="Script" id=2]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.gd" type="Script" id=3]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_bar.gd" type="Script" id=4]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/portrait.png" type="Texture" id=5]
@@ -13,15 +13,15 @@
 [ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_under.png" type="Texture" id=11]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_progress.png" type="Texture" id=12]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/jump_pressed.png" type="Texture" id=13]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button_unpressed.png" type="Texture" id=14]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button_pressed.png" type="Texture" id=15]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/fps_label.gd" type="Script" id=16]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button1.png" type="Texture" id=14]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button2.png" type="Texture" id=15]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label/score_label.png" type="Texture" id=17]
-[ext_resource path="res://main/ui/font/C&C Red Alert [INET].ttf" type="DynamicFontData" id=18]
+[ext_resource path="res://main/ui/theme/font/C&C Red Alert [INET].ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd" type="Script" id=19]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label.gd" type="Script" id=20]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/coin_label.png" type="Texture" id=21]
-[ext_resource path="res://main/ui/font/font.tres" type="DynamicFont" id=22]
+[ext_resource path="res://main/ui/theme/ButtonSounds.tscn" type="PackedScene" id=23]
+[ext_resource path="res://main/ui/theme/sound_button.gd" type="Script" id=24]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -36,11 +36,11 @@ font_data = ExtResource( 18 )
 
 [sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 30, 31 )
+region_rect = Rect2( 0, 0, 30, 32 )
 
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 15 )
-region_rect = Rect2( 0, 0, 30, 31 )
+region_rect = Rect2( 0, 0, 30, 32 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 48.0
@@ -66,6 +66,8 @@ __meta__ = {
 world_path = NodePath("../../../World")
 menu_button_path = NodePath("VBoxContainer/TopRow/Menu")
 button_control_path = NodePath("VBoxContainer/BotRow/ButtonControl")
+joystick_control_path = NodePath("VBoxContainer/BotRow/JoystickControl")
+weapon_button_path = NodePath("VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/WeaponButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 4.0
@@ -95,9 +97,8 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
+[node name="WeaponButton" type="TouchScreenButton" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
 normal = ExtResource( 5 )
-action = "jump"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer"]
 margin_left = 48.0
@@ -181,14 +182,18 @@ __meta__ = {
 [node name="Menu" type="Button" parent="VBoxContainer/TopRow"]
 margin_left = 862.0
 margin_right = 892.0
-margin_bottom = 31.0
-rect_min_size = Vector2( 30, 31 )
+margin_bottom = 32.0
+rect_min_size = Vector2( 30, 32 )
 focus_mode = 0
 size_flags_vertical = 0
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
+custom_styles/disabled = SubResource( 8 )
 custom_styles/normal = SubResource( 8 )
 enabled_focus_mode = 0
+script = ExtResource( 24 )
+
+[node name="ButtonSounds" parent="VBoxContainer/TopRow/Menu" instance=ExtResource( 23 )]
 
 [node name="BotRow" type="HBoxContainer" parent="VBoxContainer"]
 pause_mode = 1
@@ -258,22 +263,4 @@ position = Vector2( -44, 0 )
 [node name="ShootSwap" type="Position2D" parent="VBoxContainer/BotRow/ButtonControl"]
 position = Vector2( 26, -10 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="FpsLabel" type="Label" parent="CanvasLayer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 896.0
-margin_bottom = 18.0
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 22 )
-text = "0 fps"
-script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Timer" type="Timer" parent="CanvasLayer/FpsLabel"]
-wait_time = 0.5
-autostart = true
+[node name="Tween" type="Tween" parent="."]

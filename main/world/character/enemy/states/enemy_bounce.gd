@@ -15,6 +15,7 @@ func physics_update(delta) -> void:
 	var collision = enemy.move_and_collide(enemy.velocity * delta)
 	if collision:
 		collisions += 1
+		enemy.sounds.get_node("Bump").play_sound()
 		enemy.velocity = enemy.velocity.bounce(collision.normal) * (1.0 - (decay + decay_extra * collisions))
 		
 		if collisions >= max_collisions:

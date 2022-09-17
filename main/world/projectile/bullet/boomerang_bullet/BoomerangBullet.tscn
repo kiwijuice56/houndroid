@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://main/world/projectile/bullet/Bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/boomerang_bullet.gd" type="Script" id=2]
+[ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/boomerang_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/boomerang.png" type="Texture" id=4]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 0.647059, 1, 1, 1, 0 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.186047, 0.488372, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.739746, 0.679688, 1, 0.356863, 0.0823529, 0.498039, 0 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 3 ]
+}
+
+[node name="BoomerangBullet" instance=ExtResource( 1 )]
+material = ExtResource( 5 )
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 2 )
+lifespan = 1.0
+delay = 0.4
+damage = 2.0
+speed = 285.0
+pierce = 8
+initial_angle_rand = 0.45
+angle_change = 6.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="GunTrail" type="CPUParticles2D" parent="." index="2"]
+material = ExtResource( 5 )
+amount = 6
+lifetime = 0.3
+speed_scale = 2.0
+local_coords = false
+texture = ExtResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+material = ExtResource( 5 )
+texture = ExtResource( 3 )
+hframes = 4
+
+[node name="HitEffect" type="CPUParticles2D" parent="." index="4"]
+material = ExtResource( 5 )
+position = Vector2( 0, -1 )
+emitting = false
+amount = 48
+lifetime = 0.6
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.79
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 4.0
+spread = 180.0
+initial_velocity = 32.0
+color_ramp = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+autoplay = "shoot"
+anims/RESET = SubResource( 3 )
+anims/fade = SubResource( 4 )
+anims/shoot = SubResource( 6 )

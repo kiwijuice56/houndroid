@@ -14,6 +14,7 @@ func set_tip(new_tip: Vector2):
 	ring.position = new_tip + new_tip.normalized() * ring_size
 
 func enter(msg := {}) -> void:
+	enemy.sounds.get_node("WindReleaseSounds").play_sound()
 	var dir := -(enemy.player.global_position - enemy.global_position).normalized()
 	tween.interpolate_property(self, "tip", Vector2(), dir * string_length, charge_time,  Tween.TRANS_QUAD , Tween.EASE_IN)
 	tween.start()

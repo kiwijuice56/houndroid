@@ -3,6 +3,10 @@ class_name Projectile
 
 export var lifespan := 2.0
 
+# Most enemies tweak their delay to themselves to match animations
+# This parameter is for the player to keep delays different for each weapon
+export var delay := 2.5
+
 func _ready() -> void:
 	connect("area_entered", self, "_on_area_entered")
 	connect("body_entered", self, "_on_body_entered")
@@ -17,3 +21,9 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func _on_decay_timeout() -> void:
 	queue_free()
+
+func _physics_process(delta) -> void:
+	physics_update(delta)
+
+func physics_update(delta) -> void:
+	pass

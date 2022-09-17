@@ -23,6 +23,8 @@ func _ready() -> void:
 	music_slider.connect("value_changed", self, "_on_music_slider_changed")
 	sound_effect_slider.connect("value_changed", self, "_on_sound_effect_slider_changed")
 	button_switch.connect("toggled", self, "_on_button_switch_toggle")
+	
+	disable_input()
 
 func _on_music_slider_changed(new_value: float) -> void:
 	GlobalData.music_volume = new_value
@@ -49,3 +51,17 @@ func transition_from(from: String) -> void:
 			menu_button.visible = true
 			visible = true
 	call_deferred("emit_signal", "transition_complete")
+
+func disable_input() -> void:
+	.disable_input()
+	menu_button.disabled = true
+	music_slider.editable = true
+	sound_effect_slider.editable = true
+	button_switch.disabled = true
+
+func enable_input() -> void:
+	.enable_input()
+	menu_button.disabled = false
+	music_slider.editable = false
+	sound_effect_slider.editable = false
+	button_switch.disabled = false

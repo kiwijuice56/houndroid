@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wind_and_release.wav-2463dd6b3e57b14ac2e93b018ce8e384.sample"
+
+[deps]
+
+source_file="res://main/world/character/enemy/armadillot/sounds/wind_and_release.wav"
+dest_files=[ "res://.import/wind_and_release.wav-2463dd6b3e57b14ac2e93b018ce8e384.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

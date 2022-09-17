@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main/world/projectile/bullet/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/projectile/bullet/orb_bullet/sprites/orb.png" type="Texture" id=2]
 [ext_resource path="res://main/world/projectile/bullet/orb_bullet/sprites/orb_defect.png" type="Texture" id=3]
 [ext_resource path="res://main/world/projectile/bullet/orb_bullet/orb_bullet.gd" type="Script" id=4]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
@@ -81,9 +82,11 @@ speed = 150.0
 shape = SubResource( 1 )
 
 [node name="Orb" type="Sprite" parent="." index="2"]
+material = ExtResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="OrbTrail" type="CPUParticles2D" parent="." index="3"]
+material = ExtResource( 5 )
 amount = 16
 lifetime = 0.6
 preprocess = 2.0
@@ -93,6 +96,7 @@ emission_sphere_radius = 4.0
 color_ramp = SubResource( 2 )
 
 [node name="OrbImpact" type="CPUParticles2D" parent="." index="4"]
+material = ExtResource( 5 )
 emitting = false
 amount = 16
 lifetime = 1.25

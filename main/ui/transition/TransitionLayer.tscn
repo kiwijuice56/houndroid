@@ -12,7 +12,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -46,9 +46,11 @@ tracks/0/keys = {
 }
 
 [node name="TransitionLayer" type="CanvasLayer"]
+layer = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 2.5
+pause_mode = 2
+playback_speed = 2.85
 anims/RESET = SubResource( 3 )
 anims/trans_in = SubResource( 4 )
 anims/trans_out = SubResource( 5 )
@@ -56,7 +58,8 @@ anims/trans_out = SubResource( 5 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -28,4 +28,7 @@ func physics_update(delta) -> void:
 		player.velocity.y += player.jump_force
 
 func enter(msg := {}) -> void:
-	player.set_animations("run")
+	if player.is_shooting_primary:
+		player.set_animations("run", ["Body"])
+	else:
+		player.set_animations("run")

@@ -59,6 +59,7 @@ colors = PoolColorArray( 0.433136, 0.557891, 0.667969, 0, 1, 1, 1, 1, 0.378161, 
 position = Vector2( 1824, -464 )
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 script = ExtResource( 1 )
 gravity_rate = 0.55
 particle_per_scale = 0.02

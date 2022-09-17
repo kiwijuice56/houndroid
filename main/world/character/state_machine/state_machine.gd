@@ -25,7 +25,7 @@ func _physics_process(delta) -> void:
 	state.physics_update(delta)
 
 func set_physics_process(enabled: bool) -> void:
-	.set_physics_process(uses_physics_process and enabled)
+	.set_physics_process(uses_physics_process and enabled and not owner.frozen)
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	assert(has_node(target_state_name))

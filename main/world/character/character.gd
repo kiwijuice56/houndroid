@@ -15,7 +15,7 @@ export var uses_physics_process := true
 # Stored references for other classes to access
 onready var anim_players: Node = $AnimationPlayers
 onready var sprites: Node2D = $Sprites
-var game_world: GameWorld
+onready var sounds: Node2D = $Sounds
 
 var health := 1.0 setget set_health
 var velocity := Vector2()
@@ -68,9 +68,9 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 				anim_player.current_animation = anim_name
 
 func set_physics_process(enabled: bool) -> void:
-	.set_physics_process(uses_physics_process and enabled)
+	.set_physics_process(uses_physics_process and enabled and not frozen)
 
-func hurt(damage: int) -> void:
+func hurt(damage: float) -> void:
 	self.health -= damage
 
 func physics_update(_delta) -> void:

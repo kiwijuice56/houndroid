@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://main/ui/transition/paw_transition_tile.png" type="Texture" id=1]
+[ext_resource path="res://main/world/obstacle/wall/wall.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )

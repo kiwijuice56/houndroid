@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://main/world/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/player/states/player_run.gd" type="Script" id=2]
@@ -21,11 +21,17 @@
 [ext_resource path="res://main/world/projectile/bullet/orb_bullet/sprites/orb.png" type="Texture" id=19]
 [ext_resource path="res://main/world/character/player/sprites/player_arm_shot_spritesheet.png" type="Texture" id=20]
 [ext_resource path="res://main/world/character/player/sounds/primary_shot.wav" type="AudioStream" id=21]
-[ext_resource path="res://main/world/projectile/bullet/player_bullet/PlayerBullet.tscn" type="PackedScene" id=22]
+[ext_resource path="res://main/world/projectile/bullet/sharp_bullet/SharpBullet.tscn" type="PackedScene" id=22]
 [ext_resource path="res://main/world/character/player/sprites/player_electricity_hurt.png" type="Texture" id=23]
 [ext_resource path="res://main/world/character/enemy/sounds/hurt.wav" type="AudioStream" id=24]
-[ext_resource path="res://main/world/character/player/sprites/death_effect/DeathEffect.tscn" type="PackedScene" id=25]
+[ext_resource path="res://main/world/projectile/bullet/beam_bullet/BeamBullet.tscn" type="PackedScene" id=25]
 [ext_resource path="res://main/world/character/player/sounds/player_death.wav" type="AudioStream" id=26]
+[ext_resource path="res://main/world/character/player/sprites/death_effect/DeathEffect.tscn" type="PackedScene" id=27]
+[ext_resource path="res://main/world/character/player/sprites/light.png" type="Texture" id=28]
+[ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/BoomerangBullet.tscn" type="PackedScene" id=29]
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=40]
 extents = Vector2( 8, 10 )
@@ -598,9 +604,6 @@ colors = PoolColorArray( 2, 1.25, 1, 1, 1, 0, 0, 0.0784314 )
 offsets = PoolRealArray( 0, 0.165746, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0.953613, 0.953613, 0.953613, 0 )
 
-[sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 7, 10 )
-
 [node name="Player" instance=ExtResource( 1 )]
 position = Vector2( -1, 0 )
 collision_layer = 2
@@ -609,18 +612,24 @@ script = ExtResource( 7 )
 move_speed = 180.0
 gravity = 875.0
 max_health = 9.0
-primary_weapon_delay = 0.19
 jump_force = -400.0
 jump_cut = 120
 jump_tolerance = 0.15
 jump_fall = 0.095
 fall_effect_distance = 4.0
-primary_bullet_scene = ExtResource( 22 )
-death_effect_scene = ExtResource( 25 )
+bullet_scenes = [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 29 ) ]
+death_effect_scene = ExtResource( 27 )
 death_effect_count = 8
 death_fall_delay = 0.15
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="Hitbox" parent="." index="0"]
+collision_layer = 2
+collision_mask = 176
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 32 )
+
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
@@ -718,6 +727,9 @@ script = ExtResource( 10 )
 sounds = [ ExtResource( 26 ) ]
 volume = -12.0
 
+[node name="VisibilityEnabler2D" parent="." index="4"]
+pause_animations = false
+
 [node name="ArmMR" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
 playback_speed = 0.9
 anims/death = SubResource( 41 )
@@ -767,24 +779,6 @@ anims/RESET = SubResource( 33 )
 anims/hurt = SubResource( 34 )
 anims/hurt_complete = SubResource( 35 )
 
-[node name="StateMachine" parent="." index="4"]
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine" index="0"]
-script = ExtResource( 3 )
-state_owner_path = NodePath("../..")
-
-[node name="Run" type="Node" parent="StateMachine" index="1"]
-script = ExtResource( 2 )
-state_owner_path = NodePath("../..")
-
-[node name="Air" type="Node" parent="StateMachine" index="2"]
-script = ExtResource( 8 )
-state_owner_path = NodePath("../..")
-
-[node name="VisibilityEnabler2D" parent="." index="5"]
-pause_animations = false
-
 [node name="PrimaryForcedTimer" type="Timer" parent="." index="6"]
 one_shot = true
 
@@ -804,7 +798,7 @@ one_shot = true
 one_shot = true
 
 [node name="DragCamera" type="Camera2D" parent="." index="12"]
-offset = Vector2( 0, -28 )
+offset = Vector2( 16, -28 )
 current = true
 script = ExtResource( 9 )
 target_path = NodePath("..")
@@ -859,12 +853,20 @@ tangential_accel = 100.0
 tangential_accel_random = 1.0
 color_ramp = SubResource( 39 )
 
-[node name="Hitbox" parent="." index="16"]
-collision_layer = 2
-collision_mask = 176
+[node name="StateMachine" parent="." index="16"]
+initial_state = NodePath("Idle")
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 32 )
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 3 )
+state_owner_path = NodePath("../..")
+
+[node name="Run" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 2 )
+state_owner_path = NodePath("../..")
+
+[node name="Air" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 8 )
+state_owner_path = NodePath("../..")
 
 [node name="HurtEffect" type="Sprite" parent="." index="17"]
 visible = false
@@ -872,5 +874,14 @@ light_mask = 2
 position = Vector2( -1, -3 )
 texture = ExtResource( 23 )
 hframes = 8
+
+[node name="Light2D" type="Light2D" parent="." index="18"]
+light_mask = 7
+texture = ExtResource( 28 )
+texture_scale = 0.75
+energy = 0.65
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 7
 
 [editable path="Sprites/Shadow"]

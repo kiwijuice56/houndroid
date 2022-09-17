@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://main/ui/theme/button_press.wav" type="AudioStream" id=1]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=2]
+[ext_resource path="res://main/ui/theme/button_release.wav" type="AudioStream" id=3]
+
+[node name="ButtonSounds" type="Node"]
+
+[node name="PressSounds" type="Node2D" parent="."]
+script = ExtResource( 2 )
+sounds = [ ExtResource( 1 ) ]
+volume = -6.0
+positional = false
+
+[node name="ReleaseSounds" type="Node2D" parent="."]
+script = ExtResource( 2 )
+sounds = [ ExtResource( 3 ) ]
+volume = -6.0
+positional = false

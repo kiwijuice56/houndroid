@@ -3,8 +3,11 @@ class_name Bullet
 
 export var damage := 1.0
 export var speed := 0.0
+export var pierce := 1
 export var persist := false
+
 var direction := Vector2()
+var hits: int = 0
 
 func _ready() -> void:
 	scale.x = 1 if direction.x > 0 else -1
@@ -17,8 +20,9 @@ func _on_area_entered(area: Area2D) -> void:
 	var parent = area.get_parent()
 	if parent is Character:
 		parent.hurt(damage)
-	if not persist:
+		hits = hits + 1
+	if not persist and hits >= pierce:
 		call_deferred("queue_free")
 
-func _physics_process(delta) -> void:
+func physics_update(delta) -> void:
 	global_position += delta * speed * direction

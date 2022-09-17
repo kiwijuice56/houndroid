@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://main/world/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/enemy/enemy.gd" type="Script" id=2]
@@ -7,9 +7,10 @@
 [ext_resource path="res://main/world/character/enemy/sounds/death.wav" type="AudioStream" id=5]
 [ext_resource path="res://main/world/character/enemy/sounds/hurt.wav" type="AudioStream" id=6]
 [ext_resource path="res://main/world/collectible/score_orb/ScoreOrb.tscn" type="PackedScene" id=7]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=8]
 
-[sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0.227451, 0.388235, 0.160784 )
+[sub_resource type="CircleShape2D" id=7]
+radius = 16.0
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -199,20 +200,32 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.227451, 0.388235, 0.160784 )
+
 [sub_resource type="CircleShape2D" id=5]
 radius = 160.0
 
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 4
 script = ExtResource( 2 )
+gravity = 9.0
 score_orb = ExtResource( 7 )
 
-[node name="Hitbox" parent="." index="1"]
+[node name="Hitbox" parent="." index="0"]
 collision_layer = 4
 collision_mask = 0
 
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 7 )
+
+[node name="Sprites" parent="." index="2"]
+light_mask = 2
+
 [node name="Explosion" type="Sprite" parent="Sprites" index="0"]
 visible = false
+light_mask = 0
+material = ExtResource( 8 )
 texture = ExtResource( 4 )
 hframes = 6
 frame = 5
@@ -229,6 +242,13 @@ sounds = [ ExtResource( 5 ) ]
 volume = -14.0
 rand_pitch_range = 0.3
 
+[node name="Hurt" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
+pause_mode = 2
+playback_speed = 1.75
+anims/RESET = SubResource( 1 )
+anims/death = SubResource( 4 )
+anims/hurt = SubResource( 2 )
+
 [node name="HurtParticles" type="CPUParticles2D" parent="." index="6"]
 emitting = false
 amount = 32
@@ -242,13 +262,6 @@ spread = 180.0
 initial_velocity = 37.8
 color_ramp = SubResource( 6 )
 
-[node name="Hurt" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
-pause_mode = 2
-playback_speed = 1.75
-anims/RESET = SubResource( 1 )
-anims/death = SubResource( 4 )
-anims/hurt = SubResource( 2 )
-
 [node name="Vision" type="Area2D" parent="." index="8"]
 visible = false
 collision_layer = 0
@@ -256,3 +269,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource( 5 )
+
+[node name="ShootDelayTimer" type="Timer" parent="." index="9"]

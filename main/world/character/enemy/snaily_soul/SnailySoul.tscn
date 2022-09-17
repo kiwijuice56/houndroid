@@ -1,16 +1,33 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main/world/character/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/enemy/snaily_soul/sprites/snaily_soul_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://main/world/character/enemy/snaily_soul/sprites/snaily_soul_shadow.png" type="Texture" id=3]
 [ext_resource path="res://main/world/character/Shadow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/world/character/enemy/states/enemy_walk.gd" type="Script" id=5]
+[ext_resource path="res://main/world/character/enemy/snaily_soul/sprites/snaily_soul_eye_spritesheet.png" type="Texture" id=6]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=7]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 18.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 11 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Eye:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "walk"
@@ -28,10 +45,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 1, 0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprites/Eye:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0 ]
+}
 
 [node name="SnailySoul" instance=ExtResource( 1 )]
 scale = Vector2( -1, 1 )
 move_speed = 55.0
+gravity = 600.0
 max_health = 6.0
 score_orb_count = 6
 contact_damage = 2.0
@@ -50,13 +80,19 @@ texture = ExtResource( 3 )
 offset = Vector2( 0.5, 2 )
 
 [node name="Body" type="Sprite" parent="Sprites" index="1"]
-light_mask = 0
+light_mask = 2
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 3
+frame = 1
 
-[node name="Explosion" parent="Sprites" index="2"]
-light_mask = 0
+[node name="Eye" type="Sprite" parent="Sprites" index="2"]
+modulate = Color( 1.25, 1.25, 1.25, 1 )
+light_mask = 2
+material = ExtResource( 7 )
+texture = ExtResource( 6 )
+offset = Vector2( 0.5, 0 )
+hframes = 3
 
 [node name="VisibilityEnabler2D" parent="." index="4"]
 rect = Rect2( -40, -40, 80, 80 )
@@ -64,12 +100,10 @@ process_parent = true
 physics_process_parent = true
 
 [node name="Body" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
+anims/RESET = SubResource( 4 )
 anims/walk = SubResource( 3 )
 
-[node name="CollisionShape2D" parent="Vision" index="0"]
-disabled = true
-
-[node name="StateMachine" parent="." index="8"]
+[node name="StateMachine" parent="." index="7"]
 initial_state = NodePath("Walk")
 
 [node name="Walk" type="Node" parent="StateMachine" index="0"]
@@ -77,6 +111,9 @@ script = ExtResource( 5 )
 state_owner_path = NodePath("../..")
 floor_ray_path = NodePath("../../FloorCheck")
 wall_ray_path = NodePath("../../WallCheck")
+
+[node name="CollisionShape2D" parent="Vision" index="0"]
+disabled = true
 
 [node name="FloorCheck" type="RayCast2D" parent="." index="9"]
 position = Vector2( 12, 0 )

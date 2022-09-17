@@ -1,0 +1,2 @@
+extends EnemyState
+class_name EnemyJump

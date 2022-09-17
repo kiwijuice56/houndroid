@@ -33,4 +33,7 @@ func physics_update(delta) -> void:
 
 func enter(msg := {}) -> void:
 	origin = player.global_position
-	player.set_animations("jump")
+	if player.is_shooting_primary:
+		player.set_animations("jump", ["Body"])
+	else:
+		player.set_animations("jump")

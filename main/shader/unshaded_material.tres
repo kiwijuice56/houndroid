@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=80]
+code = "shader_type canvas_item;
+render_mode unshaded;"
+
+[resource]
+shader = SubResource( 80 )

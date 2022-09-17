@@ -47,11 +47,11 @@ func set_animations(anim_name: String, anim_player_names := []) -> void:
 		$NormalFlashTimer.start(flash_time)
 		$Sprites.get_node("Top").visible = false
 		$Sprites.get_node("BlurTop").visible = true
-		$Trail.emitting = true
+		sprites.get_node("Trail").emitting = true
 		
 	else:
 		$AnimationPlayers/BlurTop.playback_speed = 1.0
 		$AnimationPlayers/Top.playback_speed = 1.0
 		$NormalFlashEndTimer.stop()
 		$NormalFlashTimer.stop()
-		$Trail.emitting = false
+		sprites.get_node("Trail").emitting = false

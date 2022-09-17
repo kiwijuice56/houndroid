@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://main/ui/ui_screen/level_finish/level_finish_screen.gd" type="Script" id=1]
+[ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=2]
+[ext_resource path="res://main/ui/transition/paw_transition_tile.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec2 fragment_number = vec2(20,20);
+uniform float dissolve_state : hint_range(0,20) = 1;
+
+void fragment() {
+	vec2 pixel_fract = fract(UV * fragment_number);
+	float pixel_dist = UV.x * distance(pixel_fract, vec2(0.5, 0.5));
+	COLOR = texture(TEXTURE, UV);
+	COLOR.a *= step(pixel_dist, dissolve_state);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/fragment_number = Vector2( 1, 1 )
+shader_param/dissolve_state = 0.0
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.843137, 0.843137, 0.843137, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:material:shader_param/dissolve_state")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "transition_in"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:material:shader_param/dissolve_state")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
+
+[node name="LevelFinish" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+panel_path = NodePath("PanelContainer")
+initial_offset_x = 300
+final_offset_x = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 240 )
+size_flags_horizontal = 8
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_top = 229.0
+margin_right = 900.0
+margin_bottom = 250.0
+text = "Level complete
+"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "transition_in"
+anims/RESET = SubResource( 4 )
+anims/transition_in = SubResource( 5 )

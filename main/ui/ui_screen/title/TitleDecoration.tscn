@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/Star.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star_spawner.gd" type="Script" id=5]
+[ext_resource path="res://main/world/level/1_city/city_tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://main/world/level/1_city/sprites/background1.png" type="Texture" id=7]
+[ext_resource path="res://main/world/level/1_city/sprites/background3.png" type="Texture" id=8]
+[ext_resource path="res://main/world/level/1_city/sprites/background2.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=2]
+resource_name = "scroll"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 600 ), Vector2( 900, 600 ) ]
+}
+
+[node name="TitleDecoration" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
+position = Vector2( 422, -81 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 1024 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/Background/Sprite"]
+playback_speed = 0.03
+anims/scroll = SubResource( 2 )
+
+[node name="StarSpawner" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 5 )
+star = ExtResource( 1 )
+star_count = 700
+start = Vector2( -500, -100 )
+end = Vector2( 2056, 800 )
+
+[node name="StarSpawner2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 5 )
+star = ExtResource( 1 )
+star_count = 300
+start = Vector2( 2056, -1000 )
+end = Vector2( 3500, 1000 )
+
+[node name="Background2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -28 )
+motion_scale = Vector2( 0.35, 0.35 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/Background2"]
+position = Vector2( 430, 189 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="Background3" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, -90 )
+motion_scale = Vector2( 0.4, 0.4 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background3"]
+position = Vector2( 530, 238 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 256 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 0
+format = 1
+tile_data = PoolIntArray( 327680, 0, 0, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 2, 393216, 0, 65536, 393217, 0, 65537, 393218, 0, 65537, 393219, 0, 65537, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65538, 458752, 0, 131072, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131074 )
+
+[node name="Body" type="Sprite" parent="TileMap"]
+position = Vector2( 164, 150 )
+texture = ExtResource( 2 )
+hframes = 23
+frame = 6
+
+[node name="ArmL" type="Sprite" parent="TileMap"]
+position = Vector2( 164, 150 )
+texture = ExtResource( 4 )
+hframes = 23
+frame = 6
+
+[node name="ArmR" type="Sprite" parent="TileMap"]
+position = Vector2( 164, 150 )
+texture = ExtResource( 3 )
+hframes = 23
+frame = 6

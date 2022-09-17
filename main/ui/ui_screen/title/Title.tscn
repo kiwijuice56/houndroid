@@ -1,0 +1,158 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://main/ui/theme/button_empty_unpressed.png" type="Texture" id=1]
+[ext_resource path="res://main/ui/ui_screen/title/buttons/exit_button_unpressed.png" type="Texture" id=2]
+[ext_resource path="res://main/ui/ui_screen/title/buttons/exit_button_pressed.png" type="Texture" id=3]
+[ext_resource path="res://main/ui/ui_screen/title/buttons/rate_button_pressed.png" type="Texture" id=4]
+[ext_resource path="res://main/ui/ui_screen/title/title.gd" type="Script" id=5]
+[ext_resource path="res://main/ui/ui_screen/title/TitleDecoration.tscn" type="PackedScene" id=6]
+[ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=7]
+[ext_resource path="res://main/ui/theme/ButtonSounds.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/ui/theme/sound_button.gd" type="Script" id=9]
+[ext_resource path="res://main/ui/ui_screen/title/title.png" type="Texture" id=15]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color = vec4(0);
+
+void fragment() {
+	COLOR.rgb = vec3(dot(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, vec3(0.5, 0.5, 0.5))) * color.rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/color = Color( 0.501961, 0.360784, 0.670588, 1 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 30, 31 )
+
+[node name="Title" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 7 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+decoration_scene = ExtResource( 6 )
+button_container_path = NodePath("MarginContainer/MainButtons")
+corner_button_container_path = NodePath("MarginContainer/CornerButtons")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.596078, 0.168627, 0.619608, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainButtons" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 418.0
+margin_top = 198.0
+margin_right = 482.0
+margin_bottom = 282.0
+rect_min_size = Vector2( 0, 84 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="Button" parent="MarginContainer/MainButtons"]
+margin_top = 52.0
+margin_right = 64.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 64, 32 )
+focus_mode = 0
+size_flags_vertical = 10
+text = "Start"
+script = ExtResource( 9 )
+
+[node name="ButtonSounds" parent="MarginContainer/MainButtons/Start" instance=ExtResource( 8 )]
+
+[node name="CornerButtons" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 896.0
+margin_top = 4.0
+margin_right = 896.0
+margin_bottom = 4.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Rate" type="Button" parent="MarginContainer/CornerButtons"]
+visible = false
+margin_right = 30.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 31 )
+focus_mode = 0
+size_flags_vertical = 4
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+enabled_focus_mode = 0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSounds" parent="MarginContainer/CornerButtons/Rate" instance=ExtResource( 8 )]
+
+[node name="Quit" type="Button" parent="MarginContainer/CornerButtons"]
+visible = false
+margin_right = 30.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 30, 31 )
+focus_mode = 0
+size_flags_vertical = 4
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+script = ExtResource( 9 )
+
+[node name="ButtonSounds" parent="MarginContainer/CornerButtons/Quit" instance=ExtResource( 8 )]
+
+[node name="Title" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -136.0
+margin_top = -32.0
+margin_right = 136.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 4
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

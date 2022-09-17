@@ -7,6 +7,7 @@ export(Array, Resource) var shadows := []
 export(Array, Color) var colors := []
 export var window_cover: Resource
 export var window_alpha_m := .25
+export var unshaded_material: Resource
 
 export var shadow_chance := 0.35
 export var window_light_time := 1.5
@@ -57,7 +58,9 @@ func _on_light_timeout() -> void:
 		cover_sprite.texture = window_cover
 		cover_sprite.modulate = colors[randi() % len(colors)]
 		cover_sprite.modulate.a *= window_alpha_m
+		cover_sprite.material = unshaded_material
 		add_child(cover_sprite)
+		
 		cover_sprite.global_position = Vector2(int(light_pos.x / 32) * 32, int(light_pos.y / 32) * 32) + Vector2(16, 16)
 		instanced_covers.append(cover_sprite)
 		

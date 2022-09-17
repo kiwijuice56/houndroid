@@ -264,7 +264,7 @@ radius = 250.0
 [node name="HammerRobot" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 move_speed = 32.0
-gravity = 9.0
+gravity = 600.0
 max_health = 28.0
 score_orb_count = 24
 contact_damage = 4.0
@@ -333,9 +333,6 @@ position = Vector2( 1.5, -32.5 )
 texture = ExtResource( 8 )
 hframes = 7
 
-[node name="Explosion" parent="Sprites" index="7"]
-light_mask = 0
-
 [node name="VisibilityEnabler2D" parent="." index="4"]
 process_parent = true
 physics_process_parent = true
@@ -367,17 +364,17 @@ anims/charge_saw = SubResource( 13 )
 anims/fall = SubResource( 14 )
 anims/rise = SubResource( 15 )
 
-[node name="CollisionShape2D" parent="Vision" index="0"]
-shape = SubResource( 17 )
-
-[node name="StateMachine" parent="." index="8"]
+[node name="StateMachine" parent="." index="7"]
 initial_state = NodePath("Strafe")
 
 [node name="Strafe" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 5 )
 state_owner_path = NodePath("../..")
 
-[node name="ShootDelayTimer" type="Timer" parent="." index="9"]
+[node name="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource( 17 )
+
+[node name="ShootDelayTimer" parent="." index="9"]
 one_shot = true
 
 [node name="StepDelayTimer" type="Timer" parent="." index="10"]

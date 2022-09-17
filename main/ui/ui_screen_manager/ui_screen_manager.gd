@@ -3,6 +3,8 @@ class_name UIScreenManager
 # Provides access to all UI overlays in a centralized
 # class to allow for transitions between overlays
 
+signal transition_complete
+
 func _ready() -> void:
 	for child in get_children():
 		if not child is CanvasLayer:
@@ -19,10 +21,11 @@ func transition(from: String, to: String) -> void:
 	
 	from_node.disable_input()
 	
-	
 	from_node.transition_to(to)
 	yield(from_node, "transition_complete")
 	to_node.transition_from(from)
 	yield(to_node, "transition_complete")
 	
 	to_node.enable_input()
+	
+	emit_signal("transition_complete")

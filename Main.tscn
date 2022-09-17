@@ -1,39 +1,21 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/world/level/1_city/City2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/ui/ui_screen/pause_menu/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/GameOverlay.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/main.gd" type="Script" id=5]
-[ext_resource path="res://main/ui/ui_screen/title_screen/title_screen.gd" type="Script" id=6]
-[ext_resource path="res://main/ui/ui_screen/title_screen/buttons/rate_button_pressed.png" type="Texture" id=8]
-[ext_resource path="res://main/ui/ui_screen/title_screen/buttons/rate_button_unpressed.png" type="Texture" id=9]
-[ext_resource path="res://main/ui/ui_screen/title_screen/buttons/exit_button_unpressed.png" type="Texture" id=10]
-[ext_resource path="res://main/ui/ui_screen/title_screen/buttons/exit_button_pressed.png" type="Texture" id=11]
+[ext_resource path="res://main/ui/ui_screen/title/Title.tscn" type="PackedScene" id=6]
+[ext_resource path="res://main/ui/ui_screen/level_select/LevelSelect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://main/ui/ui_screen/level_start/LevelStart.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main/ui/ui_screen/level_finish/LevelFinish.tscn" type="PackedScene" id=9]
+[ext_resource path="res://main/world/level/1_city/City1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://main/ui/ui_screen/debug/Debug.tscn" type="PackedScene" id=11]
+[ext_resource path="res://main/world/level/1_city/City3.tscn" type="PackedScene" id=12]
 [ext_resource path="res://main/ui/ui_screen_manager/ui_screen_manager.gd" type="Script" id=14]
 [ext_resource path="res://main/save_data/file_loader.gd" type="Script" id=16]
-[ext_resource path="res://main/ui/ui_screen/ui_screen.gd" type="Script" id=17]
 [ext_resource path="res://main/world/world.gd" type="Script" id=18]
-[ext_resource path="res://main/ui/main.theme" type="Theme" id=20]
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.101961, 0.0823529, 0.12549, 1 )
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 30, 31 )
-
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 30, 31 )
-
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 10 )
-region_rect = Rect2( 0, 0, 30, 31 )
-
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 11 )
-region_rect = Rect2( 0, 0, 30, 31 )
+[ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=20]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
@@ -41,7 +23,8 @@ script = ExtResource( 5 )
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 18 )
 player_scene = ExtResource( 2 )
-current_level_scene = ExtResource( 1 )
+current_level_scene = ExtResource( 10 )
+levels = [ ExtResource( 10 ), ExtResource( 1 ), ExtResource( 12 ) ]
 
 [node name="UIScreenManager" type="Control" parent="."]
 pause_mode = 2
@@ -53,134 +36,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelStartLayer" type="CanvasLayer" parent="UIScreenManager"]
-
-[node name="LevelStart" type="Control" parent="UIScreenManager/LevelStartLayer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 20 )
-script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelContainer" type="PanelContainer" parent="UIScreenManager/LevelStartLayer/LevelStart"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIScreenManager/LevelStartLayer/LevelStart/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 893.0
-margin_bottom = 473.0
-
-[node name="LevelLabel" type="Label" parent="UIScreenManager/LevelStartLayer/LevelStart/PanelContainer/VBoxContainer"]
-margin_right = 886.0
-margin_bottom = 14.0
-text = "Level 1"
-
 [node name="GameOverlayLayer" type="CanvasLayer" parent="UIScreenManager"]
 
 [node name="GameOverlay" parent="UIScreenManager/GameOverlayLayer" instance=ExtResource( 4 )]
+visible = false
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="UIScreenManager"]
 
 [node name="PauseMenu" parent="UIScreenManager/PauseMenuLayer" instance=ExtResource( 3 )]
 visible = false
 
-[node name="TitleScreenLayer" type="CanvasLayer" parent="UIScreenManager"]
+[node name="TitleLayer" type="CanvasLayer" parent="UIScreenManager"]
 
-[node name="TitleScreen" type="Control" parent="UIScreenManager/TitleScreenLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Title" parent="UIScreenManager/TitleLayer" instance=ExtResource( 6 )]
+
+[node name="LevelStartLayer" type="CanvasLayer" parent="UIScreenManager"]
+layer = 9
+
+[node name="LevelStart" parent="UIScreenManager/LevelStartLayer" instance=ExtResource( 8 )]
+visible = false
+
+[node name="LevelSelectLayer" type="CanvasLayer" parent="UIScreenManager"]
+
+[node name="LevelSelect" parent="UIScreenManager/LevelSelectLayer" instance=ExtResource( 7 )]
+visible = false
+
+[node name="LevelFinishLayer" type="CanvasLayer" parent="UIScreenManager"]
+
+[node name="LevelFinish" parent="UIScreenManager/LevelFinishLayer" instance=ExtResource( 9 )]
+visible = false
 mouse_filter = 2
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-button_container_path = NodePath("MarginContainer/MainButtons")
-corner_button_container_path = NodePath("MarginContainer/CornerButtons")
+transition_time = 0.9
 
-[node name="PanelContainer" type="PanelContainer" parent="UIScreenManager/TitleScreenLayer/TitleScreen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="DebugLayer" type="CanvasLayer" parent="UIScreenManager"]
+layer = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="UIScreenManager/TitleScreenLayer/TitleScreen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 2
-custom_constants/margin_top = 2
-custom_constants/margin_left = 2
-custom_constants/margin_bottom = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MainButtons" type="VBoxContainer" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer"]
-margin_left = 422.0
-margin_top = 221.0
-margin_right = 477.0
-margin_bottom = 259.0
-mouse_filter = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer/MainButtons"]
-margin_right = 55.0
-margin_bottom = 14.0
-text = "Robodog"
-
-[node name="Start" type="Button" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer/MainButtons"]
-margin_top = 18.0
-margin_right = 55.0
-margin_bottom = 38.0
-
-[node name="CornerButtons" type="HBoxContainer" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer"]
-margin_left = 834.0
-margin_top = 2.0
-margin_right = 898.0
-margin_bottom = 33.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="Rate" type="Button" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer/CornerButtons"]
-margin_right = 30.0
-margin_bottom = 31.0
-rect_min_size = Vector2( 30, 31 )
-focus_mode = 0
-size_flags_vertical = 4
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
-enabled_focus_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Quit" type="Button" parent="UIScreenManager/TitleScreenLayer/TitleScreen/MarginContainer/CornerButtons"]
-margin_left = 34.0
-margin_right = 64.0
-margin_bottom = 31.0
-rect_min_size = Vector2( 30, 31 )
-focus_mode = 0
-size_flags_vertical = 4
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-enabled_focus_mode = 0
+[node name="Debug" parent="UIScreenManager/DebugLayer" instance=ExtResource( 11 )]
+modulate = Color( 1, 1, 1, 0.52549 )
 
 [node name="FileLoader" type="Node" parent="."]
 script = ExtResource( 16 )

@@ -32,7 +32,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	player.hurt(contact_damage)
 
-func hurt(damage: int) -> void:
+func hurt(damage: float) -> void:
 	.hurt(damage)
 	
 	if health <= 0:
