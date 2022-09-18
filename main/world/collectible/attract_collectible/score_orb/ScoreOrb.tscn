@@ -1,0 +1,15 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://main/world/collectible/attract_collectible/score_orb/score_orb.gd" type="Script" id=1]
+[ext_resource path="res://main/world/collectible/attract_collectible/AttractCollectible.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main/world/collectible/attract_collectible/score_orb/sprites/score_orb3.png" type="Texture" id=3]
+[ext_resource path="res://main/world/collectible/attract_collectible/score_orb/sprites/score_orb.png" type="Texture" id=4]
+[ext_resource path="res://main/world/collectible/attract_collectible/score_orb/sprites/score_orb4.png" type="Texture" id=5]
+[ext_resource path="res://main/world/collectible/attract_collectible/score_orb/sprites/score_orb2.png" type="Texture" id=6]
+
+[node name="ScoreOrb" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+colors = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ) ]
+
+[node name="Sprite" parent="." index="0"]
+frame = 0

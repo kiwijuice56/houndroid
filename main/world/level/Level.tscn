@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main/world/level/level_tools/death_tile.png" type="Texture" id=1]
 [ext_resource path="res://main/world/level/level.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://main/world/level/level_tools/damage_tile.gd" type="Script" id=4]
 [ext_resource path="res://main/world/level/level_tools/spike_ball.png" type="Texture" id=5]
 [ext_resource path="res://main/world/level/level_tools/goal/Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://main/world/level/1_city/music1.mp3" type="AudioStream" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -119,3 +120,8 @@ script = ExtResource( 4 )
 [node name="PlayerSpawn" type="Position2D" parent="."]
 
 [node name="Goal" parent="." instance=ExtResource( 6 )]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -12.0
+autoplay = true

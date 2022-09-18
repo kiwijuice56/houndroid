@@ -2,6 +2,8 @@ extends Character
 class_name Enemy
 # Extends character functionality to allow player detection and contact damage
 
+export var health_orb: PackedScene
+export var health_orb_chance := 0.2
 export var score_orb: PackedScene
 export var score_orb_count := 4
 
@@ -45,6 +47,12 @@ func hurt(damage: float) -> void:
 func death() -> void:
 	for _i in range(score_orb_count):
 		var new_orb := score_orb.instance()
+		new_orb.dir = Vector2((randf() * 2 - 1 ) * 128, -128 * randf() - 128)
+		GlobalInstanceManager.call_deferred("add_node", new_orb)
+		new_orb.global_position = global_position
+	
+	if randf() < health_orb_chance:
+		var new_orb := health_orb.instance()
 		new_orb.dir = Vector2((randf() * 2 - 1 ) * 128, -128 * randf() - 128)
 		GlobalInstanceManager.call_deferred("add_node", new_orb)
 		new_orb.global_position = global_position

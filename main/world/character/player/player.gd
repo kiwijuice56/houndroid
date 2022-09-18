@@ -32,6 +32,10 @@ var can_jump := false
 
 var last_shot_arm := "mr"
 
+var weapon_energy := []
+
+signal energy_changed(energy)
+
 func set_is_jump_queued(new_jump_queued) -> void:
 	is_jump_queued = new_jump_queued
 	$JumpToleranceTimer.start(jump_tolerance)
@@ -43,6 +47,11 @@ func _ready() -> void:
 	$JumpToleranceTimer.connect("timeout", self, "_on_jump_tolerance_timeout")
 	$JumpFallTimer.connect("timeout", self, "_on_jump_fall_timeout")
 	$Hitbox.connect("body_entered", self, "_on_body_entered")
+	
+	weapon_energy = []
+	for _i in range(len(bullet_scenes)):
+		weapon_energy.append(1.0)
+	weapon_energy[0] = 0.0
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("swap_weapon", false):
@@ -86,6 +95,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func swap_weapon() -> void:
 	weapon_index = (weapon_index + 1) % len(bullet_scenes)
+	emit_signal("energy_changed", weapon_index, weapon_energy[weapon_index])
 
 func primary_weapon_shot() -> void:
 	if not $PrimaryForcedTimer.is_stopped():
@@ -99,11 +109,7 @@ func primary_weapon_shot() -> void:
 	set_animations("shoot_wait", ["ArmML", "ArmMR"])
 	$PrimaryForcedTimer.start(bullet.delay)
 	$PrimaryComboTimer.start(primary_weapon_combo)
-	$Sounds/PrimaryShot.play_sound()
 	
-	bullet.direction = Vector2($Sprites.scale.x, 0)
-	bullet.speed += abs(velocity.x)
-	GlobalInstanceManager.add_node(bullet)
 	if last_shot_arm == "mr":
 		bullet.global_position = $Sprites/PrimaryGunEffectML/PrimaryShotSparksML.global_position
 		set_animations("shoot", ["ArmML", "PrimaryGunEffectML"])
@@ -112,6 +118,19 @@ func primary_weapon_shot() -> void:
 		bullet.global_position = $Sprites/PrimaryGunEffectMR/PrimaryShotSparksMR.global_position
 		set_animations("shoot", ["ArmMR", "PrimaryGunEffectMR"])
 		last_shot_arm = "mr"
+	
+	if bullet.energy_use > weapon_energy[weapon_index]:
+		bullet.queue_free()
+		return
+	weapon_energy[weapon_index] -= bullet.energy_use 
+	emit_signal("energy_changed", weapon_index, weapon_energy[weapon_index])
+	
+	$Sounds/PrimaryShot.play_sound()
+	
+	bullet.direction = Vector2($Sprites.scale.x, 0)
+	bullet.speed += abs(velocity.x)
+	GlobalInstanceManager.add_node(bullet)
+	
 
 # Called each time the player foot hits the floor in the animation
 func run_step() -> void:

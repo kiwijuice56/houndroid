@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/world/character/enemy/armadillot/states/armadillot_state.gd"
 }, {
+"base": "Collectible",
+"class": "AttractCollectible",
+"language": "GDScript",
+"path": "res://main/world/collectible/attract_collectible/attract_collectible.gd"
+}, {
 "base": "Bullet",
 "class": "BeamBullet",
 "language": "GDScript",
@@ -199,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/ui/ui_screen/game_overlay/health_bar/health_bar.gd"
 }, {
+"base": "AttractCollectible",
+"class": "HealthOrb",
+"language": "GDScript",
+"path": "res://main/world/collectible/attract_collectible/health_orb/health_orb.gd"
+}, {
 "base": "TouchScreenButton",
 "class": "Joystick",
 "language": "GDScript",
@@ -304,10 +314,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/ui/ui_screen/game_overlay/score_label.gd"
 }, {
-"base": "Collectible",
+"base": "AttractCollectible",
 "class": "ScoreOrb",
 "language": "GDScript",
-"path": "res://main/world/collectible/score_orb/score_orb.gd"
+"path": "res://main/world/collectible/attract_collectible/score_orb/score_orb.gd"
 }, {
 "base": "Area2D",
 "class": "ScreenEnemySpawner",
@@ -374,6 +384,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/ui/ui_screen/title/version_label.gd"
 }, {
+"base": "TextureProgress",
+"class": "WeaponBar",
+"language": "GDScript",
+"path": "res://main/ui/ui_screen/game_overlay/weapon_bar/weapon_bar.gd"
+}, {
 "base": "Area2D",
 "class": "gravity_weakener",
 "language": "GDScript",
@@ -384,6 +399,7 @@ _global_script_class_icons={
 "Armadillot": "",
 "ArmadillotCharge": "",
 "ArmadillotState": "",
+"AttractCollectible": "",
 "BeamBullet": "",
 "Bird": "",
 "Bone": "",
@@ -418,6 +434,7 @@ _global_script_class_icons={
 "GravityBullet": "",
 "HammerRobot": "",
 "HealthBar": "",
+"HealthOrb": "",
 "Joystick": "",
 "Level": "",
 "LevelFinishScreen": "",
@@ -453,6 +470,7 @@ _global_script_class_icons={
 "UIScreen": "",
 "UIScreenManager": "",
 "VersionLabel": "",
+"WeaponBar": "",
 "gravity_weakener": ""
 }
 
@@ -473,7 +491,6 @@ LevelManager="*res://main/autoload/level_manager/level_manager.gd"
 
 [debug]
 
-settings/fps/force_fps=60
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 
@@ -596,8 +613,11 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
+quality/directional_shadow/size=2048
+quality/shadow_atlas/size=2048
+quality/shadows/filter_mode=0
+quality/lightmapping/use_bicubic_sampling=false
 environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/dynamic_fonts/use_oversampling=false

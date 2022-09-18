@@ -1294,7 +1294,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 6000, 240 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." index="10"]
-color = Color( 0.701961, 0.603922, 0.756863, 1 )
+color = Color( 0.6, 0.509804, 0.647059, 1 )
 
 [node name="Collectibles" parent="." index="11"]
 position = Vector2( -32, -16 )

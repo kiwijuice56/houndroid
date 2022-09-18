@@ -32,10 +32,10 @@ colors = PoolColorArray( 1, 1, 1, 0.694118, 1, 1, 1, 0 )
 [node name="PlayerBullet" instance=ExtResource( 1 )]
 collision_layer = 8
 collision_mask = 5
-monitorable = false
 script = ExtResource( 2 )
 lifespan = 0.2
 delay = 0.19
+energy_use = 0.0
 speed = 500.0
 
 [node name="CollisionShape2D" parent="." index="0"]

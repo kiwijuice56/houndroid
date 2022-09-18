@@ -5,7 +5,9 @@ export var lifespan := 2.0
 
 # Most enemies tweak their delay to themselves to match animations
 # This parameter is for the player to keep delays different for each weapon
+# Same with the energy usage variable
 export var delay := 2.5
+export var energy_use := 1/16.0
 
 func _ready() -> void:
 	connect("area_entered", self, "_on_area_entered")

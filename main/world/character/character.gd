@@ -27,6 +27,7 @@ signal health_changed(health)
 
 func set_health(new_health) -> void:
 	health = new_health
+	health = clamp(health, 0, max_health)
 	emit_signal("health_changed", health)
 
 func set_frozen(new_frozen: bool):

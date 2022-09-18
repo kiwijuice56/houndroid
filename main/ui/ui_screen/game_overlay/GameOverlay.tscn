@@ -1,33 +1,67 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=1]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay_screen.gd" type="Script" id=2]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.gd" type="Script" id=3]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_bar.gd" type="Script" id=4]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/portrait.png" type="Texture" id=5]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_under1.png" type="Texture" id=5]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/shoot_pressed.png" type="Texture" id=6]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/inner_joystick.png" type="Texture" id=7]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/joystick.png" type="Texture" id=8]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/jump_unpressed.png" type="Texture" id=9]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/shoot_unpressed.png" type="Texture" id=10]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_under.png" type="Texture" id=11]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_bar/weapon_progress.png" type="Texture" id=11]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_progress.png" type="Texture" id=12]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/controls/joystick/jump_pressed.png" type="Texture" id=13]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button1.png" type="Texture" id=14]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/menu_button/pause_button2.png" type="Texture" id=15]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/health_bar/health_under.png" type="Texture" id=16]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label/score_label.png" type="Texture" id=17]
 [ext_resource path="res://main/ui/theme/font/C&C Red Alert [INET].ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd" type="Script" id=19]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label.gd" type="Script" id=20]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/coin_label.png" type="Texture" id=21]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon2.png" type="Texture" id=22]
 [ext_resource path="res://main/ui/theme/ButtonSounds.tscn" type="PackedScene" id=23]
 [ext_resource path="res://main/ui/theme/sound_button.gd" type="Script" id=24]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_bar/weapon_bar.gd" type="Script" id=25]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon1.png" type="Texture" id=26]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon3.png" type="Texture" id=27]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_switch_animation.png" type="Texture" id=28]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=29]
+[ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=30]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/channel_change.wav" type="AudioStream" id=31]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="StreamTexture" id=6]
-
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="Animation" id=11]
+length = 0.28
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.035, 0.07, 0.105, 0.14, 0.175, 0.21, 0.245, 0.28 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("ChannelChangeSounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="DynamicFont" id=10]
 size = 13
@@ -97,34 +131,75 @@ margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 
+[node name="HealthUnder" type="TextureRect" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
+margin_left = 48.0
+margin_top = 3.0
+margin_right = 116.0
+margin_bottom = 51.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="WeaponButton" type="TouchScreenButton" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
 normal = ExtResource( 5 )
 
+[node name="WeaponIcon" type="TextureRect" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
+margin_right = 68.0
+margin_bottom = 48.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SwitchAnimation" type="Sprite" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control"]
+material = ExtResource( 29 )
+position = Vector2( 24, 22 )
+texture = ExtResource( 28 )
+hframes = 8
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/SwitchAnimation"]
+playback_speed = 1.5
+anims/flash = SubResource( 11 )
+
+[node name="ChannelChangeSounds" type="Node2D" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/SwitchAnimation"]
+script = ExtResource( 30 )
+sounds = [ ExtResource( 31 ) ]
+volume = -18.0
+rand_pitch_range = 0.2
+positional = false
+
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer"]
 margin_left = 48.0
-margin_top = 16.0
+margin_top = 9.0
 margin_right = 111.0
-margin_bottom = 31.0
-size_flags_vertical = 4
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 39 )
+size_flags_vertical = 8
+custom_constants/separation = 2
 
-[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
+[node name="HealthProgress" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
 margin_right = 63.0
-margin_bottom = 15.0
+margin_bottom = 13.0
 max_value = 9.0
 value = 9.0
-texture_under = ExtResource( 11 )
 texture_progress = ExtResource( 12 )
-texture_progress_offset = Vector2( 0, 1 )
 script = ExtResource( 4 )
 
-[node name="TextureProgress2" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 19.0
-margin_right = 60.0
-margin_bottom = 34.0
-value = 25.0
-texture_under = SubResource( 6 )
-texture_progress = SubResource( 7 )
+[node name="WeaponProgress" type="TextureProgress" parent="VBoxContainer/TopRow/StatusContainer/HBoxContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 63.0
+margin_bottom = 28.0
+max_value = 16.0
+value = 15.0
+texture_progress = ExtResource( 11 )
+texture_progress_offset = Vector2( -1, 0 )
+script = ExtResource( 25 )
+icon_path = NodePath("../../Control/WeaponIcon")
+flash_path = NodePath("../../Control/SwitchAnimation/AnimationPlayer")
+weapon_icons = [ ExtResource( 26 ), ExtResource( 22 ), ExtResource( 27 ) ]
+modulates = [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.976471, 1, 1 ), Color( 0.945098, 0.886275, 1, 1 ) ]
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow"]
 margin_left = 791.0

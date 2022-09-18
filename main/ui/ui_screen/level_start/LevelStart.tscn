@@ -16,8 +16,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 panel_path = NodePath("PanelContainer")
-transition_time = 0.1
-wait_time = 0.1
+transition_time = 0.3
+wait_time = 0.6
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_right = 1.0

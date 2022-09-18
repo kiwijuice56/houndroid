@@ -70,8 +70,8 @@ tracks/0/keys = {
 "values": [ 7, 7 ]
 }
 
-[sub_resource type="Animation" id=1]
-length = 0.075
+[sub_resource type="Animation" id=45]
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprites/ArmMR:frame")
@@ -80,10 +80,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.075 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 6, 6 ]
+"values": [ 23, 24, 25, 26, 26 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -217,8 +217,8 @@ tracks/0/keys = {
 "values": [ 7, 8, 8 ]
 }
 
-[sub_resource type="Animation" id=3]
-length = 0.075
+[sub_resource type="Animation" id=46]
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprites/Body:frame")
@@ -227,10 +227,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.075 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 6, 6 ]
+"values": [ 23, 24, 25, 26, 26 ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -313,8 +313,8 @@ tracks/0/keys = {
 "values": [ 7, 7 ]
 }
 
-[sub_resource type="Animation" id=5]
-length = 0.075
+[sub_resource type="Animation" id=47]
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprites/ArmML:frame")
@@ -323,10 +323,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.075 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 6, 6 ]
+"values": [ 23, 24, 25, 26, 26 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -617,7 +617,7 @@ jump_cut = 120
 jump_tolerance = 0.15
 jump_fall = 0.095
 fall_effect_distance = 4.0
-bullet_scenes = [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 29 ) ]
+bullet_scenes = [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 29 ) ]
 death_effect_scene = ExtResource( 27 )
 death_effect_count = 8
 death_fall_delay = 0.15
@@ -641,19 +641,19 @@ physics_process_parent = false
 [node name="ArmMR" type="Sprite" parent="Sprites" index="1"]
 light_mask = 2
 texture = ExtResource( 4 )
-hframes = 23
+hframes = 27
 frame = 16
 
 [node name="Body" type="Sprite" parent="Sprites" index="2"]
 light_mask = 2
 texture = ExtResource( 5 )
-hframes = 23
+hframes = 27
 frame = 7
 
 [node name="ArmML" type="Sprite" parent="Sprites" index="3"]
 light_mask = 2
 texture = ExtResource( 6 )
-hframes = 23
+hframes = 27
 frame = 16
 
 [node name="PrimaryGunEffectML" type="Sprite" parent="Sprites" index="4"]
@@ -734,7 +734,7 @@ pause_animations = false
 playback_speed = 0.9
 anims/death = SubResource( 41 )
 anims/fall = SubResource( 20 )
-anims/idle = SubResource( 1 )
+anims/idle = SubResource( 45 )
 anims/jump = SubResource( 9 )
 anims/run = SubResource( 2 )
 anims/shoot = SubResource( 12 )
@@ -745,7 +745,7 @@ playback_speed = 0.9
 anims/RESET = SubResource( 44 )
 anims/death = SubResource( 42 )
 anims/fall = SubResource( 26 )
-anims/idle = SubResource( 3 )
+anims/idle = SubResource( 46 )
 anims/jump = SubResource( 27 )
 anims/run = SubResource( 4 )
 
@@ -753,7 +753,7 @@ anims/run = SubResource( 4 )
 playback_speed = 0.9
 anims/death = SubResource( 43 )
 anims/fall = SubResource( 21 )
-anims/idle = SubResource( 5 )
+anims/idle = SubResource( 47 )
 anims/jump = SubResource( 11 )
 anims/run = SubResource( 6 )
 anims/shoot = SubResource( 13 )
@@ -879,7 +879,7 @@ hframes = 8
 light_mask = 7
 texture = ExtResource( 28 )
 texture_scale = 0.75
-energy = 0.65
+energy = 0.7
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_item_cull_mask = 7

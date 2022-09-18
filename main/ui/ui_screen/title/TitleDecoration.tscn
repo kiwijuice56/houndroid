@@ -92,17 +92,17 @@ tile_data = PoolIntArray( 327680, 0, 0, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1
 [node name="Body" type="Sprite" parent="TileMap"]
 position = Vector2( 164, 150 )
 texture = ExtResource( 2 )
-hframes = 23
+hframes = 27
 frame = 6
 
 [node name="ArmL" type="Sprite" parent="TileMap"]
 position = Vector2( 164, 150 )
 texture = ExtResource( 4 )
-hframes = 23
+hframes = 27
 frame = 6
 
 [node name="ArmR" type="Sprite" parent="TileMap"]
 position = Vector2( 164, 150 )
 texture = ExtResource( 3 )
-hframes = 23
+hframes = 27
 frame = 6
