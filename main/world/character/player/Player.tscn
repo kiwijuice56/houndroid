@@ -34,7 +34,7 @@
 extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 8, 10 )
+extents = Vector2( 14, 10 )
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.839779 )
@@ -615,7 +615,7 @@ max_health = 9.0
 jump_force = -365.0
 jump_cut = 120
 run_jump_boost = 1.05
-jump_fall = 0.12
+jump_fall = 0.1
 fall_effect_distance = 32.0
 bullet_scenes = [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 29 ) ]
 death_effect_scene = ExtResource( 27 )
@@ -630,6 +630,7 @@ collision_mask = 176
 shape = SubResource( 32 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -1, 0 )
 shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]

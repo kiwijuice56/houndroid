@@ -137,7 +137,6 @@ colors = PoolColorArray( 1, 1, 1, 1, 0.402344, 0.0644379, 0.0644379, 0 )
 [node name="Armadillot" instance=ExtResource( 2 )]
 script = ExtResource( 5 )
 move_speed = 290.0
-gravity = 9.0
 max_health = 5.0
 uses_physics_process = false
 score_orb_count = 8

@@ -28,7 +28,7 @@ func physics_update(delta) -> void:
 	if not player.can_jump:
 		player.velocity.y += player.gravity * delta
 	else:
-		player.velocity.y = 0
+		player.velocity.y += player.gravity * delta / 4
 	
 	if Input.is_action_just_pressed("jump") and player.can_jump:
 		player.jump_step()
