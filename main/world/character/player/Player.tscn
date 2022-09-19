@@ -610,13 +610,13 @@ collision_layer = 2
 collision/safe_margin = 0.2
 script = ExtResource( 7 )
 move_speed = 180.0
-gravity = 875.0
+gravity = 760.0
 max_health = 9.0
-jump_force = -400.0
+jump_force = -365.0
 jump_cut = 120
-jump_tolerance = 0.15
-jump_fall = 0.095
-fall_effect_distance = 4.0
+run_jump_boost = 1.05
+jump_fall = 0.12
+fall_effect_distance = 32.0
 bullet_scenes = [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 29 ) ]
 death_effect_scene = ExtResource( 27 )
 death_effect_count = 8
@@ -633,6 +633,7 @@ shape = SubResource( 32 )
 shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
+offset = Vector2( 0, 2.5 )
 max_distance = 256.0
 
 [node name="VisibilityEnabler2D" parent="Sprites/Shadow" index="1"]
@@ -648,7 +649,7 @@ frame = 16
 light_mask = 2
 texture = ExtResource( 5 )
 hframes = 27
-frame = 7
+frame = 23
 
 [node name="ArmML" type="Sprite" parent="Sprites" index="3"]
 light_mask = 2
@@ -703,12 +704,12 @@ volume = -2.0
 [node name="Fall" type="Node2D" parent="Sounds" index="1"]
 script = ExtResource( 10 )
 sounds = [ ExtResource( 16 ), ExtResource( 17 ) ]
-volume = -2.0
+volume = -3.0
+rand_pitch_range = 0.1
 
 [node name="Jump" type="Node2D" parent="Sounds" index="2"]
 script = ExtResource( 10 )
 sounds = [ ExtResource( 11 ) ]
-volume = -5.0
 
 [node name="PrimaryShot" type="Node2D" parent="Sounds" index="3"]
 script = ExtResource( 10 )
@@ -883,5 +884,8 @@ energy = 0.7
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_item_cull_mask = 7
+
+[node name="Label" parent="." index="19"]
+visible = false
 
 [editable path="Sprites/Shadow"]

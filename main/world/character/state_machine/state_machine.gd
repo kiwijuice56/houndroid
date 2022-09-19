@@ -1,10 +1,13 @@
 extends Node
 class_name StateMachine
 
+export var label_path: NodePath
 export var initial_state: NodePath
 
 # Ultimately decides whether physics_process of this state machine is ever enabled
 export var uses_physics_process := true
+
+onready var label := get_node(label_path)
 
 var state: Node
 
@@ -31,6 +34,7 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	assert(has_node(target_state_name))
 	if state != null:
 		state.exit()
-	state = get_node(target_state_name)
-	state.enter(msg)
+	call_deferred("set", "state", get_node(target_state_name))
+	get_node(target_state_name).call_deferred("enter", msg)
 	emit_signal("transitioned", state.name)
+	label.text = state.name

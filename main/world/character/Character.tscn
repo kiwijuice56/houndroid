@@ -23,3 +23,11 @@ gravity = 800.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
+label_path = NodePath("../Label")
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

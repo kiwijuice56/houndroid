@@ -18,14 +18,18 @@ func physics_update(delta) -> void:
 	if Input.is_action_pressed("primary_weapon"):
 		player.primary_weapon_shot()
 	
-	player.sprites.scale.x = 1 if input.x > 0 else -1
-	player.velocity.x = input.x * player.move_speed
+	if player.velocity.x != 0:
+		player.sprites.scale.x = sign(player.velocity.x)
+	
+	player.velocity.x += input.x * player.move_speed * 0.35
+	player.velocity.x = clamp(player.velocity.x, -player.move_speed, player.move_speed)
 	
 	player.velocity.y += player.gravity * delta 
 	
-	if Input.is_action_just_pressed("jump") or player.is_jump_queued:
+	if Input.is_action_pressed("jump") and not player.jumped:
 		player.jump_step()
-		player.velocity.y += player.jump_force
+		player.velocity.y += player.jump_force * player.run_jump_boost
+		state_machine.transition_to("Air")
 
 func enter(msg := {}) -> void:
 	if player.is_shooting_primary:

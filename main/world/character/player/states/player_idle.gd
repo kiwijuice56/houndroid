@@ -12,10 +12,15 @@ func physics_update(delta) -> void:
 	
 	if Input.is_action_pressed("primary_weapon"):
 		player.primary_weapon_shot()
-	player.velocity.x = 0
+	
+	if abs(player.velocity.x) < player.move_speed * 0.35:
+		player.velocity.x = 0
+	else:
+		player.velocity.x -= player.sprites.scale.x * player.move_speed * 0.35
+	
 	player.velocity.y += player.gravity * delta 
 	
-	if Input.is_action_just_pressed("jump") or player.is_jump_queued:
+	if Input.is_action_pressed("jump") and not player.jumped:
 		player.jump_step()
 		player.velocity.y += player.jump_force
 

@@ -7,8 +7,7 @@ export var hurt_invincibility := 1.25
 export var jump_force := -64.0
 # Force applied to player when jump released
 export var jump_cut := 80
-# Time allowed for jump buffer
-export var jump_tolerance := 0.1
+export var run_jump_boost := 1.1
 # Time allowed for jumping after falling
 export var jump_fall := 0.05
 
@@ -26,7 +25,7 @@ var invulnerable := false
 var can_shoot_primary := true
 var is_shooting_primary := false
 
-var is_jump_queued := false setget set_is_jump_queued
+var jumped := false
 var is_holding_jump := false
 var can_jump := false
 
@@ -36,15 +35,10 @@ var weapon_energy := []
 
 signal energy_changed(energy)
 
-func set_is_jump_queued(new_jump_queued) -> void:
-	is_jump_queued = new_jump_queued
-	$JumpToleranceTimer.start(jump_tolerance)
-
 func _ready() -> void:
 	$PrimaryForcedTimer.connect("timeout", self, "_on_primary_delay_finished")
 	$PrimaryComboTimer.connect("timeout", self, "_on_primary_combo_finished")
 	$HurtInvincibilityTimer.connect("timeout", self, "_on_hurt_invincibility_finished")
-	$JumpToleranceTimer.connect("timeout", self, "_on_jump_tolerance_timeout")
 	$JumpFallTimer.connect("timeout", self, "_on_jump_fall_timeout")
 	$Hitbox.connect("body_entered", self, "_on_body_entered")
 	
@@ -56,6 +50,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("swap_weapon", false):
 		swap_weapon()
+	if event.is_action_released("jump"):
+		jumped = false
 
 func _on_primary_delay_finished() -> void:
 	can_shoot_primary = true
@@ -74,9 +70,6 @@ func _on_primary_combo_finished() -> void:
 func _on_hurt_invincibility_finished() -> void:
 	set_animations("hurt_complete")
 	invulnerable = false
-
-func _on_jump_tolerance_timeout() -> void:
-	is_jump_queued = false
 
 func _on_jump_fall_timeout() -> void:
 	can_jump = false
@@ -141,7 +134,6 @@ func run_step() -> void:
 
 # Called when player lands after a fall
 func fall_step(distance: float) -> void:
-	$JumpToleranceTimer.stop()
 	$JumpFallTimer.stop()
 	is_holding_jump = false
 	can_jump = false
@@ -151,9 +143,9 @@ func fall_step(distance: float) -> void:
 
 # Called when player jumps
 func jump_step() -> void:
-	$JumpToleranceTimer.stop()
+	can_jump = false
 	is_holding_jump = true
-	is_jump_queued = false
+	jumped = true
 	$Sounds/Jump.play_sound()
 
 # Called when player walks into air
