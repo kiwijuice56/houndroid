@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://main/world/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/player/states/player_run.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://main/world/character/player/sprites/death_effect/DeathEffect.tscn" type="PackedScene" id=27]
 [ext_resource path="res://main/world/character/player/sprites/light.png" type="Texture" id=28]
 [ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/BoomerangBullet.tscn" type="PackedScene" id=29]
+[ext_resource path="res://main/world/character/player/sprites/shoot_light.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 7, 10 )
@@ -429,6 +430,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Sprites/PrimaryGunEffectML/ShootLight:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.03, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=19]
 length = 0.001
@@ -471,6 +484,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Sprites/PrimaryGunEffectMR/ShootLight:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.03, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=36]
@@ -546,7 +571,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.104, 0.294 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=33]
@@ -633,6 +658,9 @@ shape = SubResource( 32 )
 position = Vector2( -1, 0 )
 shape = SubResource( 40 )
 
+[node name="Sprites" parent="." index="2"]
+position = Vector2( 0.5, 0.5 )
+
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 offset = Vector2( 0, 2.5 )
 max_distance = 256.0
@@ -664,9 +692,9 @@ light_mask = 2
 position = Vector2( 3, 0 )
 texture = ExtResource( 20 )
 hframes = 5
-frame = 4
 
 [node name="PrimaryShotSparksML" type="CPUParticles2D" parent="Sprites/PrimaryGunEffectML" index="0"]
+visible = false
 position = Vector2( 6.5, -1.5 )
 emitting = false
 amount = 24
@@ -678,16 +706,23 @@ gravity = Vector2( 0, 420 )
 initial_velocity = 160.0
 color_ramp = SubResource( 16 )
 
+[node name="ShootLight" type="Light2D" parent="Sprites/PrimaryGunEffectML" index="1"]
+position = Vector2( 9.5, -0.5 )
+texture = ExtResource( 30 )
+energy = 0.0
+range_item_cull_mask = 7
+shadow_enabled = true
+
 [node name="PrimaryGunEffectMR" type="Sprite" parent="Sprites" index="5"]
 visible = false
 light_mask = 2
 position = Vector2( 11, -4 )
 texture = ExtResource( 20 )
 hframes = 5
-frame = 4
 
 [node name="PrimaryShotSparksMR" type="CPUParticles2D" parent="Sprites/PrimaryGunEffectMR" index="0"]
 position = Vector2( 7.5, -0.5 )
+emitting = false
 amount = 24
 lifetime = 0.19
 one_shot = true
@@ -696,6 +731,13 @@ explosiveness = 0.4
 gravity = Vector2( 0, 420 )
 initial_velocity = 160.0
 color_ramp = SubResource( 16 )
+
+[node name="ShootLight" type="Light2D" parent="Sprites/PrimaryGunEffectMR" index="1"]
+position = Vector2( 6.5, -0.5 )
+texture = ExtResource( 30 )
+energy = 0.0
+range_item_cull_mask = 7
+shadow_enabled = true
 
 [node name="Step" type="Node2D" parent="Sounds" index="0"]
 script = ExtResource( 10 )
@@ -803,10 +845,6 @@ one_shot = true
 offset = Vector2( 16, -28 )
 current = true
 script = ExtResource( 9 )
-target_path = NodePath("..")
-max_drag = 32.0
-turn_speed = 4.5
-update_radius = 80
 
 [node name="Tween" type="Tween" parent="DragCamera" index="0"]
 
@@ -885,8 +923,5 @@ energy = 0.7
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_item_cull_mask = 7
-
-[node name="Label" parent="." index="19"]
-visible = false
 
 [editable path="Sprites/Shadow"]

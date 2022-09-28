@@ -115,6 +115,7 @@ func primary_weapon_shot() -> void:
 	if bullet.energy_use > weapon_energy[weapon_index]:
 		bullet.queue_free()
 		return
+	
 	weapon_energy[weapon_index] -= bullet.energy_use 
 	emit_signal("energy_changed", weapon_index, weapon_energy[weapon_index])
 	
@@ -157,6 +158,8 @@ func hurt(damage: float, prioirity := false) -> void:
 	# Stop damage if invulernable unless priority (such as death pits)
 	if invulnerable and not prioirity:
 		return
+	if has_node("DragCamera"):
+		$DragCamera.add_trauma(.3)
 	
 	.hurt(damage)
 	

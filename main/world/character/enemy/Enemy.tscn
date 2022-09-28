@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/world/character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/enemy/enemy.gd" type="Script" id=2]
@@ -9,9 +9,10 @@
 [ext_resource path="res://main/world/collectible/attract_collectible/score_orb/ScoreOrb.tscn" type="PackedScene" id=7]
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=8]
 [ext_resource path="res://main/world/collectible/attract_collectible/health_orb/HealthOrb.tscn" type="PackedScene" id=9]
+[ext_resource path="res://main/world/character/enemy/sprites/hurt_particle.png" type="Texture" id=10]
 
 [sub_resource type="CircleShape2D" id=7]
-radius = 16.0
+radius = 22.0
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -169,7 +170,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.24, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 4, 4, 4, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../HurtParticles:emitting")
@@ -178,10 +179,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.08 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false, true ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath("..")
@@ -201,8 +202,14 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Curve" id=8]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.422819, 208.22 ), 0.0, 0.0, 0, 0, Vector2( 1, -23.6441 ), 0.0, 0.0, 0, 0 ]
+
 [sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0.227451, 0.388235, 0.160784 )
+offsets = PoolRealArray( 0, 0.262712, 0.525424, 1 )
+colors = PoolColorArray( 2, 2, 2, 1, 1, 0.921569, 0.937255, 1, 1, 0.737255, 0.737255, 1, 1, 0.227451, 0.388235, 0.160784 )
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 160.0
@@ -227,6 +234,7 @@ light_mask = 2
 
 [node name="Explosion" type="Sprite" parent="Sprites" index="0"]
 visible = false
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 light_mask = 0
 material = ExtResource( 8 )
 texture = ExtResource( 4 )
@@ -253,16 +261,21 @@ anims/death = SubResource( 4 )
 anims/hurt = SubResource( 2 )
 
 [node name="HurtParticles" type="CPUParticles2D" parent="." index="6"]
+material = ExtResource( 8 )
 emitting = false
 amount = 32
+lifetime = 0.8
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 10 )
 emission_shape = 1
 emission_sphere_radius = 4.0
 direction = Vector2( 0, -1 )
 spread = 180.0
-initial_velocity = 37.8
+initial_velocity = 48.0
+angle_curve = SubResource( 8 )
 color_ramp = SubResource( 6 )
 
 [node name="Vision" type="Area2D" parent="." index="8"]

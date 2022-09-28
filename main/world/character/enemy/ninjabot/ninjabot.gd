@@ -37,7 +37,11 @@ func _on_shoot_delay_finished() -> void:
 	
 	var new_shuriken := shuriken.instance()
 	GlobalInstanceManager.add_node(new_shuriken)
-	new_shuriken.direction = Vector2(sign(player_position.x - global_position.x), 0)
+	if not is_on_floor():
+		new_shuriken.direction = (player_position - global_position).normalized()
+	else:
+		new_shuriken.direction = Vector2(sign(player_position.x - global_position.x), 0)
+	
 	new_shuriken.global_position = global_position
 	
 	#$Sounds/LaserShot.play_sound()

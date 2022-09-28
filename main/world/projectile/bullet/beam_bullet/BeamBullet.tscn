@@ -2,14 +2,17 @@
 
 [ext_resource path="res://main/world/projectile/bullet/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/projectile/bullet/beam_bullet/beam_bullet.gd" type="Script" id=2]
-[ext_resource path="res://main/world/projectile/bullet/beam_bullet/sprites/gun_trail.png" type="Texture" id=3]
 [ext_resource path="res://main/world/projectile/bullet/beam_bullet/sprites/player_bullet_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://main/world/projectile/bullet/beam_bullet/sounds/wall_impact.wav" type="AudioStream" id=5]
 [ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=6]
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=7]
+[ext_resource path="res://main/world/projectile/bullet/beam_bullet/sprites/gun_trail2.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9, 5 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 1, 1, 0.694118, 1, 1, 1, 0 )
 
 [sub_resource type="Animation" id=1]
 length = 0.36
@@ -26,17 +29,14 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7 ]
 }
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 1, 1, 0.694118, 1, 1, 1, 0 )
-
 [node name="PlayerBullet" instance=ExtResource( 1 )]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 2 )
-lifespan = 0.2
+lifespan = 0.18
 delay = 0.19
 energy_use = 0.0
-speed = 500.0
+speed = 550.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 2 )
@@ -47,23 +47,14 @@ sounds = [ ExtResource( 5 ) ]
 volume = -19.0
 rand_pitch_range = 0.2
 
-[node name="Bullet" type="Sprite" parent="." index="3"]
-material = ExtResource( 7 )
-texture = ExtResource( 4 )
-hframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
-playback_speed = 2.0
-anims/destroy = SubResource( 1 )
-
-[node name="GunTrail" type="CPUParticles2D" parent="." index="5"]
+[node name="GunTrail" type="CPUParticles2D" parent="." index="3"]
 material = ExtResource( 7 )
 position = Vector2( -7, 0 )
 amount = 16
 lifetime = 0.5
 speed_scale = 2.25
 local_coords = false
-texture = ExtResource( 3 )
+texture = ExtResource( 8 )
 emission_shape = 1
 emission_sphere_radius = 1.25
 spread = 0.0
@@ -71,3 +62,12 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 80.0
 initial_velocity_random = 0.53
 color_ramp = SubResource( 3 )
+
+[node name="Bullet" type="Sprite" parent="." index="4"]
+material = ExtResource( 7 )
+texture = ExtResource( 4 )
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+playback_speed = 2.0
+anims/destroy = SubResource( 1 )

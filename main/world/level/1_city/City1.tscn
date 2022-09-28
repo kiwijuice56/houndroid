@@ -1464,6 +1464,9 @@ position = Vector2( -36, 329 )
 [node name="Goal" parent="." index="13"]
 position = Vector2( 128, 224 )
 
+[node name="MusicPlayer" parent="." index="14"]
+autoplay = false
+
 [editable path="Obstacles/MovingPlatform3"]
 [editable path="Obstacles/MovingPlatform1"]
 [editable path="Obstacles/MovingPlatform5"]
