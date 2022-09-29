@@ -117,6 +117,8 @@ script = ExtResource( 4 )
 
 [node name="Collectibles" type="Node2D" parent="."]
 
+[node name="Checkpoints" type="Node2D" parent="."]
+
 [node name="PlayerSpawn" type="Position2D" parent="."]
 
 [node name="Goal" parent="." instance=ExtResource( 6 )]

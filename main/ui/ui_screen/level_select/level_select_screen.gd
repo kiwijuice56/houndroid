@@ -42,6 +42,10 @@ func _on_level_button_pressed(button: Button) -> void:
 	if is_instance_valid(selected_info):
 		selected_info.queue_free()
 	
+	$Tween.interpolate_property(levels, "rect_position:x", null, (levels.rect_global_position.x) - button.get_global_rect().position.x + 225, 0.45, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$Tween.start()
+	drag_velocity = Vector2()
+	
 	var new_info := level_info_scene.instance()
 	levels.add_child(new_info)
 

@@ -38,7 +38,7 @@ func _on_shoot_delay_finished() -> void:
 	var new_shuriken := shuriken.instance()
 	GlobalInstanceManager.add_node(new_shuriken)
 	if not is_on_floor():
-		new_shuriken.direction = (player_position - global_position).normalized()
+		new_shuriken.direction = Vector2(sign(player_position.x - global_position.x), .5).normalized()
 	else:
 		new_shuriken.direction = Vector2(sign(player_position.x - global_position.x), 0)
 	

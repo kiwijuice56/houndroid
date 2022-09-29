@@ -24,6 +24,7 @@ func load_level(index := -1) -> void:
 	add_child(current_level)
 	move_child(current_level, 0)
 	
+	# reset level state
 	GlobalInstanceManager.clear_nodes()
 	
 	GlobalData.coin_count = 0
@@ -35,12 +36,20 @@ func load_level(index := -1) -> void:
 	player = player_scene.instance()
 	add_child(player)
 	
-	player.global_position = current_level.spawn.global_position
+	# spawn player at the checkpoint if valid or else the spawn 
+	if GlobalData.checkpoint_index < 0 or GlobalData.checkpoint_index >= current_level.checkpoints.get_child_count():
+		player.global_position = current_level.spawn.global_position
+	else:
+		current_level.checkpoints.get_child(GlobalData.checkpoint_index).enter_checkpoint(true)
+		player.global_position = current_level.checkpoints.get_child(GlobalData.checkpoint_index).global_position
+	
 	player.frozen = true
 	
 	call_deferred("emit_signal", "level_loaded")
 
 func unload_level() -> void:
+	# reset checkpoint only after the level is complete, as resetting it earlier would delete player progress
+	GlobalData.checkpoint_index = -1
 	current_level.queue_free()
 	player.queue_free()
 	emit_signal("level_unloaded")

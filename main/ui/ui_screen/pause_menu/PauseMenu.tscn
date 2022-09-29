@@ -131,8 +131,11 @@ align = 2
 [node name="InputContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
 margin_left = 155.0
 margin_right = 411.0
-margin_bottom = 411.0
+margin_bottom = 53.0
 rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 4
 
 [node name="MusicSilder" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer/InputContainer"]
 margin_right = 256.0
@@ -169,6 +172,8 @@ margin_right = 32.0
 margin_bottom = 53.0
 focus_mode = 0
 size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 6 )
 custom_icons/off = ExtResource( 7 )
 custom_icons/on = ExtResource( 8 )

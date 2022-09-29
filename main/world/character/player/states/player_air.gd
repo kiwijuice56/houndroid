@@ -17,12 +17,12 @@ func physics_update(delta) -> void:
 	if player.velocity.x != 0:
 		player.sprites.scale.x = sign(player.velocity.x)
 	if input.x != 0:
-		player.velocity.x += input.x * player.move_speed * 0.35
+		player.velocity.x += input.x * player.move_speed * delta * 10
 	else:
-		if abs(player.velocity.x) < player.move_speed * 0.35:
+		if abs(player.velocity.x) < player.move_speed * delta * 10:
 			player.velocity.x = 0
 		else:
-			player.velocity.x -= player.sprites.scale.x * player.move_speed * 0.35
+			player.velocity.x -= player.sprites.scale.x * player.move_speed * delta * 10
 	player.velocity.x = clamp(player.velocity.x, -player.move_speed, player.move_speed)
 	
 	if not player.can_jump:

@@ -12,9 +12,9 @@ onready var world: GameWorld = get_tree().get_root().get_node("Main/World")
 onready var ui_manager: UIScreenManager = get_tree().get_root().get_node("Main/UIScreenManager")
 
 # Data variables
-
 var coin_count := 0 setget set_coin_count
 var score := 0 setget set_score
+var checkpoint_index := -1
 
 func set_coin_count(new_count: int) -> void:
 	coin_count = new_count

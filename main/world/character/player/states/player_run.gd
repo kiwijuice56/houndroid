@@ -21,7 +21,7 @@ func physics_update(delta) -> void:
 	if player.velocity.x != 0:
 		player.sprites.scale.x = sign(player.velocity.x)
 	
-	player.velocity.x += input.x * player.move_speed * 0.35
+	player.velocity.x += input.x * player.move_speed * 10 * delta
 	player.velocity.x = clamp(player.velocity.x, -player.move_speed, player.move_speed)
 	
 	player.velocity.y += player.gravity * delta 
