@@ -13,10 +13,10 @@ func physics_update(delta) -> void:
 	if Input.is_action_pressed("primary_weapon"):
 		player.primary_weapon_shot()
 	
-	if abs(player.velocity.x) < player.move_speed  * delta * 10:
+	if abs(player.velocity.x) < player.move_speed * delta * player.friction:
 		player.velocity.x = 0
 	else:
-		player.velocity.x -= sign(player.velocity.x) * player.move_speed * delta * 10
+		player.velocity.x -= sign(player.velocity.x) * player.move_speed * delta * player.friction
 	player.velocity.x = clamp(player.velocity.x, -player.move_speed, player.move_speed)
 	
 	player.velocity.y += player.gravity * delta 

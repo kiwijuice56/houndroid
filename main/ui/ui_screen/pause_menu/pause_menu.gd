@@ -1,5 +1,6 @@
 extends UIScreen
 class_name GameMenu
+# Controls the pause menu and updates the settings associated with it
 
 export var menu_button_path: NodePath
 export var music_slider_path: NodePath

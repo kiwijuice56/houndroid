@@ -45,6 +45,8 @@ func _ready() -> void:
 
 # Link VisibilityEnabler to StateMachine processing as well
 func _on_screen_entered() -> void:
+	# Play any animations that characters have when entering the screen
+	set_animations("screen_entered")
 	$StateMachine.set_physics_process(true)
 	set_physics_process(true)
 

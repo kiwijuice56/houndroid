@@ -11,6 +11,9 @@ export var run_jump_boost := 1.1
 # Time allowed for jumping after falling
 export var jump_fall := 0.05
 
+export var friction := 12
+export var slow_fall := 0.25
+
 export var step_spark_probability := 0.6
 export var fall_effect_distance := 8.0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/world/character/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/enemy/ninjabot/ninjabot.gd" type="Script" id=2]
@@ -75,6 +75,38 @@ tracks/0/keys = {
 "values": [ 5, 4, 3, 2, 1, 0, 0 ]
 }
 
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Face:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 2, 2, 2, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "screen_entered"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprites/Face:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 2, 2, 2, 1 ), Color( 1.2, 1.2, 1.2, 1 ), Color( 2, 2, 2, 1 ) ]
+}
+
 [sub_resource type="CircleShape2D" id=2]
 radius = 180.0
 
@@ -82,12 +114,12 @@ radius = 180.0
 script = ExtResource( 2 )
 gravity = 760.0
 max_health = 10.0
-score_orb_count = 8
-contact_damage = 3.0
+score_orb_count = 6
+contact_damage = 2.0
 burst_size = 3
 shuriken = ExtResource( 4 )
 shoot_delay = 0.15
-attack_delay = 0.9
+attack_delay = 1.1
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
@@ -99,7 +131,7 @@ texture = ExtResource( 3 )
 hframes = 6
 
 [node name="Face" type="Sprite" parent="Sprites" index="3"]
-modulate = Color( 1.5, 1.5, 1.5, 1 )
+modulate = Color( 2, 2, 2, 1 )
 material = ExtResource( 6 )
 texture = ExtResource( 7 )
 hframes = 6
@@ -115,6 +147,11 @@ anims/land = SubResource( 6 )
 [node name="Face" type="AnimationPlayer" parent="AnimationPlayers" index="2"]
 anims/jump = SubResource( 4 )
 anims/land = SubResource( 5 )
+
+[node name="FaceFlash" type="AnimationPlayer" parent="AnimationPlayers" index="3"]
+autoplay = "screen_entered"
+anims/RESET = SubResource( 7 )
+anims/screen_entered = SubResource( 8 )
 
 [node name="StateMachine" parent="." index="7"]
 initial_state = NodePath("Jump")

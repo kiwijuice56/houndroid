@@ -1,7 +1,6 @@
 extends UIScreen
 class_name GameOverlayScreen
-# Controls gameplay overlay and handles interface between
-# World and the UI
+# Controls gameplay overlay and handles interface between World and the UI
 
 export var world_path: NodePath
 export var menu_button_path: NodePath
@@ -26,7 +25,7 @@ func _ready() -> void:
 	weapon_button = get_node(weapon_button_path)
 	weapon_button.connect("pressed", self, "_on_weapon_button_pressed")
 	
-	# ui_manager variable not initialized yet
+	# ui_manager variable is not initialized yet, which would cause a null pointer exception
 	yield(get_parent().get_parent(), "ready")
 	ui_manager.get_screen("PauseMenu").connect("jump_shoot_swapped", self, "_on_jump_shoot_swapped")
 	

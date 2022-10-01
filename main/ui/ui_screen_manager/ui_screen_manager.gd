@@ -1,15 +1,14 @@
 extends Control
 class_name UIScreenManager
-# Provides access to all UI overlays in a centralized
-# class to allow for transitions between overlays
+# Provides access to all UI overlays in a centralized class to allow for transitions between overlays
 
 signal transition_complete
 
 func _ready() -> void:
 	for child in get_children():
+		# Get past the CanvasLayer parent that all UIScreens have
 		if not child is CanvasLayer:
 			return
-		# Get past first child - the CanvasLayer
 		child.get_child(0).ui_manager = self
 
 func get_screen(screen: String) -> Node:

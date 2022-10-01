@@ -1,5 +1,6 @@
 extends UIScreen
 class_name LevelStartScreen
+# Controls the screen that appears when starting the level
 
 export var panel_path: NodePath
 export var initial_offset_x := -400

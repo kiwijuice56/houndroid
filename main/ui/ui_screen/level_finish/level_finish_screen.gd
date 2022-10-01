@@ -1,5 +1,6 @@
 extends UIScreen
 class_name LevelFinishScreen
+# Controls the screen that appears when finishing the level
 
 export var panel_path: NodePath
 export var initial_offset_x := 0
@@ -23,12 +24,14 @@ func transition_from(from: String) -> void:
 			
 			$Timer.start(wait_time)
 			yield($Timer, "timeout")
+			
 			$Tween.interpolate_property(panel, "rect_position:x", final_offset_x, initial_offset_x, transition_time)
 			$Tween.start()
 			yield($Tween, "tween_completed")
+			
+			# Block out the screen and then complete the level
 			Transition.trans_in()
 			yield(Transition, "finished")
-			GlobalData.world.unload_level()
 			visible = false
-			
 	call_deferred("emit_signal", "transition_complete")
+

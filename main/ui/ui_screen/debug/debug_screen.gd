@@ -1,5 +1,6 @@
 extends UIScreen
 class_name DebugScreen
+# Controls the toggleable information screen
 
 func _ready() -> void:
 	yield(get_parent().get_parent(), "ready")

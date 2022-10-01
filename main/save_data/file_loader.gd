@@ -1,12 +1,9 @@
 extends Node
 class_name FileLoader
+# Controls file saving and loading to keep user state
 
 export var file_resource_path: String
 export var save_file_path: String
-
-func _ready() -> void:
-	save_file(0)
-	load_file(0)
 
 func save_file(id: int) -> void:
 	var new_file: Resource = load(file_resource_path).new()

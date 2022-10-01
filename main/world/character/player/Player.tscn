@@ -658,9 +658,6 @@ shape = SubResource( 32 )
 position = Vector2( -1, 0 )
 shape = SubResource( 40 )
 
-[node name="Sprites" parent="." index="2"]
-position = Vector2( 0.5, 0.5 )
-
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 offset = Vector2( 0, 2.5 )
 max_distance = 256.0

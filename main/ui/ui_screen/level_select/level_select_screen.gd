@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	disable_input()
 
-# Called when the "Go" button is pressed in a LevelSelect
+# Called when the back button is pressed 
 func _on_menu_button_pressed() -> void:
 	ui_manager.transition("LevelSelect", "Title")
 
@@ -55,11 +55,10 @@ func _on_level_button_pressed(button: Button) -> void:
 	
 	selected_info = new_info
 
+# Called when the "go" button is pressed in a LevelSelect 
 func _on_level_selected() -> void:
 	var index := selected_info.index
-	
-	ui_manager.transition("LevelSelect", "LevelStart")
-	yield(ui_manager, "transition_complete")
+
 	
 	LevelManager.start_level(index)
 
@@ -67,6 +66,7 @@ func _input(event) -> void:
 	if event is InputEventScreenDrag:
 		drag_velocity = event.speed
 
+# Updates the screen position from scrolling the screen or pressing on levels
 func _process(delta) -> void:
 	levels.rect_position.x += drag_velocity.x * delta
 	if abs(drag_velocity.x) > de_accel * delta:

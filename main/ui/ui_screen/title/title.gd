@@ -1,5 +1,6 @@
 extends UIScreen
 class_name TitleScreen
+# Controls the initial screen when starting the game
 
 export var decoration_scene: PackedScene
 export var button_container_path: NodePath
@@ -10,6 +11,7 @@ var corner_button_container: Container
 var decoration: Node
 
 func _ready() -> void:
+	# The decoration is taxing on performance, so it must be deleted and spawned only when needed
 	decoration = decoration_scene.instance()
 	add_child(decoration)
 	move_child(decoration, 0)
