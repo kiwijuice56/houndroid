@@ -62,9 +62,8 @@ tracks/1/keys = {
 scale = Vector2( -1, 1 )
 move_speed = 55.0
 gravity = 600.0
-max_health = 6.0
+max_health = 5.0
 score_orb_count = 6
-contact_damage = 2.0
 
 [node name="Hitbox" parent="." index="0"]
 collision_mask = 2

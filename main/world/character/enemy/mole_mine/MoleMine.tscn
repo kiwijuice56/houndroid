@@ -11,29 +11,28 @@ radius = 16.0
 [node name="MoleMine" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 move_speed = -64.0
-gravity = 9.0
 score_orb_count = 1
 
+[node name="Hitbox" parent="." index="0"]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 1 )
+
 [node name="Sprite" type="Sprite" parent="Sprites" index="0"]
+light_mask = 2
 texture = ExtResource( 1 )
 
-[node name="StateMachine" parent="." index="4"]
+[node name="VisibilityEnabler2D" parent="." index="4"]
+rect = Rect2( -100, -100, 200, 200 )
+physics_process_parent = true
+
+[node name="StateMachine" parent="." index="7"]
 initial_state = NodePath("Float")
 
 [node name="Float" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 4 )
 state_owner_path = NodePath("../..")
 
-[node name="VisibilityEnabler2D" parent="." index="6"]
-visible = true
-rect = Rect2( -100, -100, 200, 200 )
-physics_process_parent = true
-
 [node name="CollisionShape2D" parent="Vision" index="0"]
 shape = null
-
-[node name="Hitbox" parent="." index="8"]
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 1 )
