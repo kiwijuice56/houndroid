@@ -59,6 +59,8 @@ func death() -> void:
 	
 	$Sounds/Death.play_sound()
 	set_animations("death")
+	if has_node("Sprites/Shadow"):
+		get_node("Sprites/Shadow").visible = false
 	
 	# Disable collision 
 	$Hitbox.get_node("CollisionShape2D").call_deferred("set_disabled", true)

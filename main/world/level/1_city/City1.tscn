@@ -1630,16 +1630,16 @@ position = Vector2( 3400, 544 )
 position = Vector2( 1376, 448 )
 
 [node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 44 )]
-position = Vector2( 2176, 960 )
+position = Vector2( 2166, 971 )
 
 [node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource( 44 )]
-position = Vector2( 2880, -96 )
+position = Vector2( 2872, -87 )
 
 [node name="Checkpoint3" parent="Checkpoints" index="2" instance=ExtResource( 44 )]
-position = Vector2( 4096, 832 )
+position = Vector2( 4096, 841 )
 
 [node name="Checkpoint4" parent="Checkpoints" index="3" instance=ExtResource( 44 )]
-position = Vector2( 4064, 384 )
+position = Vector2( 4034, 394 )
 
 [node name="PlayerSpawn" parent="." index="13"]
 position = Vector2( -8, 320 )
