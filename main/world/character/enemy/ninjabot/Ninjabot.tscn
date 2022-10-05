@@ -113,7 +113,7 @@ radius = 180.0
 [node name="Ninjabot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 gravity = 760.0
-max_health = 10.0
+max_health = 5.0
 score_orb_count = 6
 contact_damage = 2.0
 burst_size = 3

@@ -15,5 +15,6 @@ func enter_checkpoint(already_collected: bool) -> void:
 	if not already_collected:
 		$AnimationPlayer.current_animation = "enter"
 		yield($AnimationPlayer, "animation_finished")
-	$Sprite.modulate = Color(1.0, 0.0, 0.0)
+	$Monitor.frame = 12
+	$Light2D.color = Color("a6e4ff")
 	entered = true

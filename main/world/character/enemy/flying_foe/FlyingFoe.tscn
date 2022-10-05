@@ -71,13 +71,12 @@ tracks/0/keys = {
 colors = PoolColorArray( 1, 1, 1, 1, 0.878431, 0.223529, 0.576471, 0 )
 
 [sub_resource type="CircleShape2D" id=7]
-radius = 32.0
+radius = 12.0
 
 [node name="FlyingFoe" instance=ExtResource( 1 )]
 collision_mask = 0
 script = ExtResource( 2 )
 move_speed = 100.0
-gravity = 9.0
 max_health = 2.0
 orb = ExtResource( 9 )
 shoot_delay = 1.55
@@ -154,9 +153,9 @@ anims/shoot = SubResource( 4 )
 anims/unwind = SubResource( 5 )
 
 [node name="StateMachine" parent="." index="7"]
-initial_state = NodePath("EnemyHover")
+initial_state = NodePath("Hover")
 
-[node name="EnemyHover" type="Node" parent="StateMachine" index="0"]
+[node name="Hover" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 13 )
 state_owner_path = NodePath("../..")
 timer_path = NodePath("../../WaitTimer")
@@ -180,14 +179,14 @@ spread = 180.0
 initial_velocity = 47.62
 color_ramp = SubResource( 6 )
 
-[node name="ShootDelayTimer" type="Timer" parent="." index="10"]
+[node name="ShootDelayTimer" parent="." index="10"]
 one_shot = true
 
 [node name="WaitTimer" type="Timer" parent="." index="11"]
 
 [node name="RelocateArea" type="Area2D" parent="." index="12"]
 collision_layer = 0
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RelocateArea" index="0"]
+position = Vector2( 0, 6 )
 shape = SubResource( 7 )

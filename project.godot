@@ -497,6 +497,7 @@ LevelManager="*res://main/autoload/level_manager/level_manager.gd"
 
 [debug]
 
+settings/fps/force_fps=60
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 

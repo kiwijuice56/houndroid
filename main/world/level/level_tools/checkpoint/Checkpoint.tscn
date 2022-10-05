@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main/world/level/level_tools/checkpoint/checkpoint.gd" type="Script" id=1]
 [ext_resource path="res://main/world/level/level_tools/checkpoint/sprites/checkpoint_body.png" type="Texture" id=2]
+[ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=3]
+[ext_resource path="res://main/world/character/player/sprites/light.png" type="Texture" id=4]
+[ext_resource path="res://main/world/level/level_tools/checkpoint/sprites/checkpoint_screen.png" type="Texture" id=5]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 32 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Base:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,20 +23,60 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.65098, 0.921569, 1 ) ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "enter"
+[sub_resource type="Animation" id=5]
+length = 0.385
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Monitor:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.055, 0.11, 0.165, 0.22, 0.275, 0.33, 0.385 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10, 11, 12, 12 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.33
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Monitor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.055, 0.11, 0.165, 0.22, 0.275, 0.33 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ) ]
+"values": [ Color( 1, 0.65098, 0.921569, 1 ) ]
 }
 
 [node name="Checkpoint" type="Area2D"]
@@ -42,11 +85,33 @@ collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Base" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
+[node name="Monitor" type="Sprite" parent="."]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+light_mask = 0
+material = ExtResource( 3 )
+position = Vector2( -19, 4 )
+texture = ExtResource( 5 )
+hframes = 13
+frame = 6
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "flash"
 anims/RESET = SubResource( 2 )
-anims/enter = SubResource( 3 )
+anims/enter = SubResource( 5 )
+anims/flash = SubResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="."]
+light_mask = 7
+position = Vector2( -19, 5 )
+texture = ExtResource( 4 )
+texture_scale = 0.3
+color = Color( 1, 0.65098, 0.921569, 1 )
+energy = 0.7
+range_item_cull_mask = 7
+shadow_enabled = true
+shadow_item_cull_mask = 3

@@ -11,6 +11,7 @@ radius = 16.0
 [node name="MoleMine" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 move_speed = -64.0
+health_orb_chance = 0.05
 score_orb_count = 1
 
 [node name="Hitbox" parent="." index="0"]

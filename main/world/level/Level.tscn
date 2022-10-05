@@ -111,13 +111,13 @@ script = ExtResource( 4 )
 
 [node name="Decoration" type="Node2D" parent="."]
 
+[node name="Checkpoints" type="Node2D" parent="."]
+
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Collectibles" type="Node2D" parent="."]
-
-[node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="PlayerSpawn" type="Position2D" parent="."]
 

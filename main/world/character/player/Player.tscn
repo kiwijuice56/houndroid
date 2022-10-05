@@ -35,7 +35,7 @@
 extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 14, 10 )
+extents = Vector2( 14, 9 )
 
 [sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.839779 )
@@ -647,18 +647,28 @@ death_effect_scene = ExtResource( 27 )
 death_effect_count = 8
 death_fall_delay = 0.15
 
-[node name="Hitbox" parent="." index="0"]
+[node name="Light2D" type="Light2D" parent="." index="0"]
+light_mask = 7
+texture = ExtResource( 28 )
+texture_scale = 0.75
+energy = 0.7
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 7
+
+[node name="Hitbox" parent="." index="1"]
 collision_layer = 2
 collision_mask = 176
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 32 )
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2( -1, 0 )
 shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
+light_mask = 0
 offset = Vector2( 0, 2.5 )
 max_distance = 256.0
 
@@ -768,7 +778,7 @@ script = ExtResource( 10 )
 sounds = [ ExtResource( 26 ) ]
 volume = -12.0
 
-[node name="VisibilityEnabler2D" parent="." index="4"]
+[node name="VisibilityEnabler2D" parent="." index="5"]
 pause_animations = false
 
 [node name="ArmMR" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
@@ -820,32 +830,32 @@ anims/RESET = SubResource( 33 )
 anims/hurt = SubResource( 34 )
 anims/hurt_complete = SubResource( 35 )
 
-[node name="PrimaryForcedTimer" type="Timer" parent="." index="6"]
+[node name="PrimaryForcedTimer" type="Timer" parent="." index="7"]
 one_shot = true
 
-[node name="PrimaryComboTimer" type="Timer" parent="." index="7"]
+[node name="PrimaryComboTimer" type="Timer" parent="." index="8"]
 one_shot = true
 
-[node name="JumpToleranceTimer" type="Timer" parent="." index="8"]
+[node name="JumpToleranceTimer" type="Timer" parent="." index="9"]
 one_shot = true
 
-[node name="JumpFallTimer" type="Timer" parent="." index="9"]
+[node name="JumpFallTimer" type="Timer" parent="." index="10"]
 one_shot = true
 
-[node name="HurtInvincibilityTimer" type="Timer" parent="." index="10"]
+[node name="HurtInvincibilityTimer" type="Timer" parent="." index="11"]
 one_shot = true
 
-[node name="DeathFallTimer" type="Timer" parent="." index="11"]
+[node name="DeathFallTimer" type="Timer" parent="." index="12"]
 one_shot = true
 
-[node name="DragCamera" type="Camera2D" parent="." index="12"]
+[node name="DragCamera" type="Camera2D" parent="." index="13"]
 offset = Vector2( 16, -28 )
 current = true
 script = ExtResource( 9 )
 
 [node name="Tween" type="Tween" parent="DragCamera" index="0"]
 
-[node name="FallingSparks" type="CPUParticles2D" parent="." index="13"]
+[node name="FallingSparks" type="CPUParticles2D" parent="." index="14"]
 position = Vector2( 1, 14 )
 emitting = false
 amount = 16
@@ -861,7 +871,7 @@ initial_velocity = 160.0
 initial_velocity_random = 0.44
 color_ramp = SubResource( 8 )
 
-[node name="WalkingSparks" type="CPUParticles2D" parent="." index="14"]
+[node name="WalkingSparks" type="CPUParticles2D" parent="." index="15"]
 position = Vector2( 1, 12 )
 emitting = false
 amount = 16
@@ -876,7 +886,7 @@ initial_velocity = 160.0
 initial_velocity_random = 0.44
 color_ramp = SubResource( 8 )
 
-[node name="DeathSparks" type="CPUParticles2D" parent="." index="15"]
+[node name="DeathSparks" type="CPUParticles2D" parent="." index="16"]
 emitting = false
 amount = 32
 one_shot = true
@@ -890,7 +900,7 @@ tangential_accel = 100.0
 tangential_accel_random = 1.0
 color_ramp = SubResource( 39 )
 
-[node name="StateMachine" parent="." index="16"]
+[node name="StateMachine" parent="." index="17"]
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" index="0"]
@@ -905,20 +915,11 @@ state_owner_path = NodePath("../..")
 script = ExtResource( 8 )
 state_owner_path = NodePath("../..")
 
-[node name="HurtEffect" type="Sprite" parent="." index="17"]
+[node name="HurtEffect" type="Sprite" parent="." index="18"]
 visible = false
 light_mask = 2
 position = Vector2( -1, -3 )
 texture = ExtResource( 23 )
 hframes = 8
-
-[node name="Light2D" type="Light2D" parent="." index="18"]
-light_mask = 7
-texture = ExtResource( 28 )
-texture_scale = 0.75
-energy = 0.7
-range_item_cull_mask = 3
-shadow_enabled = true
-shadow_item_cull_mask = 7
 
 [editable path="Sprites/Shadow"]

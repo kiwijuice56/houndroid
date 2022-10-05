@@ -365,7 +365,7 @@ script = ExtResource( 33 )
 off_tiles = [ 10, 16, 13 ]
 on_tiles = [ 9, 17, 12 ]
 shadows = [ ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 39 ) ]
-colors = [ Color( 1, 0, 0.647059, 1 ), Color( 1, 0.701961, 0, 1 ), Color( 0, 0.670588, 1, 1 ), Color( 0.431373, 0, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+colors = [ Color( 1, 0, 0.647059, 1 ), Color( 0, 0.670588, 1, 1 ), Color( 0.431373, 0, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 window_cover = ExtResource( 43 )
 unshaded_material = ExtResource( 31 )
 shadow_chance = 0.2
@@ -775,7 +775,19 @@ texture = ExtResource( 13 )
 position = Vector2( 4002, 810 )
 texture = ExtResource( 51 )
 
-[node name="Obstacles" parent="." index="7"]
+[node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 44 )]
+position = Vector2( 2166, 971 )
+
+[node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource( 44 )]
+position = Vector2( 2872, -87 )
+
+[node name="Checkpoint3" parent="Checkpoints" index="2" instance=ExtResource( 44 )]
+position = Vector2( 4096, 841 )
+
+[node name="Checkpoint4" parent="Checkpoints" index="3" instance=ExtResource( 44 )]
+position = Vector2( 4034, 394 )
+
+[node name="Obstacles" parent="." index="8"]
 position = Vector2( 8, -192 )
 
 [node name="MovingPlatform3" parent="Obstacles" index="0" instance=ExtResource( 15 )]
@@ -1154,169 +1166,215 @@ position = Vector2( 445, 3 )
 [node name="Platform31" parent="Obstacles" index="59" instance=ExtResource( 8 )]
 position = Vector2( 4656, 8 )
 
-[node name="SnailySoul" parent="Enemies" index="0" instance=ExtResource( 6 )]
-position = Vector2( 2040, 944 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="9"]
 
-[node name="SnailySoul2" parent="Enemies" index="1" instance=ExtResource( 6 )]
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2( 0.25, 0.25 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background" index="0"]
+position = Vector2( 0, 600 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 6000 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/Background/Sprite" index="0"]
+autoplay = "scroll"
+playback_speed = 0.03
+anims/scroll = SubResource( 2 )
+
+[node name="StarSpawner" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+motion_scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 3 )
+star = ExtResource( 5 )
+star_count = 16
+start = Vector2( -64, -200 )
+end = Vector2( 512, 100 )
+
+[node name="StarSpawner2" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+motion_scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 3 )
+star = ExtResource( 5 )
+star_count = 15
+start = Vector2( 2056, -1000 )
+end = Vector2( 3500, 1000 )
+
+[node name="Background2" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
+position = Vector2( 0, -28 )
+motion_scale = Vector2( 0.35, 0.35 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/Background2" index="0"]
+position = Vector2( 0, 192 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 240 )
+
+[node name="Background3" type="ParallaxLayer" parent="ParallaxBackground" index="4"]
+position = Vector2( 0, -90 )
+motion_scale = Vector2( 0.4, 0.4 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background3" index="0"]
+position = Vector2( 512, 242 )
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 240 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="10"]
+color = Color( 0.564706, 0.462745, 0.65098, 1 )
+
+[node name="SnailySoul2" parent="Enemies" index="0" instance=ExtResource( 6 )]
 position = Vector2( 679, 249 )
 
-[node name="SnailySoul3" parent="Enemies" index="2" instance=ExtResource( 6 )]
+[node name="SnailySoul3" parent="Enemies" index="1" instance=ExtResource( 6 )]
 position = Vector2( 2872, -80 )
 
-[node name="SnailySoul4" parent="Enemies" index="3" instance=ExtResource( 6 )]
+[node name="SnailySoul4" parent="Enemies" index="2" instance=ExtResource( 6 )]
 position = Vector2( 1688, 592 )
 
-[node name="SnailySoul5" parent="Enemies" index="4" instance=ExtResource( 6 )]
+[node name="SnailySoul5" parent="Enemies" index="3" instance=ExtResource( 6 )]
 position = Vector2( 1568, 776 )
 
-[node name="SnailySoul6" parent="Enemies" index="5" instance=ExtResource( 6 )]
+[node name="SnailySoul6" parent="Enemies" index="4" instance=ExtResource( 6 )]
 position = Vector2( 1696, 936 )
 
-[node name="SnailySoul7" parent="Enemies" index="6" instance=ExtResource( 6 )]
-position = Vector2( 2192, 976 )
+[node name="SnailySoul7" parent="Enemies" index="5" instance=ExtResource( 6 )]
+position = Vector2( 1819, 981 )
 
-[node name="FlyingFoe" parent="Enemies" index="7" instance=ExtResource( 7 )]
+[node name="FlyingFoe" parent="Enemies" index="6" instance=ExtResource( 7 )]
 position = Vector2( 1267, 370 )
 
-[node name="FlyingFoe2" parent="Enemies" index="8" instance=ExtResource( 7 )]
+[node name="FlyingFoe2" parent="Enemies" index="7" instance=ExtResource( 7 )]
 position = Vector2( 2352, 192 )
 
-[node name="FlyingFoe3" parent="Enemies" index="9" instance=ExtResource( 7 )]
+[node name="FlyingFoe3" parent="Enemies" index="8" instance=ExtResource( 7 )]
 position = Vector2( 2544, 696 )
 
-[node name="FlyingFoe9" parent="Enemies" index="10" instance=ExtResource( 7 )]
+[node name="FlyingFoe9" parent="Enemies" index="9" instance=ExtResource( 7 )]
 position = Vector2( 2640, 624 )
 
-[node name="FlyingFoe10" parent="Enemies" index="11" instance=ExtResource( 7 )]
+[node name="FlyingFoe10" parent="Enemies" index="10" instance=ExtResource( 7 )]
 position = Vector2( 2496, 512 )
 
-[node name="FlyingFoe11" parent="Enemies" index="12" instance=ExtResource( 7 )]
+[node name="FlyingFoe11" parent="Enemies" index="11" instance=ExtResource( 7 )]
 position = Vector2( 2664, 144 )
 
-[node name="FlyingFoe12" parent="Enemies" index="13" instance=ExtResource( 7 )]
+[node name="FlyingFoe12" parent="Enemies" index="12" instance=ExtResource( 7 )]
 position = Vector2( 2576, 48 )
 
-[node name="FlyingFoe4" parent="Enemies" index="14" instance=ExtResource( 7 )]
+[node name="FlyingFoe4" parent="Enemies" index="13" instance=ExtResource( 7 )]
 position = Vector2( 2160, 496 )
 
-[node name="FlyingFoe5" parent="Enemies" index="15" instance=ExtResource( 7 )]
+[node name="FlyingFoe5" parent="Enemies" index="14" instance=ExtResource( 7 )]
 position = Vector2( 2256, 632 )
 
-[node name="FlyingFoe6" parent="Enemies" index="16" instance=ExtResource( 7 )]
+[node name="FlyingFoe6" parent="Enemies" index="15" instance=ExtResource( 7 )]
 position = Vector2( 2160, 304 )
 
-[node name="FlyingFoe7" parent="Enemies" index="17" instance=ExtResource( 7 )]
-position = Vector2( 1936, 952 )
-
-[node name="FlyingFoe8" parent="Enemies" index="18" instance=ExtResource( 7 )]
+[node name="FlyingFoe8" parent="Enemies" index="16" instance=ExtResource( 7 )]
 position = Vector2( 1552, 944 )
 
-[node name="SnailySoul8" parent="Enemies" index="19" instance=ExtResource( 6 )]
+[node name="SnailySoul8" parent="Enemies" index="17" instance=ExtResource( 6 )]
 position = Vector2( 3016, 848 )
 
-[node name="SnailySoul9" parent="Enemies" index="20" instance=ExtResource( 6 )]
+[node name="SnailySoul9" parent="Enemies" index="18" instance=ExtResource( 6 )]
 position = Vector2( 3288, 848 )
 
-[node name="SnailySoul28" parent="Enemies" index="21" instance=ExtResource( 6 )]
-position = Vector2( 1984, 976 )
+[node name="SnailySoul28" parent="Enemies" index="19" instance=ExtResource( 6 )]
+position = Vector2( 1782, 981 )
 
-[node name="SnailySoul11" parent="Enemies" index="22" instance=ExtResource( 6 )]
+[node name="SnailySoul11" parent="Enemies" index="20" instance=ExtResource( 6 )]
 position = Vector2( 3112, 944 )
 
-[node name="SnailySoul12" parent="Enemies" index="23" instance=ExtResource( 6 )]
+[node name="SnailySoul12" parent="Enemies" index="21" instance=ExtResource( 6 )]
 position = Vector2( 3128, 1040 )
 
-[node name="SnailySoul13" parent="Enemies" index="24" instance=ExtResource( 6 )]
+[node name="SnailySoul13" parent="Enemies" index="22" instance=ExtResource( 6 )]
 position = Vector2( 3288, 1136 )
 
-[node name="SnailySoul14" parent="Enemies" index="25" instance=ExtResource( 6 )]
+[node name="SnailySoul14" parent="Enemies" index="23" instance=ExtResource( 6 )]
 position = Vector2( 2912, 1168 )
 
-[node name="SnailySoul10" parent="Enemies" index="26" instance=ExtResource( 6 )]
+[node name="SnailySoul10" parent="Enemies" index="24" instance=ExtResource( 6 )]
 position = Vector2( 3408, 720 )
 
-[node name="SnailySoul15" parent="Enemies" index="27" instance=ExtResource( 6 )]
+[node name="SnailySoul15" parent="Enemies" index="25" instance=ExtResource( 6 )]
 position = Vector2( 3360, 1232 )
 
-[node name="SnailySoul16" parent="Enemies" index="28" instance=ExtResource( 6 )]
+[node name="SnailySoul16" parent="Enemies" index="26" instance=ExtResource( 6 )]
 position = Vector2( 3416, 1232 )
 
-[node name="SnailySoul17" parent="Enemies" index="29" instance=ExtResource( 6 )]
+[node name="SnailySoul17" parent="Enemies" index="27" instance=ExtResource( 6 )]
 position = Vector2( 3296, 1232 )
 
-[node name="HammerRobot" parent="Enemies" index="30" instance=ExtResource( 18 )]
+[node name="HammerRobot" parent="Enemies" index="28" instance=ExtResource( 18 )]
 position = Vector2( 3808, 1040 )
 
-[node name="HammerRobot2" parent="Enemies" index="31" instance=ExtResource( 18 )]
+[node name="HammerRobot2" parent="Enemies" index="29" instance=ExtResource( 18 )]
 position = Vector2( 3868, 310 )
 
-[node name="HammerRobot3" parent="Enemies" index="32" instance=ExtResource( 18 )]
+[node name="HammerRobot3" parent="Enemies" index="30" instance=ExtResource( 18 )]
 position = Vector2( 4490, -581 )
 
-[node name="SnailySoul18" parent="Enemies" index="33" instance=ExtResource( 6 )]
+[node name="SnailySoul18" parent="Enemies" index="31" instance=ExtResource( 6 )]
 position = Vector2( 3398, 365 )
 
-[node name="SnailySoul19" parent="Enemies" index="34" instance=ExtResource( 6 )]
+[node name="SnailySoul19" parent="Enemies" index="32" instance=ExtResource( 6 )]
 position = Vector2( 3456, 367 )
 
-[node name="SnailySoul20" parent="Enemies" index="35" instance=ExtResource( 6 )]
+[node name="SnailySoul20" parent="Enemies" index="33" instance=ExtResource( 6 )]
 position = Vector2( 3084, 334 )
 
-[node name="SnailySoul21" parent="Enemies" index="36" instance=ExtResource( 6 )]
+[node name="SnailySoul21" parent="Enemies" index="34" instance=ExtResource( 6 )]
 position = Vector2( 3134, 334 )
 
-[node name="SnailySoul22" parent="Enemies" index="37" instance=ExtResource( 6 )]
+[node name="SnailySoul22" parent="Enemies" index="35" instance=ExtResource( 6 )]
 position = Vector2( 3320, 335 )
 
-[node name="SnailySoul23" parent="Enemies" index="38" instance=ExtResource( 6 )]
+[node name="SnailySoul23" parent="Enemies" index="36" instance=ExtResource( 6 )]
 position = Vector2( 3563, 365 )
 
-[node name="FlyingFoe13" parent="Enemies" index="39" instance=ExtResource( 7 )]
+[node name="FlyingFoe13" parent="Enemies" index="37" instance=ExtResource( 7 )]
 position = Vector2( 4576, 424 )
 
-[node name="FlyingFoe14" parent="Enemies" index="40" instance=ExtResource( 7 )]
+[node name="FlyingFoe14" parent="Enemies" index="38" instance=ExtResource( 7 )]
 position = Vector2( 4184, 808 )
 
-[node name="FlyingFoe15" parent="Enemies" index="41" instance=ExtResource( 7 )]
+[node name="FlyingFoe15" parent="Enemies" index="39" instance=ExtResource( 7 )]
 position = Vector2( 4544, 808 )
 
-[node name="FlyingFoe16" parent="Enemies" index="42" instance=ExtResource( 7 )]
+[node name="FlyingFoe16" parent="Enemies" index="40" instance=ExtResource( 7 )]
 position = Vector2( 4696, 536 )
 
-[node name="FlyingFoe17" parent="Enemies" index="43" instance=ExtResource( 7 )]
+[node name="FlyingFoe17" parent="Enemies" index="41" instance=ExtResource( 7 )]
 position = Vector2( 4256, 384 )
 
-[node name="FlyingFoe18" parent="Enemies" index="44" instance=ExtResource( 7 )]
+[node name="FlyingFoe18" parent="Enemies" index="42" instance=ExtResource( 7 )]
 position = Vector2( 4568, 152 )
 
-[node name="FlyingFoe19" parent="Enemies" index="45" instance=ExtResource( 7 )]
+[node name="FlyingFoe19" parent="Enemies" index="43" instance=ExtResource( 7 )]
 position = Vector2( 4696, -16 )
 
-[node name="SnailySoul24" parent="Enemies" index="46" instance=ExtResource( 6 )]
+[node name="SnailySoul24" parent="Enemies" index="44" instance=ExtResource( 6 )]
 position = Vector2( 4072, 392 )
 
-[node name="SnailySoul25" parent="Enemies" index="47" instance=ExtResource( 6 )]
+[node name="SnailySoul25" parent="Enemies" index="45" instance=ExtResource( 6 )]
 position = Vector2( 3984, 840 )
 
-[node name="SnailySoul26" parent="Enemies" index="48" instance=ExtResource( 6 )]
+[node name="SnailySoul26" parent="Enemies" index="46" instance=ExtResource( 6 )]
 position = Vector2( 4352, 840 )
 
-[node name="SnailySoul27" parent="Enemies" index="49" instance=ExtResource( 6 )]
+[node name="SnailySoul27" parent="Enemies" index="47" instance=ExtResource( 6 )]
 position = Vector2( 4416, 840 )
 
-[node name="FlyingFoe23" parent="Enemies" index="50" instance=ExtResource( 7 )]
+[node name="FlyingFoe23" parent="Enemies" index="48" instance=ExtResource( 7 )]
 position = Vector2( 4528, 72 )
 
-[node name="FlyingFoe24" parent="Enemies" index="51" instance=ExtResource( 7 )]
+[node name="FlyingFoe24" parent="Enemies" index="49" instance=ExtResource( 7 )]
 position = Vector2( 4376, 400 )
 
-[node name="FlyingFoe25" parent="Enemies" index="52" instance=ExtResource( 7 )]
+[node name="FlyingFoe25" parent="Enemies" index="50" instance=ExtResource( 7 )]
 position = Vector2( 2200, 776 )
 
-[node name="FlyingFoe26" parent="Enemies" index="53" instance=ExtResource( 7 )]
-position = Vector2( 1744, 944 )
-
-[node name="MiniMole" type="Node2D" parent="Enemies" index="54"]
+[node name="MiniMole" type="Node2D" parent="Enemies" index="51"]
 
 [node name="MoleMine" parent="Enemies/MiniMole" index="0" instance=ExtResource( 45 )]
 position = Vector2( 2448, 1048 )
@@ -1406,62 +1464,7 @@ move_speed = 0.0
 position = Vector2( 1792, 720 )
 move_speed = 0.0
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="9"]
-
-[node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
-motion_scale = Vector2( 0.25, 0.25 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background" index="0"]
-position = Vector2( 0, 600 )
-texture = ExtResource( 4 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 6000, 6000 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/Background/Sprite" index="0"]
-autoplay = "scroll"
-playback_speed = 0.03
-anims/scroll = SubResource( 2 )
-
-[node name="StarSpawner" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
-motion_scale = Vector2( 0.25, 0.25 )
-script = ExtResource( 3 )
-star = ExtResource( 5 )
-star_count = 15
-start = Vector2( -500, -100 )
-end = Vector2( 2056, 400 )
-
-[node name="StarSpawner2" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
-motion_scale = Vector2( 0.25, 0.25 )
-script = ExtResource( 3 )
-star = ExtResource( 5 )
-star_count = 15
-start = Vector2( 2056, -1000 )
-end = Vector2( 3500, 1000 )
-
-[node name="Background2" type="ParallaxLayer" parent="ParallaxBackground" index="3"]
-position = Vector2( 0, -28 )
-motion_scale = Vector2( 0.35, 0.35 )
-
-[node name="Sprite2" type="Sprite" parent="ParallaxBackground/Background2" index="0"]
-position = Vector2( 0, 192 )
-texture = ExtResource( 9 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 6000, 240 )
-
-[node name="Background3" type="ParallaxLayer" parent="ParallaxBackground" index="4"]
-position = Vector2( 0, -90 )
-motion_scale = Vector2( 0.4, 0.4 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background3" index="0"]
-position = Vector2( 512, 242 )
-texture = ExtResource( 10 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 6000, 240 )
-
-[node name="CanvasModulate" type="CanvasModulate" parent="." index="10"]
-color = Color( 0.6, 0.509804, 0.647059, 1 )
-
-[node name="Collectibles" parent="." index="11"]
+[node name="Collectibles" parent="." index="12"]
 position = Vector2( -32, -16 )
 
 [node name="BoneRow" parent="Collectibles" index="0" instance=ExtResource( 16 )]
@@ -1629,26 +1632,14 @@ position = Vector2( 3400, 544 )
 [node name="BoneRow28" parent="Collectibles" index="51" instance=ExtResource( 48 )]
 position = Vector2( 1376, 448 )
 
-[node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 44 )]
-position = Vector2( 2166, 971 )
-
-[node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource( 44 )]
-position = Vector2( 2872, -87 )
-
-[node name="Checkpoint3" parent="Checkpoints" index="2" instance=ExtResource( 44 )]
-position = Vector2( 4096, 841 )
-
-[node name="Checkpoint4" parent="Checkpoints" index="3" instance=ExtResource( 44 )]
-position = Vector2( 4034, 394 )
-
 [node name="PlayerSpawn" parent="." index="13"]
-position = Vector2( -8, 320 )
+position = Vector2( -19, 330 )
 
 [node name="Goal" parent="." index="14"]
 position = Vector2( 5008, -800 )
 
 [node name="MusicPlayer" parent="." index="15"]
-autoplay = false
+volume_db = -24.0
 
 [editable path="Obstacles/MovingPlatform3"]
 [editable path="Obstacles/MovingPlatform1"]

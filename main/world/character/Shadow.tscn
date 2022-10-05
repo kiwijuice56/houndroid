@@ -6,7 +6,7 @@
 [node name="Shadow" type="Light2D"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, 2 )
-color = Color( 1, 1, 1, 0.803922 )
+color = Color( 0, 0, 0, 0.803922 )
 mode = 2
 script = ExtResource( 2 )
 shadow_owner_path = NodePath("../..")
