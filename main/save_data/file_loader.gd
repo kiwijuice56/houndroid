@@ -10,7 +10,7 @@ func save_file(id: int) -> void:
 	new_file.version = ProjectSettings.get("application/config/version")
 	
 	for node in get_tree().get_nodes_in_group("Save"):
-		node.save(new_file.data)
+		node.save_file(new_file.data)
 	
 	ResourceSaver.save(save_file_path + "save_file%03d.tres" % (id), new_file)
 
@@ -29,4 +29,4 @@ func load_file(id: int) -> void:
 			break
 	
 	for node in get_tree().get_nodes_in_group("Save"):
-		node.load(save_file_resource.data)
+		node.load_file(save_file_resource.data)

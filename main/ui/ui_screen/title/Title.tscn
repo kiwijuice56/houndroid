@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://main/ui/theme/button_empty_unpressed.png" type="Texture" id=1]
 [ext_resource path="res://main/ui/ui_screen/title/buttons/exit_button_unpressed.png" type="Texture" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=7]
 [ext_resource path="res://main/ui/theme/ButtonSounds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/ui/theme/sound_button.gd" type="Script" id=9]
+[ext_resource path="res://main/ui/ui_screen/title/yeeercpt2.png" type="Texture" id=10]
+[ext_resource path="res://main/ui/theme/font/BMSPA___.TTF" type="DynamicFontData" id=11]
+[ext_resource path="res://main/shader/shimmer_ui.tres" type="Shader" id=12]
 [ext_resource path="res://main/ui/ui_screen/title/title.png" type="Texture" id=15]
 
 [sub_resource type="Shader" id=7]
@@ -40,6 +43,80 @@ region_rect = Rect2( 0, 0, 30, 31 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 30, 31 )
 
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 12 )
+shader_param/shimmer_pos = 0.0
+shader_param/shimmer_width = 0.125
+shader_param/shimmer_magnitude = 1.0
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/shimmer_pos")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "flash"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/shimmer_pos")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.5, 2.5 ]
+}
+
+[sub_resource type="DynamicFont" id=10]
+size = 9
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "flash"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,6 +139,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 122, 127 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 10 )
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -75,26 +157,14 @@ __meta__ = {
 }
 
 [node name="MainButtons" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 418.0
+margin_left = 450.0
 margin_top = 198.0
-margin_right = 482.0
+margin_right = 450.0
 margin_bottom = 282.0
 rect_min_size = Vector2( 0, 84 )
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="Start" type="Button" parent="MarginContainer/MainButtons"]
-margin_top = 52.0
-margin_right = 64.0
-margin_bottom = 84.0
-rect_min_size = Vector2( 64, 32 )
-focus_mode = 0
-size_flags_vertical = 10
-text = "Start"
-script = ExtResource( 9 )
-
-[node name="ButtonSounds" parent="MarginContainer/MainButtons/Start" instance=ExtResource( 8 )]
 
 [node name="CornerButtons" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 896.0
@@ -142,17 +212,39 @@ script = ExtResource( 9 )
 [node name="ButtonSounds" parent="MarginContainer/CornerButtons/Quit" instance=ExtResource( 8 )]
 
 [node name="Title" type="TextureRect" parent="."]
+material = SubResource( 13 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -136.0
-margin_top = -32.0
-margin_right = 136.0
-margin_bottom = 32.0
+margin_left = -115.0
+margin_top = -18.0
+margin_right = 157.0
+margin_bottom = 46.0
 mouse_filter = 2
 size_flags_horizontal = 4
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title"]
+autoplay = "flash"
+anims/RESET = SubResource( 14 )
+anims/flash = SubResource( 15 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 191.0
+margin_top = 142.0
+margin_right = 296.0
+margin_bottom = 151.0
+custom_fonts/font = SubResource( 10 )
+text = "Press to Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+autoplay = "flash"
+anims/RESET = SubResource( 11 )
+anims/flash = SubResource( 12 )

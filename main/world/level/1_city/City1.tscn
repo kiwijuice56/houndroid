@@ -1633,7 +1633,7 @@ position = Vector2( 3400, 544 )
 position = Vector2( 1376, 448 )
 
 [node name="PlayerSpawn" parent="." index="13"]
-position = Vector2( -19, 330 )
+position = Vector2( 4416, -760 )
 
 [node name="Goal" parent="." index="14"]
 position = Vector2( 5008, -800 )

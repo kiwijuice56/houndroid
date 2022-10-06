@@ -1,0 +1,15 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float shimmer_pos;
+uniform float shimmer_width;
+uniform float shimmer_magnitude;
+
+void fragment() {
+	if (abs(UV.x + UV.y - shimmer_pos) < shimmer_width) 
+		COLOR = texture(TEXTURE, UV) + vec4(shimmer_magnitude, shimmer_magnitude, shimmer_magnitude, 0.0);
+	else
+		COLOR = texture(TEXTURE, UV);
+}"

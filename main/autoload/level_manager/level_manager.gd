@@ -20,6 +20,9 @@ func start_level(index := -1) -> void:
 	GlobalData.world.unlock_player()
 
 func end_level() -> void:
+	GlobalData.store_user_properties()
+	GlobalData.file_loader.save_file(0)
+	
 	# Transition from the level select into the full finish sequence
 	GlobalData.ui_manager.transition("GameOverlay", "LevelFinish")
 	yield(GlobalData.ui_manager, "transition_complete")
@@ -34,11 +37,14 @@ func reset_level() -> void:
 	# Block out the screen and reset the level
 	Transition.trans_in()
 	yield(Transition, "finished")
-	GlobalData.world.load_level(-1)
+	
+	GlobalData.world.delete_level_instance()
 	
 	# Transition from the gameplay UI into the preliminary starting sequence
 	GlobalData.ui_manager.transition("GameOverlay", "LevelStart")
 	yield(GlobalData.ui_manager, "transition_complete")
+	
+	GlobalData.world.load_level(-1)
 	
 	# Play out the full introduction sequence
 	GlobalData.ui_manager.get_screen("LevelStart").start_introduction()

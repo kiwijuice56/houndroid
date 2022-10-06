@@ -16,6 +16,8 @@ var current_level: Level
 func load_level(index := -1) -> void:
 	# Spawn the level indicated or the last level played if none is specified
 	if index != -1:
+		GlobalData.level_coin_count = 0
+		GlobalData.score = 0
 		current_level_scene = levels[index]
 	
 	# Delete the current instance first
@@ -29,8 +31,8 @@ func load_level(index := -1) -> void:
 	
 	# Reset level and node state
 	GlobalInstanceManager.clear_nodes()
-	GlobalData.coin_count = 0
-	GlobalData.score = 0
+	GlobalData.coin_count = GlobalData.level_coin_count
+	GlobalData.score = GlobalData.level_score
 	
 	# Create a new player scene and position it in the level according to the checkpoint collection status
 	if is_instance_valid(player):
@@ -53,9 +55,12 @@ func load_level(index := -1) -> void:
 func unload_level() -> void:
 	# Reset checkpoint only after the level is complete, as resetting it earlier would delete player progress
 	GlobalData.checkpoint_index = -1
+	delete_level_instance()
+	emit_signal("level_unloaded")
+
+func delete_level_instance() -> void:
 	current_level.queue_free()
 	player.queue_free()
-	emit_signal("level_unloaded")
 
 func lock_player() -> void:
 	if player != null:

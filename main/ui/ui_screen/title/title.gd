@@ -25,10 +25,13 @@ func _ready() -> void:
 	
 	enable_input()
 
-func _on_button_pressed(name: String) -> void:
-	match name:
-		"Start":
-			ui_manager.transition("Title", "LevelSelect")
+func _input(event) -> void:
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		ui_manager.transition("Title", "LevelSelect")
+		disable_input()
+
+func _on_button_pressed(button_name: String) -> void:
+	pass
 
 func transition_to(to: String) -> void:
 	match to:
@@ -56,6 +59,7 @@ func transition_from(from: String) -> void:
 
 func disable_input() -> void:
 	.disable_input()
+	set_process_input(false)
 	for button in button_container.get_children() + corner_button_container.get_children():
 		if not button is Button:
 			continue
@@ -63,6 +67,7 @@ func disable_input() -> void:
 
 func enable_input() -> void:
 	.enable_input()
+	set_process_input(true)
 	for button in button_container.get_children() + corner_button_container.get_children():
 		if not button is Button:
 			continue
