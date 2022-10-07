@@ -56,13 +56,13 @@ func transition_from(from: String) -> void:
 func disable_input() -> void:
 	.disable_input()
 	menu_button.disabled = true
-	music_slider.editable = true
-	sound_effect_slider.editable = true
+	music_slider.editable = false
+	sound_effect_slider.editable = false
 	button_switch.disabled = true
 
 func enable_input() -> void:
 	.enable_input()
 	menu_button.disabled = false
-	music_slider.editable = false
-	sound_effect_slider.editable = false
+	music_slider.editable = true
+	sound_effect_slider.editable = true
 	button_switch.disabled = false

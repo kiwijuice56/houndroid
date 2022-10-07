@@ -72,7 +72,7 @@ func _on_level_selected() -> void:
 	LevelManager.start_level(index)
 
 func _input(event) -> void:
-	if event is InputEventScreenDrag:
+	if event is InputEventScreenDrag or event is InputEventMouseMotion and Input.is_mouse_button_pressed(1):
 		drag_velocity = event.speed
 
 # Updates the screen position from scrolling the screen or pressing on levels
@@ -92,10 +92,17 @@ func transition_to(to: String) -> void:
 	match to:
 		"Title":
 			Transition.trans_in()
+			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -80, 0.5)
+			$Tween.start()
+			
 			yield(Transition, "finished")
 			visible = false
+			
 		"LevelStart":
 			Transition.trans_in()
+			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -80, 0.5)
+			$Tween.start()
+			
 			yield(Transition, "finished")
 			visible = false
 		"PlayerCustomize":
@@ -103,6 +110,9 @@ func transition_to(to: String) -> void:
 			yield(Transition, "finished")
 			visible = false
 	call_deferred("emit_signal", "transition_complete")
+	if $Tween.is_active():
+		yield($Tween, "tween_completed")
+		$MusicPlayer.playing = false
 
 func transition_from(from: String) -> void:
 	match from:
@@ -111,6 +121,10 @@ func transition_from(from: String) -> void:
 			levels.rect_position = Vector2()
 			drag_velocity = Vector2()
 			
+			$MusicPlayer.playing = true
+			$Tween.interpolate_property($MusicPlayer, "volume_db", -80, -24 + GlobalData.music_volume, 0.5)
+			$Tween.start()
+			
 			Transition.trans_out()
 			yield(Transition, "finished")
 		"LevelFinish":
@@ -118,6 +132,10 @@ func transition_from(from: String) -> void:
 			visible = true
 			levels.rect_position = Vector2()
 			drag_velocity = Vector2()
+			
+			$MusicPlayer.playing = true
+			$Tween.interpolate_property($MusicPlayer, "volume_db", -80, -24 + GlobalData.music_volume, 0.5)
+			$Tween.start()
 			
 			Transition.trans_out()
 			yield(Transition, "finished")

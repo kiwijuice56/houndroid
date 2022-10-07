@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/world/level/1_city/City2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/player/Player.tscn" type="PackedScene" id=2]
@@ -12,15 +12,11 @@
 [ext_resource path="res://main/world/level/1_city/City1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://main/ui/ui_screen/debug/Debug.tscn" type="PackedScene" id=11]
 [ext_resource path="res://main/world/level/1_city/City3.tscn" type="PackedScene" id=12]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon1.png" type="Texture" id=13]
+[ext_resource path="res://main/ui/ui_screen/player_customize/PlayerCustomize.tscn" type="PackedScene" id=13]
 [ext_resource path="res://main/ui/ui_screen_manager/ui_screen_manager.gd" type="Script" id=14]
-[ext_resource path="res://main/ui/ui_screen/player_customize/player_customize_screen.gd" type="Script" id=15]
 [ext_resource path="res://main/save_data/file_loader.gd" type="Script" id=16]
-[ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=17]
 [ext_resource path="res://main/world/world.gd" type="Script" id=18]
-[ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=19]
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=20]
-[ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=21]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
@@ -44,11 +40,6 @@ __meta__ = {
 [node name="GameOverlayLayer" type="CanvasLayer" parent="UIScreenManager"]
 
 [node name="GameOverlay" parent="UIScreenManager/GameOverlayLayer" instance=ExtResource( 4 )]
-visible = false
-
-[node name="PauseMenuLayer" type="CanvasLayer" parent="UIScreenManager"]
-
-[node name="PauseMenu" parent="UIScreenManager/PauseMenuLayer" instance=ExtResource( 3 )]
 visible = false
 
 [node name="TitleLayer" type="CanvasLayer" parent="UIScreenManager"]
@@ -75,99 +66,13 @@ transition_time = 0.9
 
 [node name="PlayerCustomizeLayer" type="CanvasLayer" parent="UIScreenManager"]
 
-[node name="PlayerCustomize" type="Control" parent="UIScreenManager/PlayerCustomizeLayer"]
+[node name="PlayerCustomize" parent="UIScreenManager/PlayerCustomizeLayer" instance=ExtResource( 13 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PanelContainer" type="PanelContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PauseMenuLayer" type="CanvasLayer" parent="UIScreenManager"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 893.0
-margin_bottom = 473.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer"]
-margin_right = 886.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-
-[node name="Control" type="Control" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer"]
-margin_top = 36.0
-margin_right = 886.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 0, 80 )
-
-[node name="ArmMR" type="Sprite" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
-texture = ExtResource( 21 )
-hframes = 27
-frame = 6
-
-[node name="Body" type="Sprite" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
-texture = ExtResource( 19 )
-hframes = 27
-frame = 6
-
-[node name="ArmML" type="Sprite" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
-texture = ExtResource( 17 )
-hframes = 27
-frame = 6
-
-[node name="ArmMR2" type="AnimationPlayer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-
-[node name="ArmML2" type="AnimationPlayer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-
-[node name="Body2" type="AnimationPlayer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/Control"]
-
-[node name="TabContainer" type="TabContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer"]
-margin_top = 120.0
-margin_right = 886.0
-margin_bottom = 466.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Gadgets" type="ScrollContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/TabContainer/Gadgets"]
-margin_right = 64.0
-margin_bottom = 64.0
-
-[node name="Button" type="Button" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-icon = ExtResource( 13 )
-
-[node name="Powers" type="ScrollContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/TabContainer"]
+[node name="PauseMenu" parent="UIScreenManager/PauseMenuLayer" instance=ExtResource( 3 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIScreenManager/PlayerCustomizeLayer/PlayerCustomize/PanelContainer/VBoxContainer/TabContainer/Powers"]
 
 [node name="DebugLayer" type="CanvasLayer" parent="UIScreenManager"]
 layer = 10

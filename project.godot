@@ -92,12 +92,12 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "DamageTileMap",
 "language": "GDScript",
-"path": "res://main/world/level/level_tools/damage_tile.gd"
+"path": "res://main/world/level/level_tools/tiles/damage_tile_map.gd"
 }, {
 "base": "DamageTileMap",
 "class": "DeathFallTileMap",
 "language": "GDScript",
-"path": "res://main/world/level/level_tools/death_fall_tile_map.gd"
+"path": "res://main/world/level/level_tools/tiles/death_fall_tile_map.gd"
 }, {
 "base": "UIScreen",
 "class": "DebugScreen",
@@ -172,7 +172,7 @@ _global_script_classes=[ {
 "base": "Label",
 "class": "FpsLabel",
 "language": "GDScript",
-"path": "res://main/ui/ui_screen/game_overlay/fps_label.gd"
+"path": "res://main/ui/ui_screen/debug/fps_label.gd"
 }, {
 "base": "UIScreen",
 "class": "GameMenu",
@@ -322,7 +322,7 @@ _global_script_classes=[ {
 "base": "Label",
 "class": "ScoreLabel",
 "language": "GDScript",
-"path": "res://main/ui/ui_screen/game_overlay/score_label.gd"
+"path": "res://main/ui/ui_screen/game_overlay/score_label/score_label.gd"
 }, {
 "base": "AttractCollectible",
 "class": "ScoreOrb",
@@ -347,7 +347,7 @@ _global_script_classes=[ {
 "base": "Button",
 "class": "SoundButton",
 "language": "GDScript",
-"path": "res://main/ui/theme/sound_button.gd"
+"path": "res://main/ui/theme/sounds/sound_button.gd"
 }, {
 "base": "Control",
 "class": "SpritesheetAnimImportDock",
@@ -604,10 +604,6 @@ swap_weapon={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":88,"unicode":0,"echo":false,"script":null)
  ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 

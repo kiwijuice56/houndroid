@@ -2,10 +2,11 @@ extends Node
 
 signal coin_count_updated(coin_count)
 signal score_updated(score)
+signal music_volume_updated(volume)
 
 # Option variables
 var sound_effect_volume := 0.0
-var music_volume := 0.0
+var music_volume := 0.0 setget set_music_volume
 
 # Reference variables
 onready var world: GameWorld = get_tree().get_root().get_node("Main/World")
@@ -27,9 +28,14 @@ var checkpoint_index := -1
 # Permanent user data
 var user_coin_count := 0
 var user_score_orbs := 0
+var user_levels_complete := []
 
 func _ready() -> void:
 	add_to_group("Save")
+
+func set_music_volume(new_volume: float) -> void:
+	music_volume = new_volume
+	emit_signal("music_volume_updated", music_volume)
 
 func set_coin_count(new_count: int) -> void:
 	coin_count = new_count
@@ -51,7 +57,9 @@ func store_user_properties() -> void:
 func save_file(data: Dictionary) -> void:
 	data["coins"] = user_coin_count
 	data["score_orbs"] = user_score_orbs
+	data["levels_complete"] = user_levels_complete
 
 func load_file(data: Dictionary) -> void:
 	user_coin_count = data["coins"]
 	user_score_orbs = data["score_orbs"]
+	user_levels_complete = data["levels_complete"]

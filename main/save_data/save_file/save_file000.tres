@@ -6,6 +6,7 @@
 script = ExtResource( 1 )
 version = "v1.0a"
 data = {
-"coins": 6,
+"coins": 0,
+"levels_complete": [  ],
 "score_orbs": 0
 }

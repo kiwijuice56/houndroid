@@ -10,33 +10,33 @@
 [ext_resource path="res://main/world/obstacle/platform/Platform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/world/level/1_city/sprites/background2.png" type="Texture" id=9]
 [ext_resource path="res://main/world/level/1_city/sprites/background3.png" type="Texture" id=10]
-[ext_resource path="res://main/world/decoration/trash3.png" type="Texture" id=11]
-[ext_resource path="res://main/world/decoration/trash1.png" type="Texture" id=12]
-[ext_resource path="res://main/world/decoration/broken_pole1.png" type="Texture" id=13]
+[ext_resource path="res://main/world/decoration/sprites/trash3.png" type="Texture" id=11]
+[ext_resource path="res://main/world/decoration/sprites/trash1.png" type="Texture" id=12]
+[ext_resource path="res://main/world/decoration/sprites/broken_pole1.png" type="Texture" id=13]
 [ext_resource path="res://main/world/obstacle/gravity_weakener/GravityWeakener.tscn" type="PackedScene" id=14]
 [ext_resource path="res://main/world/obstacle/platform/moving_platform/MovingPlatform.tscn" type="PackedScene" id=15]
-[ext_resource path="res://main/world/collectible/bone/BoneRow.tscn" type="PackedScene" id=16]
-[ext_resource path="res://main/world/collectible/bone/BoneCol.tscn" type="PackedScene" id=17]
+[ext_resource path="res://main/world/collectible/bone/prefabs/BoneRow.tscn" type="PackedScene" id=16]
+[ext_resource path="res://main/world/collectible/bone/prefabs/BoneCol.tscn" type="PackedScene" id=17]
 [ext_resource path="res://main/world/character/enemy/hammer_robot/HammerRobot.tscn" type="PackedScene" id=18]
 [ext_resource path="res://main/world/obstacle/platform/falling_platform/FallingPlatform.tscn" type="PackedScene" id=19]
 [ext_resource path="res://main/world/decoration/neon_sign/Down.tscn" type="PackedScene" id=20]
-[ext_resource path="res://main/world/decoration/grafitti1.png" type="Texture" id=21]
-[ext_resource path="res://main/world/decoration/grafitti3.png" type="Texture" id=22]
-[ext_resource path="res://main/world/decoration/grafitti4.png" type="Texture" id=23]
-[ext_resource path="res://main/world/decoration/grafitti2.png" type="Texture" id=24]
-[ext_resource path="res://main/world/decoration/grafitti5.png" type="Texture" id=25]
-[ext_resource path="res://main/world/decoration/grafitti7.png" type="Texture" id=26]
-[ext_resource path="res://main/world/decoration/grafitti9.png" type="Texture" id=27]
-[ext_resource path="res://main/world/decoration/grafitti8.png" type="Texture" id=28]
-[ext_resource path="res://main/world/decoration/grafitti10.png" type="Texture" id=29]
-[ext_resource path="res://main/world/decoration/grafitti6.png" type="Texture" id=30]
+[ext_resource path="res://main/world/decoration/sprites/grafitti1.png" type="Texture" id=21]
+[ext_resource path="res://main/world/decoration/sprites/grafitti3.png" type="Texture" id=22]
+[ext_resource path="res://main/world/decoration/sprites/grafitti4.png" type="Texture" id=23]
+[ext_resource path="res://main/world/decoration/sprites/grafitti2.png" type="Texture" id=24]
+[ext_resource path="res://main/world/decoration/sprites/grafitti5.png" type="Texture" id=25]
+[ext_resource path="res://main/world/decoration/sprites/grafitti7.png" type="Texture" id=26]
+[ext_resource path="res://main/world/decoration/sprites/grafitti9.png" type="Texture" id=27]
+[ext_resource path="res://main/world/decoration/sprites/grafitti8.png" type="Texture" id=28]
+[ext_resource path="res://main/world/decoration/sprites/grafitti10.png" type="Texture" id=29]
+[ext_resource path="res://main/world/decoration/sprites/grafitti6.png" type="Texture" id=30]
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=31]
 [ext_resource path="res://main/world/decoration/neon_sign/Up.tscn" type="PackedScene" id=32]
 [ext_resource path="res://main/world/level/1_city/city_window_lighter.gd" type="Script" id=33]
-[ext_resource path="res://main/world/decoration/trash2.png" type="Texture" id=34]
-[ext_resource path="res://main/world/decoration/tires3.png" type="Texture" id=35]
-[ext_resource path="res://main/world/decoration/tires2.png" type="Texture" id=36]
-[ext_resource path="res://main/world/decoration/tires1.png" type="Texture" id=37]
+[ext_resource path="res://main/world/decoration/sprites/trash2.png" type="Texture" id=34]
+[ext_resource path="res://main/world/decoration/sprites/tires3.png" type="Texture" id=35]
+[ext_resource path="res://main/world/decoration/sprites/tires2.png" type="Texture" id=36]
+[ext_resource path="res://main/world/decoration/sprites/tires1.png" type="Texture" id=37]
 [ext_resource path="res://main/world/decoration/animal/bird/Bird.tscn" type="PackedScene" id=38]
 [ext_resource path="res://main/world/decoration/shadows/shadow4.png" type="Texture" id=39]
 [ext_resource path="res://main/world/decoration/shadows/shadow1.png" type="Texture" id=40]
@@ -47,10 +47,10 @@
 [ext_resource path="res://main/world/character/enemy/mole_mine/MoleMine.tscn" type="PackedScene" id=45]
 [ext_resource path="res://main/world/decoration/neon_sign/Left.tscn" type="PackedScene" id=46]
 [ext_resource path="res://main/world/decoration/neon_sign/Right.tscn" type="PackedScene" id=47]
-[ext_resource path="res://main/world/collectible/bone/BoneRow2.tscn" type="PackedScene" id=48]
-[ext_resource path="res://main/world/decoration/sign2.png" type="Texture" id=49]
-[ext_resource path="res://main/world/decoration/sign1.png" type="Texture" id=50]
-[ext_resource path="res://main/world/decoration/sign3.png" type="Texture" id=51]
+[ext_resource path="res://main/world/collectible/bone/prefabs/BoneRow2.tscn" type="PackedScene" id=48]
+[ext_resource path="res://main/world/decoration/sprites/sign2.png" type="Texture" id=49]
+[ext_resource path="res://main/world/decoration/sprites/sign1.png" type="Texture" id=50]
+[ext_resource path="res://main/world/decoration/sprites/sign3.png" type="Texture" id=51]
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -1225,7 +1225,7 @@ color = Color( 0.564706, 0.462745, 0.65098, 1 )
 position = Vector2( 679, 249 )
 
 [node name="SnailySoul3" parent="Enemies" index="1" instance=ExtResource( 6 )]
-position = Vector2( 2872, -80 )
+position = Vector2( 2941, 369 )
 
 [node name="SnailySoul4" parent="Enemies" index="2" instance=ExtResource( 6 )]
 position = Vector2( 1688, 592 )
@@ -1356,25 +1356,22 @@ position = Vector2( 4696, -16 )
 [node name="SnailySoul24" parent="Enemies" index="44" instance=ExtResource( 6 )]
 position = Vector2( 4072, 392 )
 
-[node name="SnailySoul25" parent="Enemies" index="45" instance=ExtResource( 6 )]
-position = Vector2( 3984, 840 )
-
-[node name="SnailySoul26" parent="Enemies" index="46" instance=ExtResource( 6 )]
+[node name="SnailySoul26" parent="Enemies" index="45" instance=ExtResource( 6 )]
 position = Vector2( 4352, 840 )
 
-[node name="SnailySoul27" parent="Enemies" index="47" instance=ExtResource( 6 )]
+[node name="SnailySoul27" parent="Enemies" index="46" instance=ExtResource( 6 )]
 position = Vector2( 4416, 840 )
 
-[node name="FlyingFoe23" parent="Enemies" index="48" instance=ExtResource( 7 )]
+[node name="FlyingFoe23" parent="Enemies" index="47" instance=ExtResource( 7 )]
 position = Vector2( 4528, 72 )
 
-[node name="FlyingFoe24" parent="Enemies" index="49" instance=ExtResource( 7 )]
+[node name="FlyingFoe24" parent="Enemies" index="48" instance=ExtResource( 7 )]
 position = Vector2( 4376, 400 )
 
-[node name="FlyingFoe25" parent="Enemies" index="50" instance=ExtResource( 7 )]
+[node name="FlyingFoe25" parent="Enemies" index="49" instance=ExtResource( 7 )]
 position = Vector2( 2200, 776 )
 
-[node name="MiniMole" type="Node2D" parent="Enemies" index="51"]
+[node name="MiniMole" type="Node2D" parent="Enemies" index="50"]
 
 [node name="MoleMine" parent="Enemies/MiniMole" index="0" instance=ExtResource( 45 )]
 position = Vector2( 2448, 1048 )
@@ -1633,13 +1630,13 @@ position = Vector2( 3400, 544 )
 position = Vector2( 1376, 448 )
 
 [node name="PlayerSpawn" parent="." index="13"]
-position = Vector2( 4416, -760 )
+position = Vector2( -49, 332 )
 
 [node name="Goal" parent="." index="14"]
 position = Vector2( 5008, -800 )
 
 [node name="MusicPlayer" parent="." index="15"]
-volume_db = -24.0
+volume_db = -27.0
 
 [editable path="Obstacles/MovingPlatform3"]
 [editable path="Obstacles/MovingPlatform1"]

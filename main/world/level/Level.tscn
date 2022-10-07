@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://main/world/level/level_tools/death_tile.png" type="Texture" id=1]
+[ext_resource path="res://main/world/level/level_tools/tiles/death_tile.png" type="Texture" id=1]
 [ext_resource path="res://main/world/level/level.gd" type="Script" id=2]
-[ext_resource path="res://main/world/level/level_tools/death_fall_tile_map.gd" type="Script" id=3]
-[ext_resource path="res://main/world/level/level_tools/damage_tile.gd" type="Script" id=4]
-[ext_resource path="res://main/world/level/level_tools/spike_ball.png" type="Texture" id=5]
+[ext_resource path="res://main/world/level/level_tools/tiles/death_fall_tile_map.gd" type="Script" id=3]
+[ext_resource path="res://main/world/level/level_tools/tiles/damage_tile_map.gd" type="Script" id=4]
+[ext_resource path="res://main/world/level/level_tools/tiles/spike_ball.png" type="Texture" id=5]
 [ext_resource path="res://main/world/level/level_tools/goal/Goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://main/world/level/1_city/music1.mp3" type="AudioStream" id=7]
 
@@ -38,13 +38,13 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygon = PoolVector2Array( 23.5124, 15.5717, 22.3011, 20.0131, 15.8409, 23.5124, 9.51525, 20.6861, 8, 16, 9.64983, 10.4574, 16, 8, 22.1665, 10.3228 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+points = PoolVector2Array( 4, 3, 28, 3, 28, 29, 4, 29 )
 
 [sub_resource type="TileSet" id=4]
 0/name = "spike_ball.png 0"
 0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
+0/modulate = Color( 1.25, 1.25, 1.25, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
@@ -124,6 +124,7 @@ script = ExtResource( 4 )
 [node name="Goal" parent="." instance=ExtResource( 6 )]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 7 )
 volume_db = -12.0
 autoplay = true

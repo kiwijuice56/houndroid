@@ -12,10 +12,10 @@
 [ext_resource path="res://main/world/obstacle/platform/Platform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://main/world/obstacle/gravity_weakener/GravityWeakener.tscn" type="PackedScene" id=11]
 [ext_resource path="res://main/world/character/enemy/hammer_robot/HammerRobot.tscn" type="PackedScene" id=12]
-[ext_resource path="res://main/world/decoration/trash1.png" type="Texture" id=13]
-[ext_resource path="res://main/world/decoration/trash2.png" type="Texture" id=14]
-[ext_resource path="res://main/world/decoration/trash3.png" type="Texture" id=15]
-[ext_resource path="res://main/world/decoration/broken_pole1.png" type="Texture" id=16]
+[ext_resource path="res://main/world/decoration/sprites/trash1.png" type="Texture" id=13]
+[ext_resource path="res://main/world/decoration/sprites/trash2.png" type="Texture" id=14]
+[ext_resource path="res://main/world/decoration/sprites/trash3.png" type="Texture" id=15]
+[ext_resource path="res://main/world/decoration/sprites/broken_pole1.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 749, 100 )

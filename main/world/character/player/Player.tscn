@@ -27,7 +27,7 @@
 [ext_resource path="res://main/world/projectile/bullet/beam_bullet/BeamBullet.tscn" type="PackedScene" id=25]
 [ext_resource path="res://main/world/character/player/sounds/player_death.wav" type="AudioStream" id=26]
 [ext_resource path="res://main/world/character/player/sprites/death_effect/DeathEffect.tscn" type="PackedScene" id=27]
-[ext_resource path="res://main/world/character/player/sprites/light.png" type="Texture" id=28]
+[ext_resource path="res://main/shader/light.png" type="Texture" id=28]
 [ext_resource path="res://main/world/projectile/bullet/boomerang_bullet/BoomerangBullet.tscn" type="PackedScene" id=29]
 [ext_resource path="res://main/world/character/player/sprites/shoot_light.png" type="Texture" id=30]
 

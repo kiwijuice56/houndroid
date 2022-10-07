@@ -23,6 +23,8 @@ func _ready() -> void:
 			continue
 		button.connect("pressed", self, "_on_button_pressed", [button.name])
 	
+	$MusicPlayer.volume_db = -24 + GlobalData.music_volume
+	
 	enable_input()
 
 func _input(event) -> void:
@@ -41,10 +43,20 @@ func transition_to(to: String) -> void:
 			remove_child(decoration)
 			decoration.queue_free()
 			visible = false
+			
+			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -80, 0.5)
+			$Tween.start()
+			
 		"GameOverlay":
 			GlobalData.world.load_level()
 			visible = false
+			
+			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -80, 0.5)
+			$Tween.start()
 	call_deferred("emit_signal", "transition_complete")
+	if $Tween.is_active():
+		yield($Tween, "tween_completed")
+		$MusicPlayer.playing = false
 
 func transition_from(from: String) -> void:
 	match from:
@@ -54,6 +66,9 @@ func transition_from(from: String) -> void:
 			add_child(decoration)
 			move_child(decoration, 0)
 			Transition.trans_out()
+			$MusicPlayer.playing = true
+			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -24 + GlobalData.music_volume, 0.5)
+			$Tween.start()
 			yield(Transition, "finished")
 	call_deferred("emit_signal", "transition_complete")
 

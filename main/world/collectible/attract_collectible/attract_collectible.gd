@@ -16,7 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 	player = body
 
 func _physics_process(delta) -> void:
-	if not player:
+	if not is_instance_valid(player):
 		if abs(dir.x) > settle_speed.x:
 			dir.x += -sign(dir.x) * deaccel_x *delta
 		if dir.y < settle_speed.y:

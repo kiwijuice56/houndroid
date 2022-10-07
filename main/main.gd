@@ -10,4 +10,5 @@ func _ready() -> void:
 	randomize()
 	if quick_start:
 		LevelManager.reset_level()
+	GlobalData.file_loader.save_file(0)
 	GlobalData.file_loader.load_file(0)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/button_release.wav-b3cd1dc480fc3b92611bfa91e378ab27.sample"
+
+[deps]
+
+source_file="res://main/ui/theme/sounds/button_release.wav"
+dest_files=[ "res://.import/button_release.wav-b3cd1dc480fc3b92611bfa91e378ab27.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

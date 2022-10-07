@@ -14,19 +14,26 @@ export(Array, String) var random_lines := []
 var label: Label
 var panel: PanelContainer
 
+
 signal introduction_finished
+
 
 func _ready() -> void:
 	label = get_node(label_path)
 	panel = get_node(panel_path)
+	panel.self_modulate.a = 0
 	disable_input()
 
 func transition_from(from: String) -> void:
 	match from:
 		# LevelSelect, GameOverlay
 		_:
+			$Light.visible = true
+			$MiniLight.visible = true
+			
 			$Tween.interpolate_property(panel, "self_modulate:a", 0.0, 1.0, 0.5)
 			$Tween.start()
+			
 			
 			label.self_modulate.a = 1.0
 			label.text = ""
@@ -46,17 +53,17 @@ func transition_from(from: String) -> void:
 			yield(add_word(random_lines[0].substr(0, random_lines[0].find_last(".") + 1)), "completed")
 			$Timer.start(0.15)
 			yield($Timer, "timeout")
-			yield(add_word(random_lines[0].substr(random_lines[0].find_last(".")) + "\n"), "completed")
+			yield(add_word(random_lines[0].substr(random_lines[0].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[1].substr(0, random_lines[1].find_last(".") + 1)), "completed")
 			$Timer.start(0.15)
 			yield($Timer, "timeout")
-			yield(add_word(random_lines[1].substr(random_lines[1].find_last(".")) + "\n"), "completed")
+			yield(add_word(random_lines[1].substr(random_lines[1].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[2].substr(0, random_lines[2].find_last(".") + 1)), "completed")
 			$Timer.start(0.15)
 			yield($Timer, "timeout")
-			yield(add_word(random_lines[2].substr(random_lines[2].find_last(".")) + "\n"), "completed")
+			yield(add_word(random_lines[2].substr(random_lines[2].find_last(".") + 1) + "\n"), "completed")
 			
 			
 			yield(add_word("\n\nGO FOR IT!!!"), "completed")
@@ -65,6 +72,8 @@ func transition_from(from: String) -> void:
 			
 			$AudioStreamPlayer.playing = false
 			
+			$Light.visible = false
+			$MiniLight.visible = false
 			$Tween.interpolate_property(panel, "self_modulate:a", 1.0, 0.0, 0.5)
 			$Tween.interpolate_property(label, "self_modulate:a", 1.0, 0.0, 1.5)
 			$Tween.start()

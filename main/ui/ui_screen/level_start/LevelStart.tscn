@@ -1,22 +1,34 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/level_start/level_start_screen.gd" type="Script" id=1]
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=2]
-[ext_resource path="res://main/ui/ui_screen/level_start/outer_panel.png" type="Texture" id=3]
+[ext_resource path="res://main/ui/ui_screen/level_start/sprites/outer_panel.png" type="Texture" id=3]
 [ext_resource path="res://main/ui/theme/font/BMSPA___.TTF" type="DynamicFontData" id=4]
-[ext_resource path="res://main/ui/ui_screen/level_start/keyboard.wav" type="AudioStream" id=5]
+[ext_resource path="res://main/ui/ui_screen/level_start/sounds/keyboard.wav" type="AudioStream" id=5]
+[ext_resource path="res://main/shader/light.png" type="Texture" id=6]
+[ext_resource path="res://main/shader/ui_shader.gdshader" type="Shader" id=7]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 43, 43 )
-margin_left = 12.0
-margin_right = 24.0
+margin_left = 15.0
+margin_right = 27.0
 margin_top = 8.0
 margin_bottom = 12.0
 
 [sub_resource type="DynamicFont" id=2]
 size = 9
 font_data = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/color = Plane( 1, 1, 1.25, 1 )
+shader_param/light_texture = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 7 )
+shader_param/color = Plane( 1, 0.2, 0.2, 1 )
+shader_param/light_texture = ExtResource( 6 )
 
 [node name="LevelStart" type="Control"]
 anchor_right = 1.0
@@ -35,20 +47,19 @@ random_lines = [ ">> CUTENESS ... AT MAXIMUM!", ">> BEAMS ... DEPLOYED!", ">> DO
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 64
-custom_constants/margin_top = 8
-custom_constants/margin_left = 64
-custom_constants/margin_bottom = 8
+custom_constants/margin_right = 90
+custom_constants/margin_top = 12
+custom_constants/margin_left = 90
+custom_constants/margin_bottom = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 64.0
-margin_top = 8.0
-margin_right = 836.0
-margin_bottom = 472.0
+margin_left = 90.0
+margin_top = 12.0
+margin_right = 810.0
+margin_bottom = 468.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
@@ -57,23 +68,25 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
-margin_left = 12.0
+margin_left = 15.0
 margin_top = 8.0
-margin_right = 748.0
-margin_bottom = 452.0
+margin_right = 693.0
+margin_bottom = 444.0
 
 [node name="LevelLabel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer"]
-margin_right = 112.0
-margin_bottom = 45.0
+margin_right = 36.0
+margin_bottom = 69.0
 size_flags_horizontal = 0
 size_flags_vertical = 2
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "abc
-sdfdfsdfsdfsdf
-
-d"
+text = "aaaa
+bbbb
+cccc
+dddd
+eeee
+fffff"
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -82,3 +95,14 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
+[node name="Light" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 244, 127 )
+texture = ExtResource( 6 )
+
+[node name="MiniLight" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 397, 226 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
