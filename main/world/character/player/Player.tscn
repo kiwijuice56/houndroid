@@ -657,6 +657,7 @@ shadow_enabled = true
 shadow_item_cull_mask = 7
 
 [node name="Hitbox" parent="." index="1"]
+visible = false
 collision_layer = 2
 collision_mask = 176
 
@@ -664,12 +665,15 @@ collision_mask = 176
 shape = SubResource( 32 )
 
 [node name="CollisionShape2D" parent="." index="2"]
+visible = false
 position = Vector2( -1, 0 )
 shape = SubResource( 40 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 18 )]
 light_mask = 0
 offset = Vector2( 0, 2.5 )
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
 max_distance = 256.0
 
 [node name="VisibilityEnabler2D" parent="Sprites/Shadow" index="1"]
@@ -779,6 +783,7 @@ sounds = [ ExtResource( 26 ) ]
 volume = -12.0
 
 [node name="VisibilityEnabler2D" parent="." index="5"]
+visible = false
 pause_animations = false
 
 [node name="ArmMR" type="AnimationPlayer" parent="AnimationPlayers" index="0"]

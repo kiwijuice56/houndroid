@@ -97,6 +97,7 @@ __meta__ = {
 }
 level_info_scene = ExtResource( 4 )
 level_icons = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ) ]
+level_panel_colors = [ Color( 0.121569, 0.0745098, 0.141176, 1 ), Color( 0.0784314, 0.105882, 0.2, 1 ), Color( 0.145098, 0.0431373, 0.0588235, 1 ) ]
 menu_button_path = NodePath("MarginContainer/MenuButton")
 customize_button_path = NodePath("MarginContainer/CustomizeButton")
 levels_path = NodePath("Levels")
@@ -155,6 +156,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Levels/CityIsland/0"]
 position = Vector2( 24, 66 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Levels/CityIsland/0/Sprite"]
 autoplay = "bob"
@@ -177,8 +179,9 @@ __meta__ = {
 [node name="ButtonSounds" parent="Levels/CityIsland/1" instance=ExtResource( 9 )]
 
 [node name="Sprite2" type="Sprite" parent="Levels/CityIsland/1"]
-position = Vector2( 24, 65.8544 )
+position = Vector2( 24, 66 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 8 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Levels/CityIsland/1/Sprite2"]
 autoplay = "bob"
@@ -200,8 +203,9 @@ __meta__ = {
 [node name="ButtonSounds" parent="Levels/CityIsland/2" instance=ExtResource( 9 )]
 
 [node name="Sprite3" type="Sprite" parent="Levels/CityIsland/2"]
-position = Vector2( 24, 54.3262 )
+position = Vector2( 24, 60.4718 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 8 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Levels/CityIsland/2/Sprite3"]
 autoplay = "bob"

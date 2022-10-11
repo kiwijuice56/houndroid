@@ -4,6 +4,7 @@ class_name LevelSelectScreen
 
 export var level_info_scene: PackedScene
 export(Array, Resource) var level_icons: Array
+export(Array, Color) var level_panel_colors: Array
 
 export var menu_button_path: NodePath
 export var customize_button_path: NodePath
@@ -53,7 +54,7 @@ func _on_level_button_pressed(button: Button) -> void:
 	if is_instance_valid(selected_info):
 		selected_info.queue_free()
 	
-	$Tween.interpolate_property(levels, "rect_position", null, (levels.rect_global_position) - button.get_global_rect().position + Vector2(200, 125), 0.45, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$Tween.interpolate_property(levels, "rect_position", null, (levels.rect_global_position) - button.get_global_rect().position + Vector2(200, 140), 0.45, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	$Tween.start()
 	drag_velocity = Vector2()
 	
@@ -61,7 +62,8 @@ func _on_level_button_pressed(button: Button) -> void:
 	levels.add_child(new_info)
 
 	# Extraneous info that will have save data later on
-	new_info.initialize(button, {"yay" : "info"}, level_icons[int(button.name)])
+	var idx := int(button.name)
+	new_info.initialize(button, {"yay" : "info"}, level_icons[idx], level_panel_colors[idx])
 	new_info.connect("level_selected", self, "_on_level_selected")
 	
 	selected_info = new_info

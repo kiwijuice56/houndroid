@@ -2,6 +2,9 @@ extends Node
 class_name FileLoader
 # Controls file saving and loading to keep user state
 
+signal saving_complete
+signal loading_complete
+
 export var file_resource_path: String
 export var save_file_path: String
 
@@ -13,6 +16,8 @@ func save_file(id: int) -> void:
 		node.save_file(new_file.data)
 	
 	ResourceSaver.save(save_file_path + "save_file%03d.tres" % (id), new_file)
+	call_deferred("emit_signal", "saving_complete")
+
 
 func load_file(id: int) -> void:
 	var dir := Directory.new()
@@ -30,3 +35,5 @@ func load_file(id: int) -> void:
 	
 	for node in get_tree().get_nodes_in_group("Save"):
 		node.load_file(save_file_resource.data)
+	
+	call_deferred("emit_signal", "loading_complete")

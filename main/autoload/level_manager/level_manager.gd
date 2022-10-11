@@ -1,5 +1,6 @@
 extends Node
 # Interface to control level and UI state in a centralized place
+# The World class actually holds level instances and their data; this class is only to manage transitions
 
 # Assumes that the UI state is in LevelSelect
 func start_level(index := -1) -> void:
@@ -20,8 +21,9 @@ func start_level(index := -1) -> void:
 	GlobalData.world.unlock_player()
 
 func end_level() -> void:
-	GlobalData.store_user_properties()
+	GlobalData.world.store_user_properties()
 	GlobalData.file_loader.save_file(0)
+	yield(GlobalData.file_loader, "saving_complete")
 	
 	# Transition from the level select into the full finish sequence
 	GlobalData.ui_manager.transition("GameOverlay", "LevelFinish")
@@ -31,6 +33,7 @@ func end_level() -> void:
 	GlobalData.ui_manager.transition("LevelFinish", "LevelSelect")
 	
 	GlobalData.world.unload_level()
+	yield(GlobalData.world, "level_unloaded")
 
 # Assumes that the UI state is in GameOverlay
 func reset_level() -> void:
@@ -38,13 +41,17 @@ func reset_level() -> void:
 	Transition.trans_in()
 	yield(Transition, "finished")
 	
-	GlobalData.world.delete_level_instance()
+	GlobalData.world.unload_level()
 	
 	# Transition from the gameplay UI into the preliminary starting sequence
 	GlobalData.ui_manager.transition("GameOverlay", "LevelStart")
 	yield(GlobalData.ui_manager, "transition_complete")
 	
+	GlobalData.world.revert_level_state()
 	GlobalData.world.load_level(-1)
+	
+	# print(GlobalData.coin_count, " d", GlobalData.dup_coin_coint, " l", GlobalData.level_coin_count, " ld", GlobalData.level_dup_coin_count)
+	yield(GlobalData.world, "level_loaded")
 	
 	# Play out the full introduction sequence
 	GlobalData.ui_manager.get_screen("LevelStart").start_introduction()

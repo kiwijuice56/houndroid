@@ -35,12 +35,13 @@ tracks/0/keys = {
 motion_scale = Vector2( 0.25, 0.25 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
-position = Vector2( 422, -81 )
+position = Vector2( 0, 600 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1024, 1024 )
+region_rect = Rect2( 0, 0, 6000, 6000 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/Background/Sprite"]
+autoplay = "scroll"
 playback_speed = 0.03
 anims/scroll = SubResource( 2 )
 
@@ -48,17 +49,8 @@ anims/scroll = SubResource( 2 )
 motion_scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 5 )
 star = ExtResource( 1 )
-star_count = 700
-start = Vector2( -500, -100 )
-end = Vector2( 2056, 800 )
-
-[node name="StarSpawner2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.25, 0.25 )
-script = ExtResource( 5 )
-star = ExtResource( 1 )
-star_count = 300
-start = Vector2( 2056, -1000 )
-end = Vector2( 3500, 1000 )
+star_count = 64
+end = Vector2( 450, 240 )
 
 [node name="Background2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2( 0, -28 )
@@ -87,21 +79,24 @@ collision_layer = 0
 collision_mask = 0
 occluder_light_mask = 0
 format = 1
-tile_data = PoolIntArray( 327680, 0, 0, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 2, 393216, 0, 65536, 393217, 0, 65537, 393218, 0, 65537, 393219, 0, 65537, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65538, 458752, 0, 131072, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131074 )
+tile_data = PoolIntArray( 196608, 11, 0, 196609, 11, 0, 196610, 11, 0, 196611, 3, 0, 262144, 10, 0, 262145, 9, 0, 262146, 10, 0, 262147, 4, 0, 262151, 18, 0, 262152, 14, 0, 262153, 14, 0, 262154, 14, 0, 262155, 14, 0, 262156, 18, 0, 327680, 10, 0, 327681, 10, 0, 327682, 10, 0, 327683, 4, 0, 327687, 19, 0, 327688, 12, 0, 327689, 13, 0, 327690, 13, 0, 327691, 13, 0, 327692, 19, 0, 393216, 9, 0, 393217, 10, 0, 393218, 9, 0, 393219, 4, 0, 393223, 19, 0, 393224, 13, 0, 393225, 13, 0, 393226, 12, 0, 393227, 13, 0, 393228, 19, 0, 458752, 10, 0, 458753, 9, 0, 458754, 10, 0, 458755, 4, 0, 458759, 19, 0, 458760, 12, 0, 458761, 13, 0, 458762, 13, 0, 458763, 13, 0, 458764, 19, 0 )
 
 [node name="Body" type="Sprite" parent="TileMap"]
+visible = false
 position = Vector2( 164, 150 )
 texture = ExtResource( 2 )
 hframes = 27
 frame = 6
 
 [node name="ArmL" type="Sprite" parent="TileMap"]
+visible = false
 position = Vector2( 164, 150 )
 texture = ExtResource( 4 )
 hframes = 27
 frame = 6
 
 [node name="ArmR" type="Sprite" parent="TileMap"]
+visible = false
 position = Vector2( 164, 150 )
 texture = ExtResource( 3 )
 hframes = 27

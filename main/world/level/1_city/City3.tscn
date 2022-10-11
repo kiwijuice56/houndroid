@@ -45,6 +45,7 @@ tracks/0/keys = {
 }
 
 [node name="City3" instance=ExtResource( 1 )]
+game_name = "City3"
 
 [node name="Background" parent="." index="0"]
 modulate = Color( 0.54902, 0.52549, 0.584314, 1 )

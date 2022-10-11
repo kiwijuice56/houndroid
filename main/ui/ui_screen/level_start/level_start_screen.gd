@@ -44,30 +44,30 @@ func transition_from(from: String) -> void:
 			
 			visible = true
 			yield(add_word("> LOADING LEVEL ..."), "completed")
-			$Timer.start(0.15)
+			$Timer.start(0.1)
 			yield($Timer, "timeout")
 			yield(add_word(" COMPLETE!\n"), "completed")
 			
 			yield(add_word("> LOADING HOUNDROID ...\n"), "completed")
 			
 			yield(add_word(random_lines[0].substr(0, random_lines[0].find_last(".") + 1)), "completed")
-			$Timer.start(0.15)
+			$Timer.start(0.1)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[0].substr(random_lines[0].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[1].substr(0, random_lines[1].find_last(".") + 1)), "completed")
-			$Timer.start(0.15)
+			$Timer.start(0.1)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[1].substr(random_lines[1].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[2].substr(0, random_lines[2].find_last(".") + 1)), "completed")
-			$Timer.start(0.15)
+			$Timer.start(0.1)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[2].substr(random_lines[2].find_last(".") + 1) + "\n"), "completed")
 			
 			
 			yield(add_word("\n\nGO FOR IT!!!"), "completed")
-			$Timer.start(1.2)
+			$Timer.start(0.8)
 			yield($Timer, "timeout")
 			
 			$AudioStreamPlayer.playing = false

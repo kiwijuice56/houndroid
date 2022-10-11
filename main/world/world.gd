@@ -6,6 +6,13 @@ export var player_scene: PackedScene
 export var current_level_scene: PackedScene
 export(Array, Resource) var levels: Array
 
+# Store permanent data for all levels
+var level_data := {}
+
+# Store temporary data as playing a level
+var temp_saved_level_state := {}
+var level_state := {}
+
 signal level_loaded
 signal level_unloaded
 
@@ -13,26 +20,27 @@ signal level_unloaded
 var player: Node 
 var current_level: Level
 
+# Loads level data and prepares the scene
 func load_level(index := -1) -> void:
 	# Spawn the level indicated or the last level played if none is specified
+	# We only completely reset data when we are starting a new level 
 	if index != -1:
-		GlobalData.level_coin_count = 0
-		GlobalData.score = 0
 		current_level_scene = levels[index]
+		delete_level_state()
 	
 	# Delete the current instance first
 	if is_instance_valid(current_level):
 		remove_child(current_level)
 		current_level.queue_free()
-	
 	current_level = current_level_scene.instance()
+	if current_level.game_name in level_data:
+		# We need to mark coins that were already collected as "ghosts"
+		current_level.mark_collected_coins(level_data[current_level.game_name]["coins"])
+	# But we have to delete coins collected since the level started to prevent them from collecting twice
+	current_level.remove_collected_coins(level_state["recently_collected"])
+	
 	add_child(current_level)
 	move_child(current_level, 0)
-	
-	# Reset level and node state
-	GlobalInstanceManager.clear_nodes()
-	GlobalData.coin_count = GlobalData.level_coin_count
-	GlobalData.score = GlobalData.level_score
 	
 	# Create a new player scene and position it in the level according to the checkpoint collection status
 	if is_instance_valid(player):
@@ -41,26 +49,63 @@ func load_level(index := -1) -> void:
 	add_child(player)
 	
 	# A checkpoint_index of -1 is the default index if the player has not reached a checkpoint yet
-	if GlobalData.checkpoint_index < 0 or GlobalData.checkpoint_index >= current_level.checkpoints.get_child_count():
+	if not "checkpoint" in level_state or level_state.checkpoint == -1:
 		player.global_position = current_level.spawn.global_position
 	else:
 		# Mark the checkpoint as visited without playing animations
-		current_level.checkpoints.get_child(GlobalData.checkpoint_index).enter_checkpoint(true)
-		player.global_position = current_level.checkpoints.get_child(GlobalData.checkpoint_index).global_position
+		current_level.checkpoints.get_child(level_state.checkpoint).enter_checkpoint(true)
+		player.global_position = current_level.checkpoints.get_child(level_state.checkpoint).global_position
 	
 	# Freeze the player to stop them from moving until the UI is transitioned
 	player.frozen = true
 	call_deferred("emit_signal", "level_loaded")
 
 func unload_level() -> void:
-	# Reset checkpoint only after the level is complete, as resetting it earlier would delete player progress
-	GlobalData.checkpoint_index = -1
-	delete_level_instance()
-	emit_signal("level_unloaded")
-
-func delete_level_instance() -> void:
+	GlobalInstanceManager.clear_nodes()
 	current_level.queue_free()
 	player.queue_free()
+	call_deferred("emit_signal", "level_unloaded")
+
+# Functions used to manage the level state
+func set_level_state(key: String, data) -> void:
+	level_state[key] = data
+
+func add_to_level_state(key: String, data) -> void:
+	level_state[key] += data
+
+func get_level_state(key: String):
+	return level_state[key]
+
+func cache_level_state() -> void:
+	temp_saved_level_state = level_state.duplicate(true)
+
+func revert_level_state() -> void:
+	level_state = temp_saved_level_state.duplicate(true)
+
+func delete_level_state() -> void:
+	level_state = {}
+	
+	level_state["checkpoint"] = -1
+	level_state["new_coin_count"] = 0
+	level_state["total_coin_count"] = 0
+	level_state["score"] = 0
+	level_state["experience"] = 0
+	level_state["recently_collected"] = {}
+	
+	temp_saved_level_state = level_state.duplicate(true)
+
+# Save the level state into permament storage, such as what coins were collected
+func store_user_properties() -> void:
+	GlobalData.coin_count += level_state["new_coin_count"]
+	GlobalData.experience += level_state["experience"]
+	
+	if current_level.game_name in level_data:
+		for path in level_state.recently_collected:
+			level_data[current_level.game_name]["coins"][path] = true 
+	else:
+		level_data[current_level.game_name] = {}
+		level_data[current_level.game_name]["coins"] = level_state.recently_collected.duplicate()
+
 
 func lock_player() -> void:
 	if player != null:
@@ -69,3 +114,18 @@ func lock_player() -> void:
 func unlock_player() -> void:
 	if player != null:
 		player.frozen = false
+
+
+# Called whenever a level ends, so this is where we will also manage storing level data into temp storage
+func save_file(data: Dictionary) -> void:
+	if not is_instance_valid(current_level):
+		return
+	if not levels in data:
+		data["levels"] = {}
+	
+	data["levels"][current_level.game_name] = level_data[current_level.game_name]
+
+# Called at the start of the game
+func load_file(data: Dictionary) -> void:
+	if levels in data:
+		level_data = data["levels"]

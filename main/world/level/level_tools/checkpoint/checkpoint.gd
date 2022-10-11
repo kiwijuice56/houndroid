@@ -11,8 +11,8 @@ func _on_area_entered(area: Area2D) -> void:
 		enter_checkpoint(false)
 
 func enter_checkpoint(already_collected: bool) -> void:
-	GlobalData.checkpoint_index = get_index()
-	GlobalData.store_level_properties()
+	GlobalData.world.set_level_state("checkpoint", get_index())
+	GlobalData.world.cache_level_state()
 	if not already_collected:
 		$AnimationPlayer.current_animation = "enter"
 		yield($AnimationPlayer, "animation_finished")

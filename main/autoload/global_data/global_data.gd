@@ -1,34 +1,24 @@
 extends Node
+# Global node for managing player and save data
+# Bad practice, but convenience of having access to data in all places is worth it
 
 signal coin_count_updated(coin_count)
 signal score_updated(score)
 signal music_volume_updated(volume)
 
-# Option variables
-var sound_effect_volume := 0.0
-var music_volume := 0.0 setget set_music_volume
-
-# Reference variables
+# Reference variables for ease of access to most world and UI top nodes
 onready var world: GameWorld = get_tree().get_root().get_node("Main/World")
 onready var ui_manager: UIScreenManager = get_tree().get_root().get_node("Main/UIScreenManager")
 onready var file_loader: FileLoader = get_tree().get_root().get_node("Main/FileLoader")
 
-# Data variables
-var coin_count := 0 setget set_coin_count
-var level_coin_count := 0 # The amount of coins from the last checkpoint
+# Option variables
+var sound_effect_volume := 0.0
+var music_volume := 0.0 setget set_music_volume
 
-var score := 0 setget set_score
-var level_score := 0  # The score from the last checkpoint
-
-var score_orbs := 0
-var level_score_orbs := 0
-
-var checkpoint_index := -1
-
-# Permanent user data
-var user_coin_count := 0
-var user_score_orbs := 0
-var user_levels_complete := []
+# Player currency variables
+var coin_count := 0 
+var experience := 0 
+var items := {}
 
 func _ready() -> void:
 	add_to_group("Save")
@@ -37,29 +27,18 @@ func set_music_volume(new_volume: float) -> void:
 	music_volume = new_volume
 	emit_signal("music_volume_updated", music_volume)
 
-func set_coin_count(new_count: int) -> void:
-	coin_count = new_count
-	emit_signal("coin_count_updated", coin_count)
-
-func set_score(new_score: int) -> void:
-	score = new_score
-	emit_signal("score_updated", score)
-
-func store_level_properties() -> void:
-	level_coin_count = coin_count
-	level_score = score
-	level_score_orbs = score_orbs
-
-func store_user_properties() -> void:
-	user_coin_count += coin_count
-	user_score_orbs += score_orbs
-
 func save_file(data: Dictionary) -> void:
-	data["coins"] = user_coin_count
-	data["score_orbs"] = user_score_orbs
-	data["levels_complete"] = user_levels_complete
+	data["coin_count"] = coin_count
+	data["experience"] = experience
+	data["options"] = {}
+	data["options"]["sound_effect_volume"] = sound_effect_volume
+	data["options"]["music_volume"] = music_volume
+	data["items"] = items
 
 func load_file(data: Dictionary) -> void:
-	user_coin_count = data["coins"]
-	user_score_orbs = data["score_orbs"]
-	user_levels_complete = data["levels_complete"]
+	coin_count = data["coin_count"]
+	experience = data["experience"]
+	
+	sound_effect_volume = data["options"]["sound_effect_volume"]
+	music_volume = data["options"]["music_volume"]
+	items = data["items"]

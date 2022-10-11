@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://main/ui/ui_screen/title/sprites/dog_background.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform sampler2D tex;
+
+void fragment() {
+	vec4 color = texture(tex, UV + vec2(sin(TIME / 5.0), cos(TIME / 4.0)));
+	if (texture(TEXTURE, UV).r <= 0.05) {
+		COLOR = texture(TEXTURE, UV);
+	} else {
+		COLOR = texture(TEXTURE, UV).a * color + texture(TEXTURE, UV) * (1.0 - texture(TEXTURE, UV).a);
+	}
+}"
+
+[resource]
+shader = SubResource( 16 )
+shader_param/tex = ExtResource( 1 )

@@ -25,6 +25,8 @@ func _ready():
 	$Timer.start(window_light_time + 2 * window_light_rand * randf() - window_light_rand)
 
 func _on_light_timeout() -> void:
+	if not is_instance_valid(GlobalData.world.player):
+		return
 	var pos: Vector2 = GlobalData.world.player.global_position 
 	
 	# While loop required because range() is cached

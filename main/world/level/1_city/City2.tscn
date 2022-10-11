@@ -137,6 +137,7 @@ tracks/0/keys = {
 extents = Vector2( 870.5, 192.5 )
 
 [node name="City2" instance=ExtResource( 1 )]
+game_name = "City2"
 
 [node name="Background" parent="." index="0"]
 modulate = Color( 0.521569, 0.505882, 0.588235, 1 )
@@ -497,6 +498,12 @@ position = Vector2( 2917, 1191 )
 
 [node name="Wall2" parent="Decoration" index="30" instance=ExtResource( 27 )]
 position = Vector2( 2917, 1223 )
+
+[node name="NeonSign19" parent="Decoration" index="31" instance=ExtResource( 43 )]
+position = Vector2( 3134, 129 )
+
+[node name="NeonSign20" parent="Decoration" index="32" instance=ExtResource( 43 )]
+position = Vector2( 2653, 201 )
 
 [node name="Checkpoint" parent="Checkpoints" index="0" instance=ExtResource( 50 )]
 position = Vector2( 1982, 1098 )

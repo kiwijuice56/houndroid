@@ -36,12 +36,14 @@ func _on_timeout() -> void:
 		$Timer.start(back_side_time)
 	front_side = !front_side
 
-func initialize(button: Button, info: Dictionary, icon: Resource) -> void:
+func initialize(button: Button, info: Dictionary, icon: Resource, color: Color) -> void:
 	rect_global_position = button.rect_global_position
 	rect_position += offset
 	
 	index = int(button.name)
 	$VBoxContainer/TextureRect.texture = icon
+	get("custom_styles/panel").set("bg_color", color)
+	get("custom_styles/panel").set("border_color", color / 2)
 	pop_up()
 
 func pop_up() -> void:

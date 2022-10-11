@@ -11,7 +11,8 @@ func collect() -> void:
 	$CollectSounds.play_sound()
 	$AnimationPlayer.current_animation = "collect"
 	yield($AnimationPlayer, "animation_finished")
-	GlobalData.score += 15
-	GlobalData.score_orbs += 1
+	GlobalData.world.add_to_level_state("score", 5)
+	GlobalData.world.add_to_level_state("experience", 1)
+	
 	.collect()
 

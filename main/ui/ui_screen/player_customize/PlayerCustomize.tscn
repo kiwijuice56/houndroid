@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/player_customize/player_customize_screen.gd" type="Script" id=1]
 [ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon1.png" type="Texture" id=5]
+[ext_resource path="res://main/ui/ui_screen/player_customize/menu_container.gd" type="Script" id=6]
+[ext_resource path="res://main/ui/ui_screen/player_customize/menu_item_button.gd" type="Script" id=7]
 
 [node name="PlayerCustomize" type="Control"]
 anchor_right = 1.0
@@ -85,12 +87,14 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Gadgets"]
 margin_right = 64.0
 margin_bottom = 64.0
+script = ExtResource( 6 )
 
 [node name="Button" type="Button" parent="PanelContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer"]
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 icon = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Powers" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false

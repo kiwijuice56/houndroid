@@ -74,19 +74,12 @@ margin_right = 693.0
 margin_bottom = 444.0
 
 [node name="LevelLabel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer"]
-margin_right = 36.0
-margin_bottom = 69.0
+margin_bottom = 9.0
 size_flags_horizontal = 0
 size_flags_vertical = 2
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "aaaa
-bbbb
-cccc
-dddd
-eeee
-fffff"
 
 [node name="Tween" type="Tween" parent="."]
 

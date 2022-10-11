@@ -21,7 +21,7 @@
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." groups=["Save"]]
 script = ExtResource( 18 )
 player_scene = ExtResource( 2 )
 current_level_scene = ExtResource( 10 )
