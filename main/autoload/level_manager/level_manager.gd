@@ -35,6 +35,13 @@ func end_level() -> void:
 	GlobalData.world.unload_level()
 	yield(GlobalData.world, "level_unloaded")
 
+func quit_level() -> void:
+	GlobalData.ui_manager.transition("PauseMenu", "LevelSelect")
+	yield(GlobalData.ui_manager, "transition_complete")
+	GlobalData.world.unload_level()
+	yield(GlobalData.world, "level_unloaded")
+	get_tree().paused = false # This is happening from the pause menu, so we have to undo this
+
 # Assumes that the UI state is in GameOverlay
 func reset_level() -> void:
 	# Block out the screen and reset the level

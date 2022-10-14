@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/level_select/sprites/island.png" type="Texture" id=1]
 [ext_resource path="res://main/ui/ui_screen/level_select/level_select_screen.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://main/ui/theme/sounds/ButtonSounds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://main/ui/theme/sounds/sound_button.gd" type="Script" id=10]
 [ext_resource path="res://main/world/level/1_city/select_music.mp3" type="AudioStream" id=11]
+[ext_resource path="res://main/ui/ui_screen/level_select/buttons/customize_button1.png" type="Texture" id=12]
+[ext_resource path="res://main/ui/ui_screen/level_select/buttons/customize_button2.png" type="Texture" id=13]
 [ext_resource path="res://main/world/level/1_city/sprites/background1.png" type="Texture" id=14]
 
 [sub_resource type="Animation" id=9]
@@ -78,12 +80,20 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
-[sub_resource type="StyleBoxTexture" id=1]
+[sub_resource type="StyleBoxTexture" id=13]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 30, 32 )
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 30, 32 )
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 30, 32 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 13 )
 region_rect = Rect2( 0, 0, 30, 32 )
 
 [node name="LevelSelect" type="Control"]
@@ -98,8 +108,8 @@ __meta__ = {
 level_info_scene = ExtResource( 4 )
 level_icons = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ) ]
 level_panel_colors = [ Color( 0.121569, 0.0745098, 0.141176, 1 ), Color( 0.0784314, 0.105882, 0.2, 1 ), Color( 0.145098, 0.0431373, 0.0588235, 1 ) ]
-menu_button_path = NodePath("MarginContainer/MenuButton")
-customize_button_path = NodePath("MarginContainer/CustomizeButton")
+menu_button_path = NodePath("MarginContainer/HBoxContainer/MenuButton")
+customize_button_path = NodePath("MarginContainer/HBoxContainer/CustomizeButton")
 levels_path = NodePath("Levels")
 min_x = -240
 max_x = 240
@@ -145,6 +155,8 @@ margin_top = 139.0
 margin_right = 3.0
 margin_bottom = 187.0
 rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
+enabled_focus_mode = 0
 text = "1"
 script = ExtResource( 10 )
 __meta__ = {
@@ -170,6 +182,7 @@ margin_top = 53.0
 margin_right = 123.0
 margin_bottom = 101.0
 rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
 text = "2"
 script = ExtResource( 10 )
 __meta__ = {
@@ -194,6 +207,7 @@ margin_top = 93.0
 margin_right = 275.0
 margin_bottom = 141.0
 rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
 text = "3"
 script = ExtResource( 10 )
 __meta__ = {
@@ -213,45 +227,53 @@ playback_speed = 0.27
 anims/bob = SubResource( 12 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = -900.0
+margin_bottom = 480.0
 mouse_filter = 2
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton" type="Button" parent="MarginContainer"]
-margin_left = 4.0
-margin_top = 445.0
-margin_right = 34.0
-margin_bottom = 476.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 824.0
+margin_top = 8.0
+margin_right = 892.0
+margin_bottom = 40.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_constants/separation = 8
+
+[node name="MenuButton" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 31.0
 rect_min_size = Vector2( 30, 31 )
 focus_mode = 0
 size_flags_horizontal = 0
-size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 1 )
-custom_styles/disabled = SubResource( 1 )
-custom_styles/normal = SubResource( 1 )
+size_flags_vertical = 0
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
 enabled_focus_mode = 0
 script = ExtResource( 10 )
 
-[node name="ButtonSounds" parent="MarginContainer/MenuButton" instance=ExtResource( 9 )]
+[node name="ButtonSounds" parent="MarginContainer/HBoxContainer/MenuButton" instance=ExtResource( 9 )]
 
-[node name="CustomizeButton" type="Button" parent="MarginContainer"]
-margin_left = 866.0
-margin_top = 445.0
-margin_right = 896.0
-margin_bottom = 476.0
-rect_min_size = Vector2( 30, 31 )
+[node name="CustomizeButton" type="Button" parent="MarginContainer/HBoxContainer"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 30, 32 )
 focus_mode = 0
-size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_horizontal = 0
+size_flags_vertical = 0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 1 )
@@ -260,7 +282,7 @@ custom_styles/normal = SubResource( 1 )
 enabled_focus_mode = 0
 script = ExtResource( 10 )
 
-[node name="ButtonSounds" parent="MarginContainer/CustomizeButton" instance=ExtResource( 9 )]
+[node name="ButtonSounds" parent="MarginContainer/HBoxContainer/CustomizeButton" instance=ExtResource( 9 )]
 
 [node name="Tween" type="Tween" parent="."]
 

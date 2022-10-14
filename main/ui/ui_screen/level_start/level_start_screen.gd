@@ -9,14 +9,14 @@ export var initial_offset_x := -400
 export var transition_time := 0.8
 export var wait_time := 1.5
 
+export var speed := 1
+
 export(Array, String) var random_lines := []
 
 var label: Label
 var panel: PanelContainer
 
-
 signal introduction_finished
-
 
 func _ready() -> void:
 	label = get_node(label_path)
@@ -25,9 +25,11 @@ func _ready() -> void:
 	disable_input()
 
 func transition_from(from: String) -> void:
+	speed = 1
 	match from:
 		# LevelSelect, GameOverlay
 		_:
+			enable_input()
 			$Light.visible = true
 			$MiniLight.visible = true
 			
@@ -44,24 +46,24 @@ func transition_from(from: String) -> void:
 			
 			visible = true
 			yield(add_word("> LOADING LEVEL ..."), "completed")
-			$Timer.start(0.1)
+			$Timer.start(0.06)
 			yield($Timer, "timeout")
 			yield(add_word(" COMPLETE!\n"), "completed")
 			
 			yield(add_word("> LOADING HOUNDROID ...\n"), "completed")
 			
 			yield(add_word(random_lines[0].substr(0, random_lines[0].find_last(".") + 1)), "completed")
-			$Timer.start(0.1)
+			$Timer.start(0.06)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[0].substr(random_lines[0].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[1].substr(0, random_lines[1].find_last(".") + 1)), "completed")
-			$Timer.start(0.1)
+			$Timer.start(0.06)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[1].substr(random_lines[1].find_last(".") + 1) + "\n"), "completed")
 			
 			yield(add_word(random_lines[2].substr(0, random_lines[2].find_last(".") + 1)), "completed")
-			$Timer.start(0.1)
+			$Timer.start(0.06)
 			yield($Timer, "timeout")
 			yield(add_word(random_lines[2].substr(random_lines[2].find_last(".") + 1) + "\n"), "completed")
 			
@@ -74,11 +76,11 @@ func transition_from(from: String) -> void:
 			
 			$Light.visible = false
 			$MiniLight.visible = false
-			$Tween.interpolate_property(panel, "self_modulate:a", 1.0, 0.0, 0.5)
-			$Tween.interpolate_property(label, "self_modulate:a", 1.0, 0.0, 1.5)
+			$Tween.interpolate_property(panel, "self_modulate:a", 1.0, 0.0, 0.55)
+			$Tween.interpolate_property(label, "self_modulate:a", 1.0, 0.0, 1.0)
 			$Tween.start()
 			yield($Tween, "tween_completed")
-			
+			disable_input()
 	call_deferred("emit_signal", "transition_complete")
 
 func start_introduction() -> void:
@@ -88,23 +90,30 @@ func start_introduction() -> void:
 	$Timer.start(wait_time)
 	yield($Timer, "timeout")
 	
-	yield($Tween, "tween_completed")
+	# yield($Tween, "tween_completed")
 	
 	visible = false
 	
 	emit_signal("introduction_finished")
 
 func add_word(word: String) -> void:
-	$Tween.interpolate_property($AudioStreamPlayer, "volume_db", null, 0, 0.1)
+	$Tween.interpolate_property($AudioStreamPlayer, "volume_db", null, 0, 0.1 * speed)
 	$Tween.start()
 	yield($Tween, "tween_completed")
 	
 	label.text += word
-	$Tween.interpolate_property(label, "visible_characters", null, label.get_total_character_count(), len(word) * 0.01)
+	$Tween.interpolate_property(label, "visible_characters", null, label.get_total_character_count(), len(word) * 0.01 * speed)
 	$Tween.start()
 	yield($Tween, "tween_completed")
 	
-	$Tween.interpolate_property($AudioStreamPlayer, "volume_db", null, -60, 0.1)
+	$Tween.interpolate_property($AudioStreamPlayer, "volume_db", null, -60, 0.1 * speed)
 	$Tween.start()
 	yield($Tween, "tween_completed")
-	
+
+func _input(event) -> void:
+	if event is InputEventScreenTouch or event is InputEventMouseButton:
+		if speed < 1:
+			speed = 1
+		else:
+			speed = 0.35
+

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon1.png" type="Texture" id=1]
+[ext_resource path="res://main/ui/ui_screen/player_customize/menu_item_button.gd" type="Script" id=2]
+
+[node name="Button" type="Button" groups=["Save"]]
+margin_right = 64.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 64, 64 )
+icon = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_name = "Machine Gun"
+item_max = 1
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -14.0
+rect_min_size = Vector2( 64, 0 )
+text = "BOUGHT"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

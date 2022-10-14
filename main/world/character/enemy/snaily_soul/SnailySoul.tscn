@@ -77,6 +77,8 @@ shape = SubResource( 1 )
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 4 )]
 texture = ExtResource( 3 )
 offset = Vector2( 0.5, 2 )
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
 
 [node name="Body" type="Sprite" parent="Sprites" index="1"]
 light_mask = 2

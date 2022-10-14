@@ -1,108 +1,247 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/player_customize/player_customize_screen.gd" type="Script" id=1]
 [ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=4]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon1.png" type="Texture" id=5]
+[ext_resource path="res://main/ui/ui_screen/player_customize/ItemButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://main/ui/ui_screen/player_customize/menu_container.gd" type="Script" id=6]
-[ext_resource path="res://main/ui/ui_screen/player_customize/menu_item_button.gd" type="Script" id=7]
+[ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=7]
+[ext_resource path="res://main/ui/ui_screen/level_select/buttons/back_button1.png" type="Texture" id=8]
+[ext_resource path="res://main/ui/theme/sounds/sound_button.gd" type="Script" id=9]
+[ext_resource path="res://main/ui/theme/sounds/ButtonSounds.tscn" type="PackedScene" id=10]
+[ext_resource path="res://main/ui/ui_screen/level_select/buttons/back_button2.png" type="Texture" id=11]
+[ext_resource path="res://main/ui/ui_screen/level_start/sprites/outer_panel.png" type="Texture" id=12]
+[ext_resource path="res://main/world/level/1_city/sprites/background21.png" type="Texture" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 43, 43 )
+margin_left = 21.0
+margin_right = 21.0
+margin_top = 16.0
+margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 30, 32 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 30, 32 )
 
 [node name="PlayerCustomize" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+menu_button_path = NodePath("MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/Button")
+weapon_button_path = NodePath("MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 448, -104 )
+texture = ExtResource( 13 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 893.0
-margin_bottom = 473.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 892.0
+margin_bottom = 472.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-margin_right = 886.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+margin_right = 884.0
+margin_bottom = 464.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+margin_right = 174.0
+margin_bottom = 464.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
+margin_right = 170.0
+margin_bottom = 464.0
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer"]
+margin_left = 21.0
+margin_top = 16.0
+margin_right = 149.0
+margin_bottom = 448.0
+rect_min_size = Vector2( 128, 0 )
+custom_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 9.0
+custom_colors/font_color = Color( 0.603922, 0.580392, 0.643137, 1 )
+text = "Item"
+
+[node name="Label3" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 128.0
+margin_bottom = 23.0
+text = "Machine Gun"
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0.603922, 0.580392, 0.643137, 1 )
+text = "
+Description"
+
+[node name="Label4" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 128.0
+margin_bottom = 99.0
+text = "Shoots at an incredibly fast rate to shred enemies up close"
+autowrap = true
+
+[node name="Label6" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 372.0
+margin_right = 128.0
+margin_bottom = 381.0
+size_flags_vertical = 10
+custom_colors/font_color = Color( 1, 0.807843, 0.678431, 1 )
+text = "50 BONES "
+autowrap = true
+
+[node name="Label7" type="Label" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 386.0
+margin_right = 128.0
+margin_bottom = 395.0
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0.686275, 0.756863, 1, 1 )
+text = "100 EXP"
+autowrap = true
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 400.0
+margin_right = 128.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 32 )
+text = "Purchase"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+margin_left = 178.0
+margin_right = 884.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_right = 706.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-margin_right = 12.0
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 676.0
+margin_right = 706.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 30, 32 )
+focus_mode = 0
+size_flags_horizontal = 10
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/disabled = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+enabled_focus_mode = 0
+script = ExtResource( 9 )
 
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer"]
+[node name="ButtonSounds" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer/Button" instance=ExtResource( 10 )]
+
+[node name="Control" type="Control" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 margin_top = 36.0
-margin_right = 886.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 0, 80 )
+margin_right = 706.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 64 )
 
-[node name="ArmMR" type="Sprite" parent="PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
+[node name="ArmMR" type="Sprite" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
+position = Vector2( 105, 35 )
 texture = ExtResource( 2 )
 hframes = 27
 frame = 6
 
-[node name="Body" type="Sprite" parent="PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
+[node name="Body" type="Sprite" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
+position = Vector2( 105, 35 )
 texture = ExtResource( 3 )
 hframes = 27
 frame = 6
 
-[node name="ArmML" type="Sprite" parent="PanelContainer/VBoxContainer/Control"]
-position = Vector2( 225, 45 )
+[node name="ArmML" type="Sprite" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
+position = Vector2( 105, 35 )
 texture = ExtResource( 4 )
 hframes = 27
 frame = 6
 
-[node name="ArmMR2" type="AnimationPlayer" parent="PanelContainer/VBoxContainer/Control"]
+[node name="ArmMR2" type="AnimationPlayer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
 
-[node name="ArmML2" type="AnimationPlayer" parent="PanelContainer/VBoxContainer/Control"]
+[node name="ArmML2" type="AnimationPlayer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
 
-[node name="Body2" type="AnimationPlayer" parent="PanelContainer/VBoxContainer/Control"]
+[node name="Body2" type="AnimationPlayer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Control"]
 
-[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
-margin_top = 120.0
-margin_right = 886.0
-margin_bottom = 466.0
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 706.0
+margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
 
-[node name="Gadgets" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+[node name="Gadgets" type="ScrollContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 21.0
+margin_top = 35.0
+margin_right = -21.0
+margin_bottom = -16.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Gadgets"]
-margin_right = 64.0
-margin_bottom = 64.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer/Gadgets"]
+margin_right = 132.0
+margin_bottom = 66.0
 script = ExtResource( 6 )
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-icon = ExtResource( 5 )
-script = ExtResource( 7 )
+[node name="Button" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer" instance=ExtResource( 5 )]
+price = 85
 
-[node name="Powers" type="ScrollContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+[node name="Button2" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer/Gadgets/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 68.0
+margin_right = 132.0
+item_name = "Glaive Shooter"
+price = 65
+
+[node name="Powers" type="ScrollContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 27.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Powers"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/TabContainer/Powers"]

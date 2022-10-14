@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://main/world/character/enemy/armadillot/sprites/armadillot_body_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://main/world/character/enemy/Enemy.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=14]
 [ext_resource path="res://main/world/character/enemy/armadillot/sprites/armadillot_blur_top2_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://main/world/character/enemy/armadillot/sprites/armadillot_top_spritesheet2.png" type="Texture" id=16]
+[ext_resource path="res://main/world/character/Shadow.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.0
@@ -232,7 +233,11 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="Trail" type="CPUParticles2D" parent="Sprites" index="0"]
+[node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 17 )]
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
+
+[node name="Trail" type="CPUParticles2D" parent="Sprites" index="1"]
 amount = 4
 lifetime = 0.5
 speed_scale = 2.0
@@ -241,22 +246,22 @@ texture = ExtResource( 8 )
 gravity = Vector2( 0, 42 )
 color_ramp = SubResource( 11 )
 
-[node name="String" type="Line2D" parent="Sprites" index="1"]
+[node name="String" type="Line2D" parent="Sprites" index="2"]
 self_modulate = Color( 1.2, 1.2, 1.2, 1 )
 points = PoolVector2Array( 0, 0, 16.1, 0 )
 width = 4.0
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="Ring" type="Sprite" parent="Sprites" index="2"]
+[node name="Ring" type="Sprite" parent="Sprites" index="3"]
 self_modulate = Color( 1.2, 1.2, 1.2, 1 )
 texture = ExtResource( 10 )
 
-[node name="Body" type="Sprite" parent="Sprites" index="3"]
+[node name="Body" type="Sprite" parent="Sprites" index="4"]
 self_modulate = Color( 1.2, 1.2, 1.2, 1 )
 texture = ExtResource( 1 )
 hframes = 4
 
-[node name="Top" type="Sprite" parent="Sprites" index="4"]
+[node name="Top" type="Sprite" parent="Sprites" index="5"]
 self_modulate = Color( 1.2, 1.2, 1.2, 1 )
 texture = ExtResource( 6 )
 hframes = 4
@@ -268,7 +273,7 @@ material = ExtResource( 14 )
 texture = ExtResource( 16 )
 hframes = 4
 
-[node name="BlurTop" type="Sprite" parent="Sprites" index="5"]
+[node name="BlurTop" type="Sprite" parent="Sprites" index="6"]
 visible = false
 self_modulate = Color( 1.2, 1.2, 1.2, 1 )
 texture = ExtResource( 7 )

@@ -89,10 +89,10 @@ radius = 24.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -104,13 +104,13 @@ joystick_control_path = NodePath("VBoxContainer/BotRow/JoystickControl")
 weapon_button_path = NodePath("VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/WeaponButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 896.0
-margin_bottom = 476.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 892.0
+margin_bottom = 472.0
 
 [node name="TopRow" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 892.0
+margin_right = 884.0
 margin_bottom = 48.0
 custom_constants/separation = 16
 
@@ -202,8 +202,8 @@ weapon_icons = [ ExtResource( 26 ), ExtResource( 22 ), ExtResource( 27 ) ]
 modulates = [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.976471, 1, 1 ), Color( 0.945098, 0.886275, 1, 1 ) ]
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow"]
-margin_left = 791.0
-margin_right = 812.0
+margin_left = 783.0
+margin_right = 804.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 0, 26 )
 size_flags_vertical = 0
@@ -228,8 +228,8 @@ __meta__ = {
 }
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow"]
-margin_left = 828.0
-margin_right = 846.0
+margin_left = 820.0
+margin_right = 838.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 size_flags_vertical = 0
@@ -255,8 +255,8 @@ __meta__ = {
 }
 
 [node name="Menu" type="Button" parent="VBoxContainer/TopRow"]
-margin_left = 862.0
-margin_right = 892.0
+margin_left = 854.0
+margin_right = 884.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 30, 32 )
 focus_mode = 0
@@ -272,9 +272,9 @@ script = ExtResource( 24 )
 
 [node name="BotRow" type="HBoxContainer" parent="VBoxContainer"]
 pause_mode = 1
-margin_top = 403.0
-margin_right = 892.0
-margin_bottom = 472.0
+margin_top = 395.0
+margin_right = 884.0
+margin_bottom = 464.0
 size_flags_vertical = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -282,7 +282,7 @@ __meta__ = {
 
 [node name="JoystickControl" type="Control" parent="VBoxContainer/BotRow"]
 margin_top = 5.0
-margin_right = 824.0
+margin_right = 816.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 3
@@ -304,8 +304,8 @@ normal = ExtResource( 7 )
 visibility_mode = 1
 
 [node name="ButtonControl" type="Control" parent="VBoxContainer/BotRow"]
-margin_left = 828.0
-margin_right = 892.0
+margin_left = 820.0
+margin_right = 884.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 64, 69 )
 size_flags_horizontal = 9

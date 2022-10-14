@@ -107,6 +107,7 @@ func transition_to(to: String) -> void:
 			
 			yield(Transition, "finished")
 			visible = false
+			
 		"PlayerCustomize":
 			Transition.trans_in()
 			yield(Transition, "finished")
@@ -131,6 +132,17 @@ func transition_from(from: String) -> void:
 			yield(Transition, "finished")
 		"LevelFinish":
 			# copy for now, will have other function later
+			visible = true
+			levels.rect_position = Vector2()
+			drag_velocity = Vector2()
+			
+			$MusicPlayer.playing = true
+			$Tween.interpolate_property($MusicPlayer, "volume_db", -80, -24 + GlobalData.music_volume, 0.5)
+			$Tween.start()
+			
+			Transition.trans_out()
+			yield(Transition, "finished")
+		"PauseMenu":
 			visible = true
 			levels.rect_position = Vector2()
 			drag_velocity = Vector2()

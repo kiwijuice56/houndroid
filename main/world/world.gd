@@ -16,6 +16,9 @@ var level_state := {}
 signal level_loaded
 signal level_unloaded
 
+signal coin_count_updated(coin_count)
+signal score_updated(score)
+
 # Must already be child at game start
 var player: Node 
 var current_level: Level
@@ -68,10 +71,14 @@ func unload_level() -> void:
 
 # Functions used to manage the level state
 func set_level_state(key: String, data) -> void:
+	if key == "total_coin_count":
+		emit_signal("coin_count_updated", level_state["total_coin_count"])
+	if key == "score":
+		emit_signal("score_updated", level_state["score"])
 	level_state[key] = data
 
 func add_to_level_state(key: String, data) -> void:
-	level_state[key] += data
+	set_level_state(key, level_state[key] + data)
 
 func get_level_state(key: String):
 	return level_state[key]

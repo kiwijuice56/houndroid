@@ -5,7 +5,7 @@
 
 [node name="Shadow" type="Light2D"]
 texture = ExtResource( 1 )
-offset = Vector2( 0, 2 )
+offset = Vector2( 0, 2.5 )
 color = Color( 0, 0, 0, 0.803922 )
 mode = 2
 script = ExtResource( 2 )

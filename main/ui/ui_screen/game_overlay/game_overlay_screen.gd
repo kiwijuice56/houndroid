@@ -68,6 +68,8 @@ func transition_from(from: String) -> void:
 		"TitleScreen":
 			visible = true
 		"LevelStart":
+			
+			menu_button.modulate.a = 1.0
 			visible = true
 			modulate.a = 0.0
 			$Tween.interpolate_property(self, "modulate:a", 0.0, 1.0, fade_transition_time)

@@ -79,7 +79,7 @@ script = ExtResource( 2 )
 move_speed = 100.0
 max_health = 2.0
 orb = ExtResource( 9 )
-shoot_delay = 1.55
+shoot_delay = 1.95
 
 [node name="Hitbox" parent="." index="0"]
 collision_mask = 2
@@ -89,6 +89,8 @@ position = Vector2( 0, 4 )
 shape = SubResource( 2 )
 
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 8 )]
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
 max_distance = 256.0
 
 [node name="Body" type="Sprite" parent="Sprites" index="1"]

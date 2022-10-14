@@ -9,11 +9,11 @@
 [node name="PressSounds" type="Node2D" parent="."]
 script = ExtResource( 2 )
 sounds = [ ExtResource( 1 ) ]
-volume = -6.0
+volume = -9.0
 positional = false
 
 [node name="ReleaseSounds" type="Node2D" parent="."]
 script = ExtResource( 2 )
 sounds = [ ExtResource( 3 ) ]
-volume = -6.0
+volume = -9.0
 positional = false

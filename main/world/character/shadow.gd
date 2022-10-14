@@ -7,6 +7,9 @@ export var max_distance := 80.0
 onready var shadow_owner = get_node(shadow_owner_path)
 onready var ray: RayCast2D = $RayCast2D
 
+func _ready() -> void:
+	_process(0) # Move the shadow down to the floor at least once before quitting processing (when off screen)
+
 func _process(_delta) -> void:
 	ray.global_position = shadow_owner.global_position
 	ray.force_raycast_update()

@@ -309,11 +309,12 @@ radius = 250.0
 script = ExtResource( 3 )
 move_speed = 32.0
 gravity = 600.0
-max_health = 22.0
+max_health = 17.0
+health_orb_chance = 0.5
 score_orb_count = 24
 contact_damage = 3.0
 hammer = ExtResource( 4 )
-shoot_delay = 0.9
+shoot_delay = 1.3
 shoot_random = 0.45
 shoot_up_tolerance = 32
 up_throw_angle_cycle = [ 75.0, 55.0, 65.0 ]
@@ -331,20 +332,25 @@ shape = SubResource( 16 )
 [node name="Shadow" parent="Sprites" index="0" instance=ExtResource( 11 )]
 texture = ExtResource( 12 )
 offset = Vector2( 0, 4 )
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
 max_distance = 200.0
 
 [node name="LegMR" type="Sprite" parent="Sprites" index="1"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 2
 texture = ExtResource( 6 )
 hframes = 5
 frame = 3
 
 [node name="LegML" type="Sprite" parent="Sprites" index="2"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 2
 texture = ExtResource( 7 )
 hframes = 5
 
 [node name="BodyLow" type="Sprite" parent="Sprites" index="3"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 2
 texture = ExtResource( 10 )
 hframes = 5
@@ -375,6 +381,7 @@ initial_velocity = 73.39
 color_ramp = SubResource( 18 )
 
 [node name="BodyHigh" type="Sprite" parent="Sprites" index="6"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 2
 texture = ExtResource( 2 )
 hframes = 5
@@ -387,6 +394,7 @@ texture = ExtResource( 19 )
 hframes = 5
 
 [node name="Antenna" type="Sprite" parent="Sprites" index="8"]
+self_modulate = Color( 1.1, 1.1, 1.1, 1 )
 light_mask = 2
 position = Vector2( 1.5, -32.5 )
 texture = ExtResource( 8 )

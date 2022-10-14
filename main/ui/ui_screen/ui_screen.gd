@@ -11,10 +11,12 @@ var input_disabled := false
 
 func disable_input() -> void:
 	input_disabled = true
+	set_process_input(false)
 	emit_signal("input_changed", self, input_disabled)
 
 func enable_input() -> void:
 	input_disabled = false
+	set_process_input(true)
 	emit_signal("input_changed", self, input_disabled)
 
 func transition_from(from: String) -> void:

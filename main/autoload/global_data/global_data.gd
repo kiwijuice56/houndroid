@@ -2,8 +2,6 @@ extends Node
 # Global node for managing player and save data
 # Bad practice, but convenience of having access to data in all places is worth it
 
-signal coin_count_updated(coin_count)
-signal score_updated(score)
 signal music_volume_updated(volume)
 
 # Reference variables for ease of access to most world and UI top nodes
