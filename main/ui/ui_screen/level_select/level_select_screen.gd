@@ -167,11 +167,13 @@ func disable_input() -> void:
 	if is_instance_valid(selected_info):
 		selected_info.disable_input()
 	menu_button.disabled = true
+	customize_button.disabled = true
 	set_process_input(false)
 	set_process(false)
 
 func enable_input() -> void:
 	.enable_input()
 	menu_button.disabled = false
+	customize_button.disabled = false
 	set_process_input(true)
 	set_process(true)

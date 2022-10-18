@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=1]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/game_overlay_screen.gd" type="Script" id=2]
@@ -20,7 +20,7 @@
 [ext_resource path="res://main/ui/theme/font/C&C Red Alert [INET].ttf" type="DynamicFontData" id=18]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/bone_counter.gd" type="Script" id=19]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/score_label/score_label.gd" type="Script" id=20]
-[ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/coin_label.png" type="Texture" id=21]
+[ext_resource path="res://main/ui/ui_screen/level_select/level_info_container/icons/icon2.png" type="Texture" id=21]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/weapon_icon2.png" type="Texture" id=22]
 [ext_resource path="res://main/ui/theme/sounds/ButtonSounds.tscn" type="PackedScene" id=23]
 [ext_resource path="res://main/ui/theme/sounds/sound_button.gd" type="Script" id=24]
@@ -31,6 +31,10 @@
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=29]
 [ext_resource path="res://main/world/random_sound_spawner/random_sound_spawner.gd" type="Script" id=30]
 [ext_resource path="res://main/ui/ui_screen/game_overlay/weapon_button/channel_change.wav" type="AudioStream" id=31]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/time_label.gd" type="Script" id=32]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/screen.png" type="Texture" id=33]
+[ext_resource path="res://main/ui/ui_screen/level_select/level_info_container/icons/icon1.png" type="Texture" id=34]
+[ext_resource path="res://main/ui/ui_screen/game_overlay/bone_count/screen2.png" type="Texture" id=35]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -65,7 +69,6 @@ tracks/1/keys = {
 
 [sub_resource type="DynamicFont" id=10]
 size = 13
-outline_size = 1
 font_data = ExtResource( 18 )
 
 [sub_resource type="StyleBoxTexture" id=8]
@@ -97,11 +100,11 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-world_path = NodePath("../../../World")
 menu_button_path = NodePath("VBoxContainer/TopRow/Menu")
 button_control_path = NodePath("VBoxContainer/BotRow/ButtonControl")
 joystick_control_path = NodePath("VBoxContainer/BotRow/JoystickControl")
 weapon_button_path = NodePath("VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/WeaponButton")
+time_label_path = NodePath("VBoxContainer/TopRow/TextureRect3/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -112,7 +115,7 @@ margin_bottom = 472.0
 [node name="TopRow" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 884.0
 margin_bottom = 48.0
-custom_constants/separation = 16
+custom_constants/separation = 5
 
 [node name="StatusContainer" type="PanelContainer" parent="VBoxContainer/TopRow"]
 margin_right = 111.0
@@ -202,8 +205,9 @@ weapon_icons = [ ExtResource( 26 ), ExtResource( 22 ), ExtResource( 27 ) ]
 modulates = [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.976471, 1, 1 ), Color( 0.945098, 0.886275, 1, 1 ) ]
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow"]
-margin_left = 783.0
-margin_right = 804.0
+visible = false
+margin_left = 732.0
+margin_right = 753.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 0, 26 )
 size_flags_vertical = 0
@@ -219,37 +223,83 @@ margin_top = -7.0
 margin_right = 18.0
 margin_bottom = 7.0
 size_flags_vertical = 0
-custom_colors/font_outline_modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
-custom_fonts/font = SubResource( 10 )
 text = "000000"
 script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow"]
-margin_left = 820.0
-margin_right = 838.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 0, 25 )
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/TopRow"]
+margin_left = 758.0
+margin_right = 801.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 0, 26 )
 size_flags_vertical = 0
-texture = ExtResource( 21 )
+texture = ExtResource( 33 )
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow/TextureRect3"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -10.0
+margin_right = 16.0
+margin_bottom = 3.0
+texture = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/TopRow/TextureRect3"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 11.0
+margin_top = -10.0
+margin_right = 47.0
+margin_bottom = 4.0
+size_flags_vertical = 0
+custom_colors/font_outline_modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "0:00"
+align = 1
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="VBoxContainer/TopRow/TextureRect3/Label"]
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow"]
+margin_left = 806.0
+margin_right = 849.0
+margin_bottom = 19.0
+size_flags_vertical = 0
+texture = ExtResource( 35 )
 
 [node name="Label" type="Label" parent="VBoxContainer/TopRow/TextureRect2"]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -9.0
-margin_top = -7.0
-margin_right = 9.0
-margin_bottom = 7.0
+margin_left = 20.0
+margin_top = -6.5
+margin_right = 44.0
+margin_bottom = 7.5
 size_flags_vertical = 0
 custom_colors/font_outline_modulate = Color( 0.227451, 0.227451, 0.227451, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "0"
 align = 1
 script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow/TextureRect2"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 3.0
+margin_top = -6.5
+margin_right = 16.0
+margin_bottom = 6.5
+texture = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

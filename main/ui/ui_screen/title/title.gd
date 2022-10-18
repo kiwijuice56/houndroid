@@ -11,6 +11,9 @@ var corner_button_container: Container
 var decoration: Node
 
 func _ready() -> void:
+	
+	
+	
 	# The decoration is taxing on performance, so it must be deleted and spawned only when needed
 	decoration = decoration_scene.instance()
 	add_child(decoration)

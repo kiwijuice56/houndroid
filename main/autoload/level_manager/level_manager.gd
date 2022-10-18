@@ -19,6 +19,9 @@ func start_level(index := -1) -> void:
 	# Transition to gameplay UI and start the player
 	GlobalData.ui_manager.transition("LevelStart", "GameOverlay")
 	GlobalData.world.unlock_player()
+	
+	# Start the timer
+	GlobalData.ui_manager.get_screen("GameOverlay").time_label.start()
 
 func end_level() -> void:
 	GlobalData.world.store_user_properties()

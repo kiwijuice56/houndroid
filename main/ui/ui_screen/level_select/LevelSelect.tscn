@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/level_select/sprites/island.png" type="Texture" id=1]
 [ext_resource path="res://main/ui/ui_screen/level_select/level_select_screen.gd" type="Script" id=2]
@@ -14,6 +14,20 @@
 [ext_resource path="res://main/ui/ui_screen/level_select/buttons/customize_button1.png" type="Texture" id=12]
 [ext_resource path="res://main/ui/ui_screen/level_select/buttons/customize_button2.png" type="Texture" id=13]
 [ext_resource path="res://main/world/level/1_city/sprites/background1.png" type="Texture" id=14]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color = vec4(0);
+
+void fragment() {
+	float x = 1.0 - abs(UV.y - 0.5);
+	COLOR.rgb = vec3(dot(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, vec3(x, x, x))) * color.rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 7 )
+shader_param/color = Color( 0.560784, 0.388235, 0.768627, 1 )
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -116,28 +130,33 @@ max_x = 240
 min_y = -125
 max_y = 125
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Levels" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.247059, 0.133333, 0.388235, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Levels" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite4" type="Sprite" parent="Levels"]
-modulate = Color( 0.741176, 0.666667, 0.921569, 1 )
 position = Vector2( 138, -118 )
 texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 1000 )
+
+[node name="ColorRect" type="ColorRect" parent="Levels"]
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -754.0
+margin_top = -499.0
+margin_right = 346.0
+margin_bottom = 1021.0
+rect_min_size = Vector2( 2000, 2000 )
+color = Color( 0.247059, 0.133333, 0.388235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CityIsland" type="Control" parent="Levels"]
 margin_left = 61.0

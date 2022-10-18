@@ -2,28 +2,31 @@ extends UIScreen
 class_name GameOverlayScreen
 # Controls gameplay overlay and handles interface between World and the UI
 
-export var world_path: NodePath
 export var menu_button_path: NodePath
 export var button_control_path: NodePath
 export var joystick_control_path: NodePath
 export var weapon_button_path: NodePath
 
+export var time_label_path: NodePath
+
 export var fade_transition_time = 0.4
 
 var menu_button: Button
-var world: GameWorld
 var button_control: Control
 var joystick_control: Control
 var weapon_button: TouchScreenButton
 
+var time_label: TimeLabel
+
 func _ready() -> void:
-	world = get_node(world_path)
 	menu_button = get_node(menu_button_path)
 	menu_button.connect("pressed", self, "_on_menu_button_pressed")
 	button_control = get_node(button_control_path)
 	joystick_control = get_node(joystick_control_path)
 	weapon_button = get_node(weapon_button_path)
 	weapon_button.connect("pressed", self, "_on_weapon_button_pressed")
+	
+	time_label = get_node(time_label_path)
 	
 	# ui_manager variable is not initialized yet, which would cause a null pointer exception
 	yield(get_parent().get_parent(), "ready")

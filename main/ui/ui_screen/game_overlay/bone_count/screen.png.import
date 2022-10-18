@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/portrait.png-cfb85740716456102c01535421c899fd.stex"
+path="res://.import/screen.png-7f5d487a816fb3becdb87a05a5a6fc17.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/ui/ui_screen/game_overlay/weapon_button/portrait.png"
-dest_files=[ "res://.import/portrait.png-cfb85740716456102c01535421c899fd.stex" ]
+source_file="res://main/ui/ui_screen/game_overlay/bone_count/screen.png"
+dest_files=[ "res://.import/screen.png-7f5d487a816fb3becdb87a05a5a6fc17.stex" ]
 
 [params]
 

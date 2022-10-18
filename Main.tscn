@@ -27,6 +27,8 @@ player_scene = ExtResource( 2 )
 current_level_scene = ExtResource( 10 )
 levels = [ ExtResource( 10 ), ExtResource( 1 ), ExtResource( 12 ) ]
 
+[node name="Timer" type="Timer" parent="World"]
+
 [node name="UIScreenManager" type="Control" parent="."]
 pause_mode = 2
 anchor_right = 1.0

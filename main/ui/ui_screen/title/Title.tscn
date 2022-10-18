@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://main/ui/theme/panels/button_empty_unpressed.png" type="Texture" id=1]
 [ext_resource path="res://main/ui/ui_screen/title/buttons/exit_button_unpressed.png" type="Texture" id=2]
@@ -21,12 +21,13 @@ code = "shader_type canvas_item;
 uniform vec4 color : hint_color = vec4(0);
 
 void fragment() {
-	COLOR.rgb = vec3(dot(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, vec3(0.5, 0.5, 0.5))) * color.rgb;
+	float x = 1.0 - abs(UV.y - 0.5);
+	COLOR.rgb = vec3(dot(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, vec3(x, x, x))) * color.rgb;
 }"
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
-shader_param/color = Color( 0.501961, 0.360784, 0.670588, 1 )
+shader_param/color = Color( 0.568627, 0.439216, 0.717647, 1 )
 
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 1 )
@@ -43,6 +44,9 @@ region_rect = Rect2( 0, 0, 30, 31 )
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 30, 31 )
+
+[sub_resource type="Gradient" id=16]
+colors = PoolColorArray( 0.789871, 0.650055, 0.929688, 1, 0.0891206, 0.0644684, 0.126953, 0 )
 
 [sub_resource type="ShaderMaterial" id=13]
 shader = ExtResource( 12 )
@@ -114,6 +118,33 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -131,33 +162,9 @@ corner_button_container_path = NodePath("MarginContainer/CornerButtons")
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.596078, 0.168627, 0.619608, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite2" type="Sprite" parent="."]
-modulate = Color( 0.239216, 0.121569, 0.313726, 0.74902 )
-position = Vector2( 130, 127 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 14 )
-
-[node name="Sprite3" type="Sprite" parent="."]
-modulate = Color( 0.203922, 0.121569, 0.313726, 0.458824 )
-position = Vector2( 138, 127 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 14 )
-
-[node name="Sprite4" type="Sprite" parent="."]
-modulate = Color( 0.184314, 0.121569, 0.313726, 0.219608 )
-position = Vector2( 146, 127 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 14 )
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 122, 127 )
-scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 10 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -226,6 +233,20 @@ script = ExtResource( 9 )
 
 [node name="ButtonSounds" parent="MarginContainer/CornerButtons/Quit" instance=ExtResource( 8 )]
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 122, 127 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 10 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+show_behind_parent = true
+amount = 4
+lifetime = 2.0
+texture = ExtResource( 14 )
+gravity = Vector2( 128, 0 )
+scale_amount = 0.99
+color_ramp = SubResource( 16 )
+
 [node name="Title" type="TextureRect" parent="."]
 material = SubResource( 13 )
 anchor_left = 0.5
@@ -253,9 +274,7 @@ margin_left = 152.0
 margin_top = 146.0
 margin_right = 333.0
 margin_bottom = 155.0
-custom_colors/font_color_shadow = Color( 0.117647, 0.109804, 0.12549, 1 )
-custom_constants/shadow_offset_x = 0
-custom_constants/shadow_offset_y = 1
+custom_colors/font_outline_modulate = Color( 0.486275, 0, 1, 1 )
 text = "Press Anywhere To Start"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -272,3 +291,6 @@ anims/flash = SubResource( 12 )
 stream = ExtResource( 13 )
 volume_db = -25.0
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 17 )

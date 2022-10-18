@@ -71,11 +71,11 @@ func unload_level() -> void:
 
 # Functions used to manage the level state
 func set_level_state(key: String, data) -> void:
+	level_state[key] = data
 	if key == "total_coin_count":
 		emit_signal("coin_count_updated", level_state["total_coin_count"])
 	if key == "score":
 		emit_signal("score_updated", level_state["score"])
-	level_state[key] = data
 
 func add_to_level_state(key: String, data) -> void:
 	set_level_state(key, level_state[key] + data)
@@ -84,10 +84,13 @@ func get_level_state(key: String):
 	return level_state[key]
 
 func cache_level_state() -> void:
+	level_state["time"] = GlobalData.ui_manager.get_screen("GameOverlay").time_label.get_elapsed()
 	temp_saved_level_state = level_state.duplicate(true)
 
 func revert_level_state() -> void:
-	level_state = temp_saved_level_state.duplicate(true)
+	GlobalData.ui_manager.get_screen("GameOverlay").time_label.elapsed = level_state["time"]
+	for key in temp_saved_level_state:
+		set_level_state(key, temp_saved_level_state[key])
 
 func delete_level_state() -> void:
 	level_state = {}
@@ -97,6 +100,7 @@ func delete_level_state() -> void:
 	level_state["total_coin_count"] = 0
 	level_state["score"] = 0
 	level_state["experience"] = 0
+	level_state["time"] = 0
 	level_state["recently_collected"] = {}
 	
 	temp_saved_level_state = level_state.duplicate(true)
@@ -106,12 +110,23 @@ func store_user_properties() -> void:
 	GlobalData.coin_count += level_state["new_coin_count"]
 	GlobalData.experience += level_state["experience"]
 	
-	if current_level.game_name in level_data:
-		for path in level_state.recently_collected:
-			level_data[current_level.game_name]["coins"][path] = true 
-	else:
+	if not current_level.game_name in level_data:
 		level_data[current_level.game_name] = {}
-		level_data[current_level.game_name]["coins"] = level_state.recently_collected.duplicate()
+	
+	var level_storage = level_data[current_level.game_name]
+	
+	if len(level_storage) == 0:
+		level_storage["total_coin_coint"] = 0
+		level_storage["score"] = 0
+		level_storage["coins"] = level_state.recently_collected.duplicate()
+		level_storage["time"] = 99999999999999
+	
+	for path in level_state.recently_collected:
+			level_storage["coins"][path] = true 
+	
+	level_storage["time"] = min(level_storage["time"], GlobalData.ui_manager.get_screen("GameOverlay").time_label.stop())
+	level_storage["score"] = max(level_storage["score"], level_state.score)
+	level_storage["total_coin_count"] = max(level_storage["total_coin_count"], level_state.total_coin_count)
 
 
 func lock_player() -> void:

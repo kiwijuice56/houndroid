@@ -1649,7 +1649,7 @@ position = Vector2( 1376, 448 )
 position = Vector2( -16, 337 )
 
 [node name="Goal" parent="." index="14"]
-position = Vector2( 5030, -801 )
+position = Vector2( 5074, -796 )
 
 [node name="MusicPlayer" parent="." index="15"]
 volume_db = -27.0
