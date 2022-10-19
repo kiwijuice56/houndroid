@@ -4,6 +4,8 @@ class_name LevelStartScreen
 
 export var label_path: NodePath
 export var panel_path: NodePath
+export var light_path1: NodePath
+export var light_path2: NodePath
 
 export var initial_offset_x := -400
 export var transition_time := 0.8
@@ -15,13 +17,19 @@ export(Array, String) var random_lines := []
 
 var label: Label
 var panel: PanelContainer
+var light1: Sprite
+var light2: Sprite
 
 signal introduction_finished
 
 func _ready() -> void:
 	label = get_node(label_path)
 	panel = get_node(panel_path)
+	light1 = get_node(light_path1)
+	light2 = get_node(light_path2)
 	panel.self_modulate.a = 0
+	light1.self_modulate.a = 0
+	light2.self_modulate.a = 0
 	disable_input()
 
 func transition_from(from: String) -> void:
@@ -30,6 +38,8 @@ func transition_from(from: String) -> void:
 		# LevelSelect, GameOverlay
 		_:
 			enable_input()
+			light1.self_modulate.a = 1
+			light2.self_modulate.a = 1
 			$Light.visible = true
 			$MiniLight.visible = true
 			
@@ -69,13 +79,13 @@ func transition_from(from: String) -> void:
 			
 			
 			yield(add_word("\n\nGO FOR IT!!!"), "completed")
-			$Timer.start(0.8)
+			$Timer.start(0.5)
 			yield($Timer, "timeout")
 			
 			$AudioStreamPlayer.playing = false
 			
-			$Light.visible = false
-			$MiniLight.visible = false
+			$Tween.interpolate_property(light1, "self_modulate:a", 1.0, 0.0, 0.55)
+			$Tween.interpolate_property(light2, "self_modulate:a", 1.0, 0.0, 0.55)
 			$Tween.interpolate_property(panel, "self_modulate:a", 1.0, 0.0, 0.55)
 			$Tween.interpolate_property(label, "self_modulate:a", 1.0, 0.0, 1.0)
 			$Tween.start()

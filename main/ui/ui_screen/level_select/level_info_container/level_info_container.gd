@@ -1,6 +1,12 @@
 extends PanelContainer
 class_name LevelInfoContainer
 
+export var coin_label_path: NodePath
+export var time_label_path: NodePath
+
+var coin_label: Label
+var time_label: Label
+
 export var front_side_time := 1.5
 export var back_side_time := 1.5
 export var offset := Vector2()
@@ -10,8 +16,10 @@ signal level_selected
 var index: int
 var front_side := true
 
-
 func _ready() -> void:
+	coin_label = get_node(coin_label_path)
+	time_label = get_node(time_label_path)
+	
 	$Button.connect("pressed", self, "emit_signal", ["level_selected"])
 	$Timer.connect("timeout", self, "_on_timeout")
 
@@ -36,7 +44,7 @@ func _on_timeout() -> void:
 		$Timer.start(back_side_time)
 	front_side = !front_side
 
-func initialize(button: Button, info: Dictionary, icon: Resource, color: Color) -> void:
+func initialize(button: Button, info, level_name: String, icon: Resource, color: Color) -> void:
 	rect_global_position = button.rect_global_position
 	rect_position += offset
 	
@@ -44,6 +52,20 @@ func initialize(button: Button, info: Dictionary, icon: Resource, color: Color) 
 	$VBoxContainer/TextureRect.texture = icon
 	get("custom_styles/panel").set("bg_color", color)
 	get("custom_styles/panel").set("border_color", color / 2)
+	
+	$VBoxContainer/TitleLabel.text = level_name
+	
+	if info != null:
+		coin_label.text = str(info["total_coin_count"])
+		
+		var secs = info["time"]
+		var mins = secs / 60
+		if mins > 9:
+			time_label.text = "9:59"
+		else:
+			secs = secs % 60
+			time_label.text = "%01d:%02d" % [mins, secs]
+	
 	pop_up()
 
 func pop_up() -> void:

@@ -19,15 +19,16 @@ signal level_unloaded
 signal coin_count_updated(coin_count)
 signal score_updated(score)
 
-# Must already be child at game start
 var player: Node 
 var current_level: Level
+var current_level_idx: int = -1
 
 # Loads level data and prepares the scene
 func load_level(index := -1) -> void:
 	# Spawn the level indicated or the last level played if none is specified
 	# We only completely reset data when we are starting a new level 
 	if index != -1:
+		current_level_idx = index
 		current_level_scene = levels[index]
 		delete_level_state()
 	
@@ -116,10 +117,12 @@ func store_user_properties() -> void:
 	var level_storage = level_data[current_level.game_name]
 	
 	if len(level_storage) == 0:
-		level_storage["total_coin_coint"] = 0
+		level_storage["total_coin_count"] = 0
 		level_storage["score"] = 0
 		level_storage["coins"] = level_state.recently_collected.duplicate()
 		level_storage["time"] = 99999999999999
+	
+	level_storage["index"] = current_level_idx
 	
 	for path in level_state.recently_collected:
 			level_storage["coins"][path] = true 

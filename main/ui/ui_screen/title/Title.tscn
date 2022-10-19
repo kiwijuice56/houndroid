@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://main/ui/theme/panels/button_empty_unpressed.png" type="Texture" id=1]
 [ext_resource path="res://main/ui/ui_screen/title/buttons/exit_button_unpressed.png" type="Texture" id=2]
@@ -10,10 +10,18 @@
 [ext_resource path="res://main/ui/theme/sounds/ButtonSounds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/ui/theme/sounds/sound_button.gd" type="Script" id=9]
 [ext_resource path="res://main/ui/ui_screen/title/sprites/yeeercpt2.png" type="Texture" id=10]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=11]
 [ext_resource path="res://main/shader/shimmer_ui.tres" type="Shader" id=12]
 [ext_resource path="res://main/world/level/1_city/title_music.mp3" type="AudioStream" id=13]
 [ext_resource path="res://main/ui/ui_screen/title/sprites/yeeercpt2_mask.png" type="Texture" id=14]
 [ext_resource path="res://main/ui/ui_screen/title/sprites/title.png" type="Texture" id=15]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=16]
+[ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=17]
+[ext_resource path="res://main/shader/light.png" type="Texture" id=18]
+[ext_resource path="res://main/world/character/Shadow.tscn" type="PackedScene" id=19]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_shot_spritesheet.png" type="Texture" id=20]
+[ext_resource path="res://main/world/character/player/sprites/shoot_light.png" type="Texture" id=21]
+[ext_resource path="res://main/ui/ui_screen/title/woosh.wav" type="AudioStream" id=22]
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
@@ -27,7 +35,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
-shader_param/color = Color( 0.568627, 0.439216, 0.717647, 1 )
+shader_param/color = Color( 0.0588235, 0.0470588, 0.129412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 1 )
@@ -118,10 +126,10 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=20]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Label:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -130,10 +138,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/CPUParticles2D:emitting")
+tracks/1/path = NodePath("MusicPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -144,6 +152,96 @@ tracks/1/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("WooshPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "intro"
+length = 8.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("TitleSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 600, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0, 122, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.9, 2.2 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Title:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.7, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.7, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect:material:shader_param/color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.3, 1.9, 2.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0588235, 0.0470588, 0.129412, 1 ), Color( 0.192157, 0.184314, 0.34902, 1 ), Color( 0.192157, 0.184314, 0.34902, 1 ), Color( 0.980392, 0.690196, 1, 1 ), Color( 0.568627, 0.439216, 0.717647, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MusicPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("WooshPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0, 0.839779 )
+colors = PoolColorArray( 1.5, 1.25, 2, 1, 0.690196, 0.384314, 0.972549, 0.0588235 )
 
 [node name="Title" type="Control"]
 anchor_right = 1.0
@@ -158,7 +256,17 @@ decoration_scene = ExtResource( 6 )
 button_container_path = NodePath("MarginContainer/MainButtons")
 corner_button_container_path = NodePath("MarginContainer/CornerButtons")
 
+[node name="TitleDecoration" parent="." instance=ExtResource( 6 )]
+
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -233,12 +341,12 @@ script = ExtResource( 9 )
 
 [node name="ButtonSounds" parent="MarginContainer/CornerButtons/Quit" instance=ExtResource( 8 )]
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 122, 127 )
-scale = Vector2( 0.35, 0.35 )
+[node name="TitleSprite" type="Sprite" parent="."]
+position = Vector2( 600, 127 )
+scale = Vector2( 0.34, 0.34 )
 texture = ExtResource( 10 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+[node name="Trail" type="CPUParticles2D" parent="TitleSprite"]
 show_behind_parent = true
 amount = 4
 lifetime = 2.0
@@ -248,6 +356,7 @@ scale_amount = 0.99
 color_ramp = SubResource( 16 )
 
 [node name="Title" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 13 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -290,7 +399,107 @@ anims/flash = SubResource( 12 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
 volume_db = -25.0
-autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 17 )
+autoplay = "intro"
+anims/RESET = SubResource( 20 )
+anims/intro = SubResource( 18 )
+
+[node name="Houndroid" type="Node2D" parent="."]
+visible = false
+position = Vector2( 244.836, -96 )
+
+[node name="Shadow" parent="Houndroid" instance=ExtResource( 19 )]
+light_mask = 0
+color = Color( 0.0156863, 0.0156863, 0.0196078, 0.803922 )
+energy = 1.1
+script = null
+
+[node name="VisibilityEnabler2D" parent="Houndroid/Shadow" index="1"]
+physics_process_parent = false
+
+[node name="ArmMR" type="Sprite" parent="Houndroid"]
+light_mask = 2
+texture = ExtResource( 11 )
+hframes = 27
+frame = 7
+
+[node name="Body" type="Sprite" parent="Houndroid"]
+light_mask = 2
+texture = ExtResource( 17 )
+hframes = 27
+frame = 7
+
+[node name="ArmML" type="Sprite" parent="Houndroid"]
+light_mask = 2
+texture = ExtResource( 16 )
+hframes = 27
+frame = 7
+
+[node name="PrimaryGunEffectML" type="Sprite" parent="Houndroid"]
+visible = false
+light_mask = 2
+position = Vector2( 3, 0 )
+texture = ExtResource( 20 )
+hframes = 5
+
+[node name="PrimaryShotSparksML" type="CPUParticles2D" parent="Houndroid/PrimaryGunEffectML"]
+visible = false
+position = Vector2( 6.5, -1.5 )
+emitting = false
+amount = 24
+lifetime = 0.19
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.4
+gravity = Vector2( 0, 420 )
+initial_velocity = 160.0
+color_ramp = SubResource( 19 )
+
+[node name="ShootLight" type="Light2D" parent="Houndroid/PrimaryGunEffectML"]
+position = Vector2( 9.5, -0.5 )
+texture = ExtResource( 21 )
+energy = 0.0
+range_item_cull_mask = 7
+shadow_enabled = true
+
+[node name="PrimaryGunEffectMR" type="Sprite" parent="Houndroid"]
+visible = false
+light_mask = 2
+position = Vector2( 11, -4 )
+texture = ExtResource( 20 )
+hframes = 5
+
+[node name="PrimaryShotSparksMR" type="CPUParticles2D" parent="Houndroid/PrimaryGunEffectMR"]
+position = Vector2( 7.5, -0.5 )
+emitting = false
+amount = 24
+lifetime = 0.19
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.4
+gravity = Vector2( 0, 420 )
+initial_velocity = 160.0
+color_ramp = SubResource( 19 )
+
+[node name="ShootLight" type="Light2D" parent="Houndroid/PrimaryGunEffectMR"]
+position = Vector2( 6.5, -0.5 )
+texture = ExtResource( 21 )
+energy = 0.0
+range_item_cull_mask = 7
+shadow_enabled = true
+
+[node name="Light2D" type="Light2D" parent="Houndroid"]
+light_mask = 7
+texture = ExtResource( 18 )
+texture_scale = 0.75
+energy = 0.7
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 7
+
+[node name="WooshPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -12.0
+
+[editable path="Houndroid/Shadow"]

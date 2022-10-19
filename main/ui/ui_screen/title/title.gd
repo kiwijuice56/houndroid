@@ -11,9 +11,6 @@ var corner_button_container: Container
 var decoration: Node
 
 func _ready() -> void:
-	
-	
-	
 	# The decoration is taxing on performance, so it must be deleted and spawned only when needed
 	decoration = decoration_scene.instance()
 	add_child(decoration)
@@ -39,6 +36,7 @@ func _on_button_pressed(button_name: String) -> void:
 	pass
 
 func transition_to(to: String) -> void:
+	$WooshPlayer.volume_db = -80
 	match to:
 		"LevelSelect":
 			Transition.trans_in()

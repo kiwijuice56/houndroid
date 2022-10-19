@@ -89,6 +89,7 @@ menu_button_path = NodePath("MarginContainer/VBoxContainer/Menu")
 music_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/MusicSilder")
 sound_effect_slider_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/SoundEffectSlider")
 button_switch_path = NodePath("MarginContainer/VBoxContainer/GridContainer/InputContainer/CheckButton")
+button_switch_label_path = NodePath("MarginContainer/VBoxContainer/GridContainer/LabelContainer/Label")
 quit_button_path = NodePath("MarginContainer/VBoxContainer/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

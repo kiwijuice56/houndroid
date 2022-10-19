@@ -137,7 +137,7 @@ tracks/0/keys = {
 extents = Vector2( 870.5, 192.5 )
 
 [node name="City2" instance=ExtResource( 1 )]
-game_name = "City2"
+game_name = "Somber Sewers"
 
 [node name="Background" parent="." index="0"]
 modulate = Color( 0.521569, 0.505882, 0.588235, 1 )

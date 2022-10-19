@@ -3,6 +3,7 @@ class_name LevelSelectScreen
 # Controls the level select
 
 export var level_info_scene: PackedScene
+export(Array, String) var level_names: Array
 export(Array, Resource) var level_icons: Array
 export(Array, Color) var level_panel_colors: Array
 
@@ -63,7 +64,11 @@ func _on_level_button_pressed(button: Button) -> void:
 
 	# Extraneous info that will have save data later on
 	var idx := int(button.name)
-	new_info.initialize(button, {"yay" : "info"}, level_icons[idx], level_panel_colors[idx])
+	
+	var data: Dictionary = GlobalData.world.level_data
+	var level_data = data[level_names[idx]] if level_names[idx] in data else null
+	
+	new_info.initialize(button, level_data, level_names[idx], level_icons[idx], level_panel_colors[idx])
 	new_info.connect("level_selected", self, "_on_level_selected")
 	
 	selected_info = new_info

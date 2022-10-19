@@ -40,6 +40,8 @@ __meta__ = {
 }
 label_path = NodePath("MarginContainer/PanelContainer/VBoxContainer/LevelLabel")
 panel_path = NodePath("MarginContainer/PanelContainer")
+light_path1 = NodePath("Light")
+light_path2 = NodePath("MiniLight")
 transition_time = 0.3
 wait_time = 0.6
 random_lines = [ ">> CUTENESS ... AT MAXIMUM!", ">> BEAMS ... DEPLOYED!", ">> DOG TREATS ... EATEN!", ">> ARMOR ... ARMORED?!", ">> GLAIVES ... SHARPENED! ", ">> ENEMIES ... SCANNED!", ">> PROGRAMS ... DOWNLOADED!" ]

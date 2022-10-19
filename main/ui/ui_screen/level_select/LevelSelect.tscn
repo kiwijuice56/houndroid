@@ -120,6 +120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 level_info_scene = ExtResource( 4 )
+level_names = [ "City Crash", "Somber Sewers", "idk" ]
 level_icons = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ) ]
 level_panel_colors = [ Color( 0.121569, 0.0745098, 0.141176, 1 ), Color( 0.0784314, 0.105882, 0.2, 1 ), Color( 0.145098, 0.0431373, 0.0588235, 1 ) ]
 menu_button_path = NodePath("MarginContainer/HBoxContainer/MenuButton")
@@ -139,7 +140,7 @@ __meta__ = {
 }
 
 [node name="Sprite4" type="Sprite" parent="Levels"]
-position = Vector2( 138, -118 )
+position = Vector2( 68, 32 )
 texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 1000 )

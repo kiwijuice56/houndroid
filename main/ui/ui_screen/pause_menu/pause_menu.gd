@@ -6,6 +6,7 @@ export var menu_button_path: NodePath
 export var music_slider_path: NodePath
 export var sound_effect_slider_path: NodePath
 export var button_switch_path: NodePath
+export var button_switch_label_path: NodePath
 export var quit_button_path: NodePath
 
 var menu_button: Button
@@ -13,6 +14,7 @@ var quit_button: Button
 var music_slider: Slider
 var sound_effect_slider: Slider
 var button_switch: CheckButton
+var button_switch_label: Label
 
 signal jump_shoot_swapped(swapped)
 
@@ -22,12 +24,16 @@ func _ready() -> void:
 	music_slider = get_node(music_slider_path)
 	sound_effect_slider = get_node(sound_effect_slider_path)
 	button_switch = get_node(button_switch_path)
+	button_switch_label = get_node(button_switch_label_path)
 	
 	menu_button.connect("pressed", self, "_on_menu_button_pressed")
 	quit_button.connect("pressed", self, "_on_quit_button_pressed")
 	music_slider.connect("value_changed", self, "_on_music_slider_changed")
 	sound_effect_slider.connect("value_changed", self, "_on_sound_effect_slider_changed")
 	button_switch.connect("toggled", self, "_on_button_switch_toggle")
+	
+	button_switch_label.visible = OS.has_touchscreen_ui_hint()
+	button_switch.visible = OS.has_touchscreen_ui_hint()
 	
 	disable_input()
 
