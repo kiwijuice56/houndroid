@@ -36,7 +36,16 @@ var last_shot_arm := "mr"
 
 var weapon_energy := []
 
+# value between [0, 1.0], increased gradually when shooting for vignette
+var weapon_trauma := 0.0 setget set_weapon_trauma
+export var weapon_trauma_add := 0.1
+export var weapon_trauma_decay := 0.05
+onready var vig: ShaderMaterial = $DragCamera/VignetteControl/Vignette.material
+
 signal energy_changed(energy)
+
+func set_weapon_trauma(value) -> void:
+	weapon_trauma = clamp(value, 0.0, 1.0)
 
 func _ready() -> void:
 	$PrimaryForcedTimer.connect("timeout", self, "_on_primary_delay_finished")
@@ -49,6 +58,10 @@ func _ready() -> void:
 	for _i in range(len(bullet_scenes)):
 		weapon_energy.append(1.0)
 	weapon_energy[0] = 0.0
+
+func _physics_process(delta) -> void:
+	self.weapon_trauma -= weapon_trauma_decay * delta
+	vig.set_shader_param("vignette_intensity", lerp(vig.get_shader_param("vignette_intensity"), 0.1 + 0.5 * weapon_trauma, 0.1))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("swap_weapon", false):
@@ -89,6 +102,11 @@ func _on_body_entered(body: Node2D) -> void:
 			yield($DeathFallTimer, "timeout")
 		hurt(max_health, true)
 
+# connected to enemy deaths at level load to give more juice to explosions
+func _on_enemy_died() -> void:
+	if has_node("DragCamera"):
+		$DragCamera.add_trauma(.25)
+
 func swap_weapon() -> void:
 	weapon_index = (weapon_index + 1) % len(bullet_scenes)
 	emit_signal("energy_changed", weapon_index, weapon_energy[weapon_index])
@@ -119,13 +137,15 @@ func primary_weapon_shot() -> void:
 		bullet.queue_free()
 		return
 	
+	self.weapon_trauma += weapon_trauma_add
 	weapon_energy[weapon_index] -= bullet.energy_use 
 	emit_signal("energy_changed", weapon_index, weapon_energy[weapon_index])
 	
 	$Sounds/PrimaryShot.play_sound()
 	
 	bullet.direction = Vector2($Sprites.scale.x, 0)
-	bullet.speed += abs(velocity.x)
+	if bullet.add_shooter_speed:
+		bullet.speed += abs(velocity.x)
 	GlobalInstanceManager.add_node(bullet)
 	
 
@@ -161,6 +181,7 @@ func hurt(damage: float, prioirity := false) -> void:
 	# Stop damage if invulernable unless priority (such as death pits)
 	if invulnerable and not prioirity:
 		return
+	# Camera is removed on death, so we have to check
 	if has_node("DragCamera"):
 		$DragCamera.add_trauma(.3)
 	

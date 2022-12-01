@@ -121,9 +121,5 @@ func add_word(word: String) -> void:
 	yield($Tween, "tween_completed")
 
 func _input(event) -> void:
-	if event is InputEventScreenTouch or event is InputEventMouseButton:
-		if speed < 1:
-			speed = 1
-		else:
-			speed = 0.35
+	speed = 0.35 if Input.is_action_pressed("primary_weapon") else 1.0
 

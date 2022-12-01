@@ -208,8 +208,8 @@ max_value = 360.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.422819, 208.22 ), 0.0, 0.0, 0, 0, Vector2( 1, -23.6441 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0, 0.262712, 0.525424, 1 )
-colors = PoolColorArray( 2, 2, 2, 1, 1, 0.921569, 0.937255, 1, 1, 0.737255, 0.737255, 1, 1, 0.227451, 0.388235, 0.160784 )
+offsets = PoolRealArray( 0, 0.236842, 0.530702, 1 )
+colors = PoolColorArray( 2, 2, 2, 1, 1, 0.952662, 0.681614, 1, 1, 0.569507, 0.569507, 1, 0.160276, 0.0209593, 0.252645, 0.160784 )
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 160.0

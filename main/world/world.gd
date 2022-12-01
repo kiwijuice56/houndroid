@@ -104,6 +104,9 @@ func delete_level_state() -> void:
 	level_state["time"] = 0
 	level_state["recently_collected"] = {}
 	
+	emit_signal("coin_count_updated", 0)
+	emit_signal("score_updated", 0)
+	
 	temp_saved_level_state = level_state.duplicate(true)
 
 # Save the level state into permament storage, such as what coins were collected

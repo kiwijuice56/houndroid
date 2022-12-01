@@ -394,6 +394,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/ui/ui_screen/title/title.gd"
 }, {
+"base": "Bullet",
+"class": "TrackBullet",
+"language": "GDScript",
+"path": "res://main/world/projectile/bullet/track_bullet/track_bullet.gd"
+}, {
 "base": "Control",
 "class": "UIScreen",
 "language": "GDScript",
@@ -497,6 +502,7 @@ _global_script_class_icons={
 "StateMachine": "",
 "TimeLabel": "",
 "TitleScreen": "",
+"TrackBullet": "",
 "UIScreen": "",
 "UIScreenManager": "",
 "VersionLabel": "",

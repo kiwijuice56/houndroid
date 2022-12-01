@@ -104,7 +104,7 @@ menu_button_path = NodePath("VBoxContainer/TopRow/Menu")
 button_control_path = NodePath("VBoxContainer/BotRow/ButtonControl")
 joystick_control_path = NodePath("VBoxContainer/BotRow/JoystickControl")
 weapon_button_path = NodePath("VBoxContainer/TopRow/StatusContainer/HBoxContainer/Control/WeaponButton")
-time_label_path = NodePath("VBoxContainer/TopRow/TextureRect3/Label")
+time_label_path = NodePath("VBoxContainer/TopRow/TimePanel/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
@@ -201,10 +201,10 @@ texture_progress_offset = Vector2( -1, 0 )
 script = ExtResource( 25 )
 icon_path = NodePath("../../Control/WeaponIcon")
 flash_path = NodePath("../../Control/SwitchAnimation/AnimationPlayer")
-weapon_icons = [ ExtResource( 26 ), ExtResource( 22 ), ExtResource( 27 ) ]
-modulates = [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.976471, 1, 1 ), Color( 0.945098, 0.886275, 1, 1 ) ]
+weapon_icons = [ ExtResource( 26 ), ExtResource( 22 ), ExtResource( 27 ), ExtResource( 27 ) ]
+modulates = [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.976471, 1, 1 ), Color( 0.945098, 0.886275, 1, 1 ), Color( 1, 0.847059, 0.847059, 1 ) ]
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow"]
+[node name="ScorePanel" type="TextureRect" parent="VBoxContainer/TopRow"]
 visible = false
 margin_left = 732.0
 margin_right = 753.0
@@ -213,7 +213,7 @@ rect_min_size = Vector2( 0, 26 )
 size_flags_vertical = 0
 texture = ExtResource( 17 )
 
-[node name="Label" type="Label" parent="VBoxContainer/TopRow/TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/TopRow/ScorePanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -229,7 +229,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/TopRow"]
+[node name="TimePanel" type="TextureRect" parent="VBoxContainer/TopRow"]
 margin_left = 758.0
 margin_right = 801.0
 margin_bottom = 26.0
@@ -237,7 +237,7 @@ rect_min_size = Vector2( 0, 26 )
 size_flags_vertical = 0
 texture = ExtResource( 33 )
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow/TextureRect3"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow/TimePanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 3.0
@@ -249,7 +249,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBoxContainer/TopRow/TextureRect3"]
+[node name="Label" type="Label" parent="VBoxContainer/TopRow/TimePanel"]
 pause_mode = 1
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -267,16 +267,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="VBoxContainer/TopRow/TextureRect3/Label"]
+[node name="Timer" type="Timer" parent="VBoxContainer/TopRow/TimePanel/Label"]
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/TopRow"]
+[node name="BonePanel" type="TextureRect" parent="VBoxContainer/TopRow"]
 margin_left = 806.0
 margin_right = 849.0
 margin_bottom = 19.0
 size_flags_vertical = 0
 texture = ExtResource( 35 )
 
-[node name="Label" type="Label" parent="VBoxContainer/TopRow/TextureRect2"]
+[node name="Label" type="Label" parent="VBoxContainer/TopRow/BonePanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 20.0
@@ -293,7 +293,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopRow/BonePanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 3.0

@@ -35,5 +35,9 @@ initial_state = NodePath("Float")
 script = ExtResource( 4 )
 state_owner_path = NodePath("../..")
 
+[node name="Vision" parent="." index="8"]
+monitoring = false
+monitorable = false
+
 [node name="CollisionShape2D" parent="Vision" index="0"]
 shape = null

@@ -9,6 +9,7 @@ func _ready() -> void:
 func start() -> void:
 	elapsed = 0
 	$Timer.start(1)
+	text = "0:00"
 
 func stop() -> int:
 	$Timer.stop()

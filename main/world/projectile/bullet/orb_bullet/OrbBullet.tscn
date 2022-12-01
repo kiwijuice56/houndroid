@@ -11,7 +11,7 @@ radius = 5.0
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.123077, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0.631373, 0 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 0.679688, 0.0548627, 0.420971, 0 )
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.322115, 1 )
@@ -86,21 +86,20 @@ speed = 150.0
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="Orb" type="Sprite" parent="." index="2"]
+[node name="OrbTrail" type="CPUParticles2D" parent="." index="2"]
 material = ExtResource( 5 )
-texture = ExtResource( 2 )
-
-[node name="OrbTrail" type="CPUParticles2D" parent="." index="3"]
-material = ExtResource( 5 )
-amount = 32
+amount = 48
 lifetime = 0.6
 preprocess = 2.0
 local_coords = false
 emission_shape = 1
 emission_sphere_radius = 4.0
+direction = Vector2( 0, 1 )
+spread = 180.0
+initial_velocity = 2.0
 color_ramp = SubResource( 2 )
 
-[node name="OrbImpact" type="CPUParticles2D" parent="." index="4"]
+[node name="OrbImpact" type="CPUParticles2D" parent="." index="3"]
 material = ExtResource( 5 )
 emitting = false
 amount = 16
@@ -114,11 +113,11 @@ spread = 180.0
 initial_velocity = 40.98
 color_ramp = SubResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 anims/RESET = SubResource( 4 )
 anims/destroy = SubResource( 5 )
 
-[node name="OrbTrai2" type="CPUParticles2D" parent="." index="6"]
+[node name="OrbTrai2" type="CPUParticles2D" parent="." index="5"]
 show_behind_parent = true
 amount = 4
 lifetime = 0.4
@@ -127,3 +126,7 @@ local_coords = false
 texture = ExtResource( 2 )
 gravity = Vector2( 0, 0 )
 color_ramp = SubResource( 6 )
+
+[node name="Orb" type="Sprite" parent="." index="6"]
+material = ExtResource( 5 )
+texture = ExtResource( 2 )

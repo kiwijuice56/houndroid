@@ -13,11 +13,14 @@ var player: Player
 
 signal body_entered_vision(body)
 signal body_exited_vision(body)
+signal enemy_died
 
 func _ready() -> void:
 	$Vision.connect("body_entered", self, "_on_body_entered_vision")
 	$Vision.connect("body_exited", self, "_on_body_exited_vision")
 	$Hitbox.connect("area_entered", self, "_on_area_entered")
+	yield(GlobalData.world, "level_loaded")
+	connect("enemy_died", GlobalData.world.player, "_on_enemy_died")
 
 func _on_body_entered_vision(body: Node2D) -> void:
 	player = body as Player
@@ -45,6 +48,7 @@ func hurt(damage: float) -> void:
 		set_animations("hurt")
 
 func death() -> void:
+	emit_signal("enemy_died")
 	for _i in range(score_orb_count):
 		var new_orb := score_orb.instance()
 		new_orb.dir = Vector2((randf() * 2 - 1 ) * 128, -128 * randf() - 128)

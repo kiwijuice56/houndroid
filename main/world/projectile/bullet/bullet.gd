@@ -5,6 +5,7 @@ export var damage := 1.0
 export var speed := 0.0
 export var pierce := 1
 export var persist := false
+export var add_shooter_speed := true
 
 var direction := Vector2()
 var hits: int = 0

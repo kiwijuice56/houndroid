@@ -15,7 +15,6 @@ func _on_body_entered(body) -> void:
 	destroy()
 
 func _on_area_entered(area: Area2D) -> void:
-	# Get owner of hitbox
 	var parent = area.get_parent()
 	if parent is Character:
 		parent.hurt(damage)
