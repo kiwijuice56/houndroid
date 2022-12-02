@@ -38,5 +38,5 @@ func load_file(data: Dictionary) -> void:
 	experience = data["experience"]
 	
 	sound_effect_volume = data["options"]["sound_effect_volume"]
-	music_volume = data["options"]["music_volume"]
+	music_volume = data["options"]["music_volume"] - 80
 	items = data["items"]

@@ -10,10 +10,10 @@ var attached := []
 var dir := Vector2()
 var relocate_dist: float
 
+onready var anchor_direction: Vector2 = ($Points/B.global_position - $Points/A.global_position).normalized()
+
 func _ready() -> void:
 	relocate_dist = speed
-	
-	var anchor_direction: Vector2 = ($Points/B.global_position - $Points/A.global_position).normalized()
 	
 	$Anchors/Anchor1.global_position = $Points/A.global_position + anchor_direction * relocate_dist
 	$Anchors/Anchor2.global_position = $Points/B.global_position - anchor_direction * relocate_dist
@@ -30,8 +30,9 @@ func _physics_process(delta) -> void:
 	if (global_position - $Points.get_child(point_index).global_position).length() < relocate_dist:
 		point_index = (point_index + 1) % $Points.get_child_count()
 		dir = ($Points.get_child(point_index).global_position - global_position).normalized()
-		
 	global_position += dir * speed * delta
+	$Anchors/Anchor1.global_position = $Points/A.global_position + anchor_direction * relocate_dist
+	$Anchors/Anchor2.global_position = $Points/B.global_position - anchor_direction * relocate_dist
 
 func _on_screen_entered() -> void:
 	speed /= 16

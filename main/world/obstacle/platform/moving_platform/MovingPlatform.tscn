@@ -46,7 +46,7 @@ motion/sync_to_physics = false
 script = ExtResource( 2 )
 speed = 16.0
 
-[node name="Anchors" type="Node" parent="." index="0"]
+[node name="Anchors" type="Node2D" parent="." index="0"]
 
 [node name="Anchor1" type="Sprite" parent="Anchors" index="0"]
 show_behind_parent = true

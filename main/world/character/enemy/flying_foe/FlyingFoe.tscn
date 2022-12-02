@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://main/world/character/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/world/character/enemy/flying_foe/flying_foe.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://main/world/character/enemy/states/enemy_hover.gd" type="Script" id=13]
 [ext_resource path="res://main/shader/unshaded_material.tres" type="Material" id=14]
 [ext_resource path="res://main/world/character/enemy/flying_foe/sprites/floating_foe_head_top.png" type="Texture" id=15]
+[ext_resource path="res://main/shader/light.png" type="Texture" id=16]
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 10.0
@@ -35,6 +36,33 @@ tracks/0/keys = {
 "values": [ 0, 1, 1 ]
 }
 
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../ShootLight:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../ShootLight:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.4 ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
@@ -49,11 +77,35 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0, 1, 2, 3, 3 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../ShootLight:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../ShootLight:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.6 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "unwind"
 length = 0.35
-step = 0.001
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprites/Eye:frame")
 tracks/0/interp = 1
@@ -65,6 +117,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 3, 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../ShootLight:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.35 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../ShootLight:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.6, 0.0 ]
 }
 
 [sub_resource type="Gradient" id=6]
@@ -125,7 +201,7 @@ position = Vector2( 1, 5 )
 [node name="Fan" type="Node2D" parent="Sounds" index="2"]
 script = ExtResource( 10 )
 sounds = [ ExtResource( 7 ) ]
-volume = -7.0
+volume = -4.0
 max_distance = 250
 auto_start = true
 
@@ -151,6 +227,7 @@ autoplay = "spin"
 anims/spin = SubResource( 1 )
 
 [node name="Eye" type="AnimationPlayer" parent="AnimationPlayers" index="1"]
+anims/RESET = SubResource( 8 )
 anims/shoot = SubResource( 4 )
 anims/unwind = SubResource( 5 )
 
@@ -192,3 +269,11 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RelocateArea" index="0"]
 position = Vector2( 0, 6 )
 shape = SubResource( 7 )
+
+[node name="ShootLight" type="Light2D" parent="." index="14"]
+enabled = false
+texture = ExtResource( 16 )
+texture_scale = 0.4
+color = Color( 1, 0.368627, 0.486275, 1 )
+energy = 0.4
+range_item_cull_mask = 7

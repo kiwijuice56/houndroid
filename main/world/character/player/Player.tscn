@@ -777,7 +777,7 @@ sounds = [ ExtResource( 11 ) ]
 [node name="PrimaryShot" type="Node2D" parent="Sounds" index="3"]
 script = ExtResource( 10 )
 sounds = [ ExtResource( 21 ) ]
-volume = -10.0
+volume = -12.5
 rand_pitch_range = 0.3
 
 [node name="Hurt" type="Node2D" parent="Sounds" index="4"]
