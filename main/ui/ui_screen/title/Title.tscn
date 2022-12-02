@@ -383,7 +383,7 @@ margin_left = 152.0
 margin_top = 146.0
 margin_right = 333.0
 margin_bottom = 155.0
-custom_colors/font_outline_modulate = Color( 0.486275, 0, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.290196, 0.321569, 0.458824, 1 )
 text = "Press Anywhere To Start"
 __meta__ = {
 "_edit_use_anchors_": false

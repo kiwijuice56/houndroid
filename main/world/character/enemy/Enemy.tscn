@@ -244,7 +244,7 @@ frame = 5
 [node name="Hurt" type="Node2D" parent="Sounds" index="0"]
 script = ExtResource( 3 )
 sounds = [ ExtResource( 6 ) ]
-volume = -11.0
+volume = -7.0
 rand_pitch_range = 0.3
 
 [node name="Death" type="Node2D" parent="Sounds" index="1"]
