@@ -242,9 +242,6 @@ area_path = NodePath("../../RelocateArea")
 relocate_angle_threshold = 1.1
 wait_time = 1.35
 
-[node name="Vision" parent="." index="8"]
-visible = true
-
 [node name="ShootSparks" type="CPUParticles2D" parent="." index="9"]
 position = Vector2( 0, 8 )
 emitting = false

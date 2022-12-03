@@ -13,8 +13,8 @@ var decoration: Node
 func _ready() -> void:
 	# The decoration is taxing on performance, so it must be deleted and spawned only when needed
 	decoration = decoration_scene.instance()
-	add_child(decoration)
-	move_child(decoration, 0)
+	$Node2D.add_child(decoration)
+	$Node2D.move_child(decoration, 0)
 	button_container = get_node(button_container_path)
 	corner_button_container = get_node(corner_button_container_path)
 	
@@ -41,7 +41,7 @@ func transition_to(to: String) -> void:
 		"LevelSelect":
 			Transition.trans_in()
 			yield(Transition, "finished")
-			remove_child(decoration)
+			$Node2D.remove_child(decoration)
 			decoration.queue_free()
 			visible = false
 			
@@ -64,8 +64,8 @@ func transition_from(from: String) -> void:
 		"LevelSelect":
 			visible = true
 			decoration = decoration_scene.instance()
-			add_child(decoration)
-			move_child(decoration, 0)
+			$Node2D.add_child(decoration)
+			$Node2D.move_child(decoration, 0)
 			Transition.trans_out()
 			$MusicPlayer.playing = true
 			$Tween.interpolate_property($MusicPlayer, "volume_db", null, -24 + GlobalData.music_volume, 0.5)

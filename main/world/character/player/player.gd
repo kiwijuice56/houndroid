@@ -61,7 +61,7 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	self.weapon_trauma -= weapon_trauma_decay * delta
-	vig.set_shader_param("vignette_intensity", lerp(vig.get_shader_param("vignette_intensity"), 0.1 + 0.5 * weapon_trauma, 0.1))
+	vig.set_shader_param("vignette_intensity", lerp(vig.get_shader_param("vignette_intensity"), 0.115 + 0.5 * weapon_trauma, 0.1))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("swap_weapon", false):

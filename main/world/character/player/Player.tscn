@@ -773,6 +773,7 @@ rand_pitch_range = 0.1
 [node name="Jump" type="Node2D" parent="Sounds" index="2"]
 script = ExtResource( 10 )
 sounds = [ ExtResource( 11 ) ]
+volume = 5.0
 
 [node name="PrimaryShot" type="Node2D" parent="Sounds" index="3"]
 script = ExtResource( 10 )

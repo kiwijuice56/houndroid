@@ -21,6 +21,7 @@ tracks/0/keys = {
 }
 
 [node name="NeonSign" type="Sprite"]
+material = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

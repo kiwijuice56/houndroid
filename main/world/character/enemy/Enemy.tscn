@@ -223,11 +223,15 @@ health_orb_chance = 0.15
 score_orb = ExtResource( 7 )
 
 [node name="Hitbox" parent="." index="0"]
+visible = false
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 7 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
 
 [node name="Sprites" parent="." index="2"]
 light_mask = 2
@@ -244,7 +248,7 @@ frame = 5
 [node name="Hurt" type="Node2D" parent="Sounds" index="0"]
 script = ExtResource( 3 )
 sounds = [ ExtResource( 6 ) ]
-volume = -7.0
+volume = -11.0
 rand_pitch_range = 0.3
 
 [node name="Death" type="Node2D" parent="Sounds" index="1"]
@@ -252,6 +256,9 @@ script = ExtResource( 3 )
 sounds = [ ExtResource( 5 ) ]
 volume = -14.0
 rand_pitch_range = 0.3
+
+[node name="VisibilityEnabler2D" parent="." index="4"]
+visible = false
 
 [node name="Hurt" type="AnimationPlayer" parent="AnimationPlayers" index="0"]
 pause_mode = 2

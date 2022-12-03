@@ -45,6 +45,7 @@ __meta__ = {
 visible = false
 
 [node name="TitleLayer" type="CanvasLayer" parent="UIScreenManager"]
+follow_viewport_enable = true
 
 [node name="Title" parent="UIScreenManager/TitleLayer" instance=ExtResource( 6 )]
 
