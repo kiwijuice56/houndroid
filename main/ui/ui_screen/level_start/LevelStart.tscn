@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://main/ui/ui_screen/level_start/level_start_screen.gd" type="Script" id=1]
 [ext_resource path="res://main/ui/theme/main.theme" type="Theme" id=2]
@@ -7,27 +7,58 @@
 [ext_resource path="res://main/ui/ui_screen/level_start/sounds/keyboard.wav" type="AudioStream" id=5]
 [ext_resource path="res://main/shader/light.png" type="Texture" id=6]
 [ext_resource path="res://main/shader/ui_shader.gdshader" type="Shader" id=7]
+[ext_resource path="res://main/shader/color_shift.gdshader" type="Shader" id=8]
+[ext_resource path="res://main/world/level/1_city/city_tileset.tres" type="TileSet" id=9]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star/Star.tscn" type="PackedScene" id=10]
+[ext_resource path="res://main/world/level/1_city/star_spawn/star_spawner.gd" type="Script" id=11]
+[ext_resource path="res://main/world/decoration/sprites/tires2.png" type="Texture" id=12]
+[ext_resource path="res://main/world/decoration/sprites/tires3.png" type="Texture" id=13]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_mr_spritesheet.png" type="Texture" id=14]
+[ext_resource path="res://main/world/character/player/sprites/player_body_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://main/world/character/player/sprites/player_arm_ml_spritesheet.png" type="Texture" id=16]
+[ext_resource path="res://main/world/decoration/cone.png" type="Texture" id=17]
+[ext_resource path="res://main/world/decoration/sign.png" type="Texture" id=18]
+[ext_resource path="res://main/world/level/1_city/sprites/background2.png" type="Texture" id=19]
+[ext_resource path="res://main/world/level/1_city/sprites/background1.png" type="Texture" id=20]
+[ext_resource path="res://main/world/level/1_city/sprites/background3.png" type="Texture" id=21]
+
+[sub_resource type="Animation" id=2]
+resource_name = "scroll"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 600 ), Vector2( 900, 600 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 8 )
+shader_param/color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 43, 43 )
-margin_left = 15.0
-margin_right = 27.0
-margin_top = 8.0
+margin_left = 27.0
+margin_right = 16.0
+margin_top = 9.0
 margin_bottom = 12.0
+expand_margin_top = 8.0
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=7]
 size = 9
 font_data = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
 shader_param/color = Plane( 1, 1, 1.25, 1 )
-shader_param/light_texture = ExtResource( 6 )
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 7 )
-shader_param/color = Plane( 1, 0.2, 0.2, 1 )
 shader_param/light_texture = ExtResource( 6 )
 
 [node name="LevelStart" type="Control"]
@@ -41,16 +72,101 @@ __meta__ = {
 label_path = NodePath("MarginContainer/PanelContainer/VBoxContainer/LevelLabel")
 panel_path = NodePath("MarginContainer/PanelContainer")
 light_path1 = NodePath("Light")
-light_path2 = NodePath("MiniLight")
 transition_time = 0.3
 wait_time = 0.6
 random_lines = [ ">> CUTENESS ... AT MAXIMUM!", ">> BEAMS ... DEPLOYED!", ">> DOG TREATS ... EATEN!", ">> ARMOR ... ARMORED?!", ">> GLAIVES ... SHARPENED! ", ">> ENEMIES ... SCANNED!", ">> PROGRAMS ... DOWNLOADED!" ]
+
+[node name="TitleDecoration" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 0, 600 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 6000 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleDecoration/Sprite"]
+autoplay = "scroll"
+playback_speed = 0.03
+anims/scroll = SubResource( 2 )
+
+[node name="StarSpawner" type="ParallaxLayer" parent="TitleDecoration"]
+motion_scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 11 )
+star = ExtResource( 10 )
+star_count = 16
+end = Vector2( 450, 240 )
+
+[node name="Sprite2" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 430, 161 )
+texture = ExtResource( 19 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="Sprite3" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 530, 148 )
+texture = ExtResource( 21 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 256 )
+
+[node name="TileMap" type="TileMap" parent="TitleDecoration"]
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+occluder_light_mask = 0
+format = 1
+tile_data = PoolIntArray( 327676, 11, 0, 327677, 11, 0, 327678, 11, 0, 327679, 11, 0, 262144, 11, 0, 262145, 11, 0, 262146, 11, 0, 262147, 3, 0, 393212, 10, 0, 393213, 10, 0, 393214, 10, 0, 393215, 10, 0, 327680, 10, 0, 327681, 10, 0, 327682, 10, 0, 327683, 4, 0, 327687, 18, 0, 327688, 14, 0, 327689, 14, 0, 327690, 14, 0, 327691, 14, 0, 327692, 18, 0, 458748, 10, 0, 458749, 10, 0, 458750, 10, 0, 458751, 10, 0, 393216, 9, 0, 393217, 10, 0, 393218, 9, 0, 393219, 4, 0, 393223, 19, 0, 393224, 13, 0, 393225, 13, 0, 393226, 12, 0, 393227, 13, 0, 393228, 19, 0, 524284, 10, 0, 524285, 10, 0, 524286, 10, 0, 524287, 10, 0, 458752, 10, 0, 458753, 9, 0, 458754, 10, 0, 458755, 4, 0, 458759, 19, 0, 458760, 12, 0, 458761, 13, 0, 458762, 13, 0, 458763, 13, 0, 458764, 19, 0, 589820, 10, 0, 589821, 10, 0, 589822, 9, 0, 589823, 10, 0, 524288, 10, 0, 524289, 10, 0, 524290, 10, 0, 524291, 4, 0, 524295, 19, 0, 524296, 13, 0, 524297, 13, 0, 524298, 13, 0, 524299, 13, 0, 524300, 19, 0, 655356, 10, 0, 655357, 9, 0, 655358, 10, 0, 655359, 10, 0, 589824, 10, 0, 589825, 21, 0, 589826, 10, 0, 589827, 4, 0, 589831, 19, 0, 589832, 13, 0, 589833, 13, 0, 589834, 12, 0, 589835, 13, 0, 589836, 19, 0, 720892, 10, 0, 720893, 10, 0, 720894, 10, 0, 720895, 10, 0, 655360, 10, 0, 655361, 10, 0, 655362, 10, 0, 655363, 4, 0, 655367, 19, 0, 655368, 13, 0, 655369, 13, 0, 655370, 13, 0, 655371, 13, 0, 655372, 19, 0, 786428, 10, 0, 786429, 10, 0, 786430, 10, 0, 786431, 10, 0, 720896, 10, 0, 720897, 9, 0, 720898, 10, 0, 720899, 4, 0, 720903, 19, 0, 720904, 12, 0, 720905, 13, 0, 720906, 13, 0, 720907, 13, 0, 720908, 19, 0, 851964, 10, 0, 851965, 10, 0, 851966, 10, 0, 851967, 9, 0, 786432, 9, 0, 786433, 10, 0, 786434, 10, 0, 786435, 4, 0, 786439, 19, 0, 786440, 13, 0, 786441, 13, 0, 786442, 13, 0, 786443, 13, 0, 786444, 19, 0, 917500, 10, 0, 917501, 10, 0, 917502, 10, 0, 917503, 10, 0, 851968, 10, 0, 851969, 9, 0, 851970, 10, 0, 851971, 4, 0, 851975, 19, 0, 851976, 13, 0, 851977, 13, 0, 851978, 12, 0, 851979, 13, 0, 851980, 19, 0, 983036, 10, 0, 983037, 10, 0, 983038, 10, 0, 983039, 10, 0, 917504, 10, 0, 917505, 10, 0, 917506, 10, 0, 917507, 4, 0, 917511, 19, 0, 917512, 13, 0, 917513, 12, 0, 917514, 12, 0, 917515, 13, 0, 917516, 19, 0, 1048572, 10, 0, 1048573, 10, 0, 1048574, 10, 0, 1048575, 10, 0, 983040, 21, 0, 983041, 10, 0, 983042, 10, 0, 983043, 4, 0, 983047, 19, 0, 983048, 13, 0, 983049, 13, 0, 983050, 13, 0, 983051, 13, 0, 983052, 19, 0, 1114108, 10, 0, 1114109, 10, 0, 1114110, 9, 0, 1114111, 10, 0, 1048576, 10, 0, 1048577, 10, 0, 1048578, 10, 0, 1048579, 4, 0, 1048583, 19, 0, 1048584, 13, 0, 1048585, 13, 0, 1048586, 13, 0, 1048587, 12, 0, 1048588, 19, 0 )
+
+[node name="Body" type="Sprite" parent="TitleDecoration/TileMap"]
+visible = false
+position = Vector2( 164, 150 )
+texture = ExtResource( 15 )
+hframes = 27
+frame = 6
+
+[node name="ArmL" type="Sprite" parent="TitleDecoration/TileMap"]
+visible = false
+position = Vector2( 164, 150 )
+texture = ExtResource( 16 )
+hframes = 27
+frame = 6
+
+[node name="ArmR" type="Sprite" parent="TitleDecoration/TileMap"]
+visible = false
+position = Vector2( 164, 150 )
+texture = ExtResource( 14 )
+hframes = 27
+frame = 6
+
+[node name="Cone" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 377, 147 )
+texture = ExtResource( 17 )
+
+[node name="Sign" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 348, 139 )
+texture = ExtResource( 18 )
+
+[node name="Tires3" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 9, 112 )
+texture = ExtResource( 13 )
+
+[node name="Tires2" type="Sprite" parent="TitleDecoration"]
+position = Vector2( 36, 111 )
+texture = ExtResource( 12 )
+
+[node name="Mask" type="ColorRect" parent="."]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 90
-custom_constants/margin_top = 12
+custom_constants/margin_top = 16
 custom_constants/margin_left = 90
 custom_constants/margin_bottom = 12
 __meta__ = {
@@ -59,7 +175,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 margin_left = 90.0
-margin_top = 12.0
+margin_top = 16.0
 margin_right = 810.0
 margin_bottom = 468.0
 size_flags_horizontal = 3
@@ -70,10 +186,10 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
-margin_left = 15.0
-margin_top = 8.0
-margin_right = 693.0
-margin_bottom = 444.0
+margin_left = 27.0
+margin_top = 9.0
+margin_right = 704.0
+margin_bottom = 440.0
 
 [node name="LevelLabel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer"]
 margin_bottom = 9.0
@@ -81,7 +197,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 2
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -94,10 +210,6 @@ stream = ExtResource( 5 )
 [node name="Light" type="Sprite" parent="."]
 material = SubResource( 4 )
 position = Vector2( 244, 127 )
-texture = ExtResource( 6 )
-
-[node name="MiniLight" type="Sprite" parent="."]
-material = SubResource( 5 )
-position = Vector2( 397, 226 )
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.6, 0.6 )
+z_index = 4
 texture = ExtResource( 6 )

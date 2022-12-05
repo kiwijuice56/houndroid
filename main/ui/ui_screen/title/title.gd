@@ -25,6 +25,8 @@ func _ready() -> void:
 	
 	$MusicPlayer.volume_db = -24 + GlobalData.music_volume
 	
+	disable_input()
+	yield($AnimationPlayer, "animation_finished")
 	enable_input()
 
 func _input(event) -> void:

@@ -15,20 +15,11 @@
 [ext_resource path="res://main/world/level/1_city/title_music.mp3" type="AudioStream" id=13]
 [ext_resource path="res://main/ui/ui_screen/title/sprites/yeeercpt2_mask.png" type="Texture" id=14]
 [ext_resource path="res://main/ui/ui_screen/title/sprites/title.png" type="Texture" id=15]
+[ext_resource path="res://main/shader/color_shift.gdshader" type="Shader" id=16]
 [ext_resource path="res://main/ui/ui_screen/title/woosh.wav" type="AudioStream" id=22]
 
-[sub_resource type="Shader" id=7]
-code = "shader_type canvas_item;
-
-uniform vec4 color : hint_color = vec4(0);
-
-void fragment() {
-	float x = 1.0 - abs(UV.y - 0.5);
-	COLOR.rgb = vec3(dot(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, vec3(x, x, x))) * color.rgb;
-}"
-
 [sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
+shader = ExtResource( 16 )
 shader_param/color = Color( 0.0588235, 0.0470588, 0.129412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=9]
@@ -297,7 +288,7 @@ tracks/15/keys = {
 
 [sub_resource type="Animation" id=18]
 resource_name = "intro"
-length = 16.0
+length = 12.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("TitleSprite:position:x")
 tracks/0/interp = 1
@@ -376,7 +367,7 @@ tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 200, -0.25, 0, 0.25, 0, 0, -4.1, 11.353, 0.25, 0 ),
-"times": PoolRealArray( 0, 7.2 )
+"times": PoolRealArray( 0, 7.6 )
 }
 tracks/7/type = "bezier"
 tracks/7/path = NodePath("CanvasLayer/BotBlocker:rect_position:x")
@@ -598,7 +589,7 @@ volume_db = -12.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"
-playback_speed = 1.1
+playback_speed = 8.0
 anims/RESET = SubResource( 20 )
 anims/intro = SubResource( 18 )
 
@@ -624,6 +615,7 @@ margin_left = -82.0
 margin_top = -7.0
 margin_right = 82.0
 margin_bottom = 7.0
+custom_colors/font_outline_modulate = Color( 0.290196, 0.321569, 0.458824, 1 )
 custom_fonts/font = ExtResource( 11 )
 text = "Created by Eric Alfaro"
 __meta__ = {

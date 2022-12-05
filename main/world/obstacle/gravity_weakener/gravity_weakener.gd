@@ -2,7 +2,6 @@ extends Area2D
 class_name gravity_weakener
 
 export var gravity_rate := 0.45
-export var particle_per_scale := 0.125
 
 func _ready():
 	connect("area_entered", self, "_on_area_entered")
@@ -15,7 +14,7 @@ func _ready():
 	
 	$VisibilityEnabler2D.rect.size.x = size.x * 2
 	$VisibilityEnabler2D.rect.size.y = size.y * 2
-	
+	$ParticleLayer/ColorRect.modulate.a = 0
 
 func _on_area_entered(area: Area2D) -> void:
 	$AreaSounds.play_sound()
@@ -24,8 +23,11 @@ func _on_area_entered(area: Area2D) -> void:
 	$ParticleLayer/FrontParticles.emitting = true
 	$ParticleLayer/BackParticles.emitting = true
 	
+	$TransferParticles.restart()
 	$TransferParticles.emitting = true
 	$TransferParticles.global_position = area.global_position
+	$Tween.interpolate_property($ParticleLayer/ColorRect, "modulate:a", null, 1.0, .2)
+	$Tween.start()
 	area.get_parent().gravity *= gravity_rate
 
 func _on_area_exited(area: Area2D) -> void:
@@ -35,6 +37,9 @@ func _on_area_exited(area: Area2D) -> void:
 	$ParticleLayer/FrontParticles.emitting = false
 	$ParticleLayer/BackParticles.emitting = false
 	
+	$TransferParticles.restart()
 	$TransferParticles.emitting = true
 	$TransferParticles.global_position = area.global_position
+	$Tween.interpolate_property($ParticleLayer/ColorRect, "modulate:a", null, 0, .2)
+	$Tween.start()
 	area.get_parent().gravity /= gravity_rate

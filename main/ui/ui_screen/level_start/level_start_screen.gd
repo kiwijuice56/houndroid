@@ -18,7 +18,6 @@ export(Array, String) var random_lines := []
 var label: Label
 var panel: PanelContainer
 var light1: Sprite
-var light2: Sprite
 
 signal introduction_finished
 
@@ -26,10 +25,8 @@ func _ready() -> void:
 	label = get_node(label_path)
 	panel = get_node(panel_path)
 	light1 = get_node(light_path1)
-	light2 = get_node(light_path2)
 	panel.self_modulate.a = 0
 	light1.self_modulate.a = 0
-	light2.self_modulate.a = 0
 	disable_input()
 
 func transition_from(from: String) -> void:
@@ -37,15 +34,14 @@ func transition_from(from: String) -> void:
 	match from:
 		# LevelSelect, GameOverlay
 		_:
+			$TitleDecoration.visible = true
+			$Mask.visible = true
 			enable_input()
 			light1.self_modulate.a = 1
-			light2.self_modulate.a = 1
 			$Light.visible = true
-			$MiniLight.visible = true
 			
 			$Tween.interpolate_property(panel, "self_modulate:a", 0.0, 1.0, 0.5)
 			$Tween.start()
-			
 			
 			label.self_modulate.a = 1.0
 			label.text = ""
@@ -85,11 +81,12 @@ func transition_from(from: String) -> void:
 			$AudioStreamPlayer.playing = false
 			
 			$Tween.interpolate_property(light1, "self_modulate:a", 1.0, 0.0, 0.55)
-			$Tween.interpolate_property(light2, "self_modulate:a", 1.0, 0.0, 0.55)
 			$Tween.interpolate_property(panel, "self_modulate:a", 1.0, 0.0, 0.55)
 			$Tween.interpolate_property(label, "self_modulate:a", 1.0, 0.0, 1.0)
 			$Tween.start()
-			yield($Tween, "tween_completed")
+			yield($Tween, "tween_all_completed")
+			$TitleDecoration.visible = false
+			$Mask.visible = false
 			disable_input()
 	call_deferred("emit_signal", "transition_complete")
 
@@ -99,8 +96,6 @@ func start_introduction() -> void:
 	
 	$Timer.start(wait_time)
 	yield($Timer, "timeout")
-	
-	# yield($Tween, "tween_completed")
 	
 	visible = false
 	
