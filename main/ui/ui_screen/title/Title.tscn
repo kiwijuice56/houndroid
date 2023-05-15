@@ -589,7 +589,7 @@ volume_db = -12.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"
-playback_speed = 8.0
+playback_speed = 2.0
 anims/RESET = SubResource( 20 )
 anims/intro = SubResource( 18 )
 
@@ -598,7 +598,8 @@ anims/intro = SubResource( 18 )
 [node name="TopBlocker" type="ColorRect" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_right = 900.0
+margin_left = -450.0
+margin_right = 450.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 color = Color( 0, 0, 0, 1 )
@@ -627,8 +628,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_top = 400.0
-margin_right = 900.0
-margin_bottom = 480.0
+margin_left = -450.0
+margin_top = -80.0
+margin_right = 450.0
 rect_min_size = Vector2( 900, 80 )
 color = Color( 0, 0, 0, 1 )

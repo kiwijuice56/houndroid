@@ -1135,7 +1135,6 @@ position = Vector2( 3304, 1136 )
 shape = SubResource( 1 )
 
 [node name="Hue" parent="Obstacles/GravityWeakener" index="2"]
-modulate = Color( 0.435294, 0.564706, 0.956863, 0.0980392 )
 position = Vector2( 564, 543 )
 scale = Vector2( 1128, 900 )
 
@@ -1745,7 +1744,7 @@ position = Vector2( 3400, 544 )
 position = Vector2( 1376, 448 )
 
 [node name="PlayerSpawn" parent="." index="13"]
-position = Vector2( 4040, 758 )
+position = Vector2( -32, 311 )
 
 [node name="Goal" parent="." index="14"]
 position = Vector2( 5042, -798 )

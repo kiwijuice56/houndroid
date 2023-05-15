@@ -45,7 +45,7 @@ _global_script_classes=[ {
 "path": "res://main/world/decoration/animal/bird/bird.gd"
 }, {
 "base": "Collectible",
-"class": "BoneCoin",
+"class": "Bone",
 "language": "GDScript",
 "path": "res://main/world/collectible/bone/bone.gd"
 }, {
@@ -432,7 +432,7 @@ _global_script_class_icons={
 "AttractCollectible": "",
 "BeamBullet": "",
 "Bird": "",
-"BoneCoin": "",
+"Bone": "",
 "BoneCounter": "",
 "BoomerangBullet": "",
 "Bullet": "",
